@@ -10,20 +10,18 @@ export type District = (typeof cityDistricts)[number];
 
 interface State {
   isOpen: boolean;
-  selectedCityId: number | null;
-  selectedCity: City | null;
-  selectedDistrictId: number | null;
-  selectedDistrict: District | null;
+  selectedCity: City | Pick<City, "id"> | null;
+  selectedDistrict: District | Pick<District, "id"> | null;
   selectedNeighborhoodId: number | null;
   selectedSchoolId: number | null;
   actions: {
-    setSelectedCityId: (_selectedCityId: number | null) => void;
-    setSelectedDistrictId: (_selectedDistrictId: number | null) => void;
     setSelectedNeighborhoodId: (_selectedNeighborhoodId: number | null) => void;
     setSelectedSchoolId: (_selectedSchoolId: number | null) => void;
     setIsOpen: (_isOpen: boolean) => void;
-    setSelectedCity: (_selectedCity: City | null) => void;
-    setSelectedDistrict: (_selectedDistrict: District | null) => void;
+    setSelectedCity: (_selectedCity: City | Pick<City, "id"> | null) => void;
+    setSelectedDistrict: (
+      _selectedDistrict: District | Pick<District, "id"> | null
+    ) => void;
   };
 }
 
@@ -31,24 +29,19 @@ export const useVotingLocations = create<State>()(
   persist(
     (set) => ({
       isOpen: false,
-      selectedCityId: null,
       selectedCity: null,
-      selectedDistrictId: null,
       selectedDistrict: null,
       selectedNeighborhoodId: null,
       selectedSchoolId: null,
       actions: {
-        setSelectedCityId: (selectedCityId) => set(() => ({ selectedCityId })),
-        setSelectedDistrictId: (selectedDistrictId) =>
-          set(() => ({ selectedDistrictId })),
+        setSelectedCity: (selectedCity) => set(() => ({ selectedCity })),
+        setSelectedDistrict: (selectedDistrict) =>
+          set(() => ({ selectedDistrict })),
         setSelectedNeighborhoodId: (selectedNeighborhoodId) =>
           set(() => ({ selectedNeighborhoodId })),
         setSelectedSchoolId: (selectedSchoolId) =>
           set(() => ({ selectedSchoolId })),
         setIsOpen: (isOpen) => set(() => ({ isOpen })),
-        setSelectedCity: (selectedCity) => set(() => ({ selectedCity })),
-        setSelectedDistrict: (selectedDistrict) =>
-          set(() => ({ selectedDistrict })),
       },
     }),
     {
@@ -60,15 +53,15 @@ export const useVotingLocations = create<State>()(
 );
 
 useVotingLocations.subscribe((state, previousState) => {
-  if (state.selectedCityId === previousState.selectedCityId) return;
+  if (state.selectedCity?.id === previousState.selectedCity?.id) return;
 
-  const city = cities.find((city) => city.id === state.selectedCityId);
+  const city = cities.find((city) => city.id === state.selectedCity?.id);
 
-  if (!city || city.id == previousState.selectedCityId) return;
+  if (!city || city.id == previousState.selectedCity?.id) return;
 
   state.actions.setSelectedCity(city);
 
-  state.actions.setSelectedDistrictId(null);
+  state.actions.setSelectedDistrict(null);
   state.actions.setSelectedNeighborhoodId(null);
   state.actions.setSelectedSchoolId(null);
 });
@@ -76,13 +69,13 @@ useVotingLocations.subscribe((state, previousState) => {
 useVotingLocations.subscribe((state, previousState) => {
   if (!state.selectedCity?.id) return;
 
-  if (state.selectedDistrictId == previousState.selectedDistrictId) return;
+  if (state.selectedDistrict?.id == previousState.selectedDistrict?.id) return;
 
   const district = cityDistricts.find(
-    (district) => district.id == state.selectedDistrictId
+    (district) => district.id == state.selectedDistrict?.id
   );
 
-  if (!district || district.id == previousState.selectedDistrictId) return;
+  if (!district || district.id == previousState.selectedDistrict?.id) return;
 
   state.actions.setSelectedDistrict(district);
 

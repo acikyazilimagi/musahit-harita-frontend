@@ -8,24 +8,22 @@ export const useVotingLocationsData = () => {
 
   // city is changed: zoom into city
   useEffect(() => {
-    if (!selectedCity?.id) return;
+    if (!selectedCity) return;
+    if (!("latitude" in selectedCity) || !("longitude" in selectedCity)) return;
 
     map.setView([selectedCity.latitude, selectedCity.longitude], 9, {
       animate: true,
     });
-  }, [map, selectedCity?.id, selectedCity?.latitude, selectedCity?.longitude]);
+  }, [map, selectedCity]);
 
   // district is changed: zoom into district
   useEffect(() => {
-    if (!selectedDistrict?.id) return;
+    if (!selectedDistrict) return;
+    if (!("latitude" in selectedDistrict) || !("longitude" in selectedDistrict))
+      return;
 
     map.setView([selectedDistrict.latitude, selectedDistrict.longitude], 11, {
       animate: true,
     });
-  }, [
-    map,
-    selectedDistrict?.id,
-    selectedDistrict?.latitude,
-    selectedDistrict?.longitude,
-  ]);
+  }, [map, selectedDistrict]);
 };
