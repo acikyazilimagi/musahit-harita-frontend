@@ -3,14 +3,17 @@ import { create } from "zustand";
 import { getHashStorage } from "@/utils/zustand";
 import { persist } from "zustand/middleware";
 import cities from "@/data/tr-cities.json";
+import cityDistricts from "@/data/tr-city-districts.json";
 
 export type City = (typeof cities)[number];
+export type District = (typeof cityDistricts)[number];
 
 interface State {
   isOpen: boolean;
   selectedCityId: number | null;
   selectedCity: City | null;
   selectedDistrictId: number | null;
+  selectedDistrict: District | null;
   selectedNeighborhoodId: number | null;
   selectedSchoolId: number | null;
   actions: {
@@ -20,6 +23,7 @@ interface State {
     setSelectedSchoolId: (_selectedSchoolId: number | null) => void;
     setIsOpen: (_isOpen: boolean) => void;
     setSelectedCity: (_selectedCity: City | null) => void;
+    setSelectedDistrict: (_selectedDistrict: District | null) => void;
   };
 }
 
@@ -30,6 +34,7 @@ export const useVotingLocations = create<State>()(
       selectedCityId: null,
       selectedCity: null,
       selectedDistrictId: null,
+      selectedDistrict: null,
       selectedNeighborhoodId: null,
       selectedSchoolId: null,
       actions: {
@@ -42,6 +47,8 @@ export const useVotingLocations = create<State>()(
           set(() => ({ selectedSchoolId })),
         setIsOpen: (isOpen) => set(() => ({ isOpen })),
         setSelectedCity: (selectedCity) => set(() => ({ selectedCity })),
+        setSelectedDistrict: (selectedDistrict) =>
+          set(() => ({ selectedDistrict })),
       },
     }),
     {
@@ -62,6 +69,23 @@ useVotingLocations.subscribe((state, previousState) => {
   state.actions.setSelectedCity(city);
 
   state.actions.setSelectedDistrictId(null);
+  state.actions.setSelectedNeighborhoodId(null);
+  state.actions.setSelectedSchoolId(null);
+});
+
+useVotingLocations.subscribe((state, previousState) => {
+  if (!state.selectedCity?.id) return;
+
+  if (state.selectedDistrictId == previousState.selectedDistrictId) return;
+
+  const district = cityDistricts.find(
+    (district) => district.id == state.selectedDistrictId
+  );
+
+  if (!district || district.id == previousState.selectedDistrictId) return;
+
+  state.actions.setSelectedDistrict(district);
+
   state.actions.setSelectedNeighborhoodId(null);
   state.actions.setSelectedSchoolId(null);
 });

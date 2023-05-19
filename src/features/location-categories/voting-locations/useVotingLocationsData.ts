@@ -1,12 +1,9 @@
-import { usePrevious } from "@/hooks/usePrevious";
 import { useEffect } from "react";
 import { useMap } from "react-leaflet";
 import { useVotingLocations } from "./useVotingLocations";
 
-import cityDistricts from "@/data/tr-city-districts.json";
-
 export const useVotingLocationsData = () => {
-  const { selectedDistrictId, selectedCity, actions } = useVotingLocations();
+  const { selectedDistrict, selectedCity } = useVotingLocations();
   const map = useMap();
 
   // city is changed: zoom into city
@@ -18,20 +15,17 @@ export const useVotingLocationsData = () => {
     });
   }, [map, selectedCity?.id, selectedCity?.latitude, selectedCity?.longitude]);
 
-  const prevDistrictId = usePrevious(selectedDistrictId);
-  // district is changed: zoom into district & reset neighborhood and school
+  // district is changed: zoom into district
   useEffect(() => {
-    if (selectedDistrictId && prevDistrictId !== selectedDistrictId) {
-      const district = cityDistricts.find(
-        (district) => district.id === selectedDistrictId
-      );
-      if (district) {
-        map.setView([district.latitude, district.longitude], 11, {
-          animate: true,
-        });
-        actions.setSelectedNeighborhoodId(null);
-        actions.setSelectedSchoolId(null);
-      }
-    }
-  }, [actions, map, prevDistrictId, selectedDistrictId]);
+    if (!selectedDistrict?.id) return;
+
+    map.setView([selectedDistrict.latitude, selectedDistrict.longitude], 11, {
+      animate: true,
+    });
+  }, [
+    map,
+    selectedDistrict?.id,
+    selectedDistrict?.latitude,
+    selectedDistrict?.longitude,
+  ]);
 };
