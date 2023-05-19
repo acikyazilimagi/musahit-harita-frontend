@@ -2,10 +2,14 @@ import omit from "lodash.omit";
 import { create } from "zustand";
 import { getHashStorage } from "@/utils/zustand";
 import { persist } from "zustand/middleware";
+import cities from "@/data/tr-cities.json";
+
+export type City = (typeof cities)[number];
 
 interface State {
   isOpen: boolean;
   selectedCityId: number | null;
+  selectedCity: City | null;
   selectedDistrictId: number | null;
   selectedNeighborhoodId: number | null;
   selectedSchoolId: number | null;
@@ -15,6 +19,7 @@ interface State {
     setSelectedNeighborhoodId: (_selectedNeighborhoodId: number | null) => void;
     setSelectedSchoolId: (_selectedSchoolId: number | null) => void;
     setIsOpen: (_isOpen: boolean) => void;
+    setSelectedCity: (_selectedCity: City | null) => void;
   };
 }
 
@@ -23,6 +28,7 @@ export const useVotingLocations = create<State>()(
     (set) => ({
       isOpen: false,
       selectedCityId: null,
+      selectedCity: null,
       selectedDistrictId: null,
       selectedNeighborhoodId: null,
       selectedSchoolId: null,
@@ -35,6 +41,7 @@ export const useVotingLocations = create<State>()(
         setSelectedSchoolId: (selectedSchoolId) =>
           set(() => ({ selectedSchoolId })),
         setIsOpen: (isOpen) => set(() => ({ isOpen })),
+        setSelectedCity: (selectedCity) => set(() => ({ selectedCity })),
       },
     }),
     {
@@ -44,3 +51,17 @@ export const useVotingLocations = create<State>()(
     }
   )
 );
+
+useVotingLocations.subscribe((state, previousState) => {
+  if (state.selectedCityId === previousState.selectedCityId) return;
+
+  const city = cities.find((city) => city.id === state.selectedCityId);
+
+  if (!city || city.id == previousState.selectedCityId) return;
+
+  state.actions.setSelectedCity(city);
+
+  state.actions.setSelectedDistrictId(null);
+  state.actions.setSelectedNeighborhoodId(null);
+  state.actions.setSelectedSchoolId(null);
+});
