@@ -46,7 +46,7 @@ export const FilterVotingLocations = () => {
       >
         {cities.map((city) => {
           return (
-            <MenuItem key={city.id} value={city.id}>
+            <MenuItem key={city.id} value={city.id ?? ""}>
               {city.name}
             </MenuItem>
           );
@@ -54,7 +54,7 @@ export const FilterVotingLocations = () => {
       </FilterControl>
 
       <FilterControl
-        value={selectedDistrictId}
+        value={selectedDistrictId ?? ""}
         label={t("filter.district")}
         onChange={(event: SelectChangeEvent<number>) => {
           const { value } = event.target;
@@ -76,7 +76,7 @@ export const FilterVotingLocations = () => {
       </FilterControl>
 
       <FilterControl
-        value={selectedNeighborhoodId}
+        value={selectedNeighborhoodId ?? ""}
         label={t("filter.neighborhood")}
         onChange={(event: SelectChangeEvent<number>) => {
           const { value } = event.target;
@@ -98,7 +98,7 @@ export const FilterVotingLocations = () => {
       </FilterControl>
 
       <FilterControl
-        value={selectedSchoolId}
+        value={selectedSchoolId ?? ""}
         label={t("filter.school")}
         onChange={(event: SelectChangeEvent<number>) => {
           const { value } = event.target;
