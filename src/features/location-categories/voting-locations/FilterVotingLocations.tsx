@@ -54,6 +54,7 @@ export const FilterVotingLocations = () => {
       </FilterControl>
 
       <FilterControl
+        disabled={!selectedCityId}
         value={selectedDistrictId ?? ""}
         label={t("filter.district")}
         onChange={(event: SelectChangeEvent<number>) => {
@@ -76,6 +77,7 @@ export const FilterVotingLocations = () => {
       </FilterControl>
 
       <FilterControl
+        disabled={!selectedDistrictId}
         value={selectedNeighborhoodId ?? ""}
         label={t("filter.neighborhood")}
         onChange={(event: SelectChangeEvent<number>) => {
@@ -98,6 +100,7 @@ export const FilterVotingLocations = () => {
       </FilterControl>
 
       <FilterControl
+        disabled={!selectedNeighborhoodId}
         value={selectedSchoolId ?? ""}
         label={t("filter.school")}
         onChange={(event: SelectChangeEvent<number>) => {
