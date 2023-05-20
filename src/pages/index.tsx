@@ -28,7 +28,7 @@ const NHome = () => {
 
   return (
     <>
-      <HeadWithMeta singleItemDetail={null} />
+      <HeadWithMeta />
       <main id="new-layout">
         <UIElementsOverlay />
         <MapContent />
