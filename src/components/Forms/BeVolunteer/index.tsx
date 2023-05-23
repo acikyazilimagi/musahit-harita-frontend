@@ -22,6 +22,7 @@ import { useCallback, useState } from "react";
 import BeVolunteer from "../../Icons/BeVolunteer";
 
 function BeVolunteerForm() {
+  const [isKVKKAcknowledged, setIsKVKKAcknowledged] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -92,7 +93,12 @@ function BeVolunteerForm() {
             fullWidth
           />
           <FormControlLabel
-            control={<Checkbox defaultChecked />}
+            control={
+              <Checkbox
+                checked={isKVKKAcknowledged}
+                onChange={(e) => setIsKVKKAcknowledged(e.target.checked)}
+              />
+            }
             label={
               <p>
                 {/* TODO: Open KVKK popup by clicking text in <u>...</u> */}
