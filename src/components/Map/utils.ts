@@ -1,5 +1,5 @@
 import { LatLngBoundsExpression } from "leaflet";
-
+// Ankara's coordinates
 export const DEFAULT_CENTER = [39.925533, 32.866287];
 export const DEFAULT_ZOOM = 8;
 export const DEFAULT_ZOOM_MOBILE = 8;
