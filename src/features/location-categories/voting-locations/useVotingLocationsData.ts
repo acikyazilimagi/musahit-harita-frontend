@@ -11,6 +11,18 @@ export const useVotingLocationsData = () => {
     useVotingLocations();
   const map = useMap();
 
+  // FIXME:
+  // when user reloads a url with a district selected, it zooms into the city instead of district.
+  // same goes for the neighborhoods, user always zooms into the city instead of neighborhood.
+  // https://github.com/acikkaynak/musahit-harita-frontend/issues/33
+  //
+  // move all of these into one effect
+  // then do checks in following order:
+  // neighborhoods -> districts -> cities
+  //
+  // the reason we start from smaller unit is because we want to be
+  // zooming into the smallest unit, then return early
+
   // city is changed: zoom into city
   useEffect(() => {
     if (!selectedCity) return;

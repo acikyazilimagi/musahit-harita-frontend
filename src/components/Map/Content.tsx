@@ -61,8 +61,8 @@ export const MapContent = () => {
               (data: IntensityData) => data.neighborhood_id === hood.id
             )?.volunteer_data as number) / 10 || DEFAULT_IMPORTANCY,
           location: {
-            lat: hood.lng,
-            lng: hood.lat,
+            lat: hood.lat,
+            lng: hood.lng,
           },
           reference: hood.id,
         })

@@ -7,10 +7,10 @@ import { useMTMLView } from "../MTMLView/MTMLView";
 
 const HeatmapLayer = memo(HeatmapLayerFactory<Point>());
 
-type Point = [number, number, number];
+type Point = [lng: number, lat: number, intensity: number];
 
-const longitudeExtractor = (p: Point) => p[1];
-const latitudeExtractor = (p: Point) => p[0];
+const longitudeExtractor = (p: Point) => p[0];
+const latitudeExtractor = (p: Point) => p[1];
 const intensityExtractor = (p: Point) => p[2];
 
 type Props = {

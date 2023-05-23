@@ -40,7 +40,7 @@ export const GenericClusterGroup = ({ data, onMarkerClick }: Props) => {
       type: "Feature",
       geometry: {
         type: "Point",
-        coordinates: [item.location.lat, item.location.lng],
+        coordinates: [item.location.lng, item.location.lat],
       },
       item,
       properties: item.properties,
