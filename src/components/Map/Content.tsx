@@ -1,6 +1,7 @@
 import { useMTMLView } from "@/components/MTMLView/MTMLView";
 import { useDevice, useMapActions } from "@/stores/mapStore";
 import {
+  DEFAULT_IMPORTANCY,
   DEFAULT_MIN_ZOOM_DESKTOP,
   DEFAULT_MIN_ZOOM_MOBILE,
 } from "@/components/Map/utils";
@@ -16,11 +17,28 @@ import { MapClusterStyle } from "@/components/Map/Cluster/ClusterStyle";
 import { latLng, latLngBounds } from "leaflet";
 import { LayerControl } from "./LayerControl";
 import { useMapGeographyStore } from "@/stores/mapGeographyStore";
+import { getAllNeighborhoods } from "@/data/models";
 
 const MapEvents = () => {
   useMapEvents();
   return null;
 };
+
+// convert neighborhood data to map locations so our map can render it
+const locations = getAllNeighborhoods().map(
+  (hood): ChannelData => ({
+    properties: {
+      name: hood.name,
+      description: null,
+    },
+    intensity: DEFAULT_IMPORTANCY,
+    location: {
+      lat: hood.lng,
+      lng: hood.lat,
+    },
+    reference: hood.id,
+  })
+);
 
 export const MapContent = () => {
   const { mapType } = useMTMLView();
@@ -74,7 +92,7 @@ export const MapContent = () => {
         <MapControls />
         <TileLayer url={baseMapUrl} />
 
-        <LayerControl locations={[]} onMarkerClick={onMarkerClick} />
+        <LayerControl locations={locations} onMarkerClick={onMarkerClick} />
       </Map>
       <Box sx={styles.fixedMidBottom}>
         <CooldownButtonComponent />

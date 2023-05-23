@@ -10,6 +10,7 @@ export type ChannelData = {
     name: string | null;
     description: string | null;
   };
+  intensity: number;
   location: Point;
   reference?: number | null;
   closeByRecords?: number[];
