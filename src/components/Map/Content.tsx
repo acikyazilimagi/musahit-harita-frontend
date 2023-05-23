@@ -16,6 +16,7 @@ import { MapClusterStyle } from "@/components/Map/Cluster/ClusterStyle";
 import { latLng, latLngBounds } from "leaflet";
 import { LayerControl } from "./LayerControl";
 import { useMapGeographyStore } from "@/stores/mapGeographyStore";
+import BeVolunteerForm from "../Forms/BeVolunteer";
 
 const MapEvents = () => {
   useMapEvents();
@@ -73,6 +74,7 @@ export const MapContent = () => {
         <MapEvents />
         <MapControls />
         <TileLayer url={baseMapUrl} />
+        <BeVolunteerForm />
 
         <LayerControl locations={[]} onMarkerClick={onMarkerClick} />
       </Map>

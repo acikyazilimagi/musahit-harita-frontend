@@ -35,6 +35,7 @@ import {
 import { DataSourcesInfo } from "@/components/DataSourcesInfo/DataSourcesInfo";
 import { useState } from "react";
 import BeVolunteer from "@/components/Icons/BeVolunteer";
+import { useBeVolunteerStoreActions } from "@/stores/beVolunteer";
 
 const typeImages: Record<MapType, string> = {
   [MapType.Default]: "default",
@@ -130,6 +131,7 @@ export const MapControls = () => {
 
   const votingLocationsFilter = useVotingLocations();
   const [dataSourcesOpen, setDataSourcesOpen] = useState(false);
+  const { toggleForm } = useBeVolunteerStoreActions();
 
   return (
     <DoubleClickStopPropagation>
@@ -171,11 +173,7 @@ export const MapControls = () => {
               <FilterButtonComponent
                 buttonLabel={t("filter.beVolunteerTitle")}
                 icon={<BeVolunteer />}
-                onClick={() => {
-                  votingLocationsFilter.actions.setIsOpen(
-                    !votingLocationsFilter.isOpen
-                  );
-                }}
+                onClick={() => toggleForm()}
               />
             </Stack>
             <Stack display={"flex"} direction={"row"} columnGap={2}>
