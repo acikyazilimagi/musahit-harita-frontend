@@ -43,6 +43,7 @@ export const LayerControl = ({ locations, onMarkerClick }: Props) => {
             <HeatmapLayer
               key={idx}
               fitBoundsOnUpdate
+              fitBoundsOnLoad
               radius={15}
               max={5}
               points={points}
