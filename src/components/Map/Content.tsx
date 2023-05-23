@@ -18,36 +18,62 @@ import { latLng, latLngBounds } from "leaflet";
 import { LayerControl } from "./LayerControl";
 import { useMapGeographyStore } from "@/stores/mapGeographyStore";
 import { getAllNeighborhoods } from "@/data/models";
+import useSWR from "swr";
+import { useEffect, useState } from "react";
 
 const MapEvents = () => {
   useMapEvents();
   return null;
 };
 
-// convert neighborhood data to map locations so our map can render it
-const locations = getAllNeighborhoods().map(
-  (hood): ChannelData => ({
-    properties: {
-      name: hood.name,
-      description: null,
-    },
-    intensity: DEFAULT_IMPORTANCY,
-    location: {
-      lat: hood.lng,
-      lng: hood.lat,
-    },
-    reference: hood.id,
-  })
-);
+type IntensityData = {
+  neighborhood_id: number;
+  volunteer_data: number;
+};
+const fetcher = (url: string): Promise<any> =>
+  fetch(url).then((res) => res.json());
 
 export const MapContent = () => {
   const { mapType } = useMTMLView();
+  const { setDrawerData } = useMapActions();
+  const { data: intensityData } = useSWR<{
+    results: IntensityData[];
+    count: number;
+  }>("http://18.194.199.255/feeds/mock", fetcher);
+
+  const [locations, setLocations] = useState<ChannelData[]>([]);
+
   const { coordinates, zoom } = useMapGeographyStore();
   const { setEventType } = useMapActions();
   const device = useDevice();
   const router = useRouter();
 
+  useEffect(() => {
+    if (intensityData) {
+      const channelData: ChannelData[] = getAllNeighborhoods().map(
+        (hood): ChannelData => ({
+          properties: {
+            name: hood.name,
+            description: null,
+          },
+          intensity:
+            (intensityData.results.find(
+              (data: IntensityData) => data.neighborhood_id === hood.id
+            )?.volunteer_data as number) / 10 || DEFAULT_IMPORTANCY,
+          location: {
+            lat: hood.lng,
+            lng: hood.lat,
+          },
+          reference: hood.id,
+        })
+      );
+
+      setLocations(channelData);
+    }
+  }, [intensityData, setDrawerData]);
+
   const onMarkerClick = (_e: any, markerData: ChannelData) => {
+    setDrawerData(markerData);
     const query = { ...router.query, id: markerData.reference };
     router.push({ query, hash: location.hash }, { query, hash: location.hash });
   };
@@ -61,6 +87,10 @@ export const MapContent = () => {
 
   const dpr = window.devicePixelRatio;
   const baseMapUrl = `https://mt0.google.com/vt/lyrs=${mapType}&scale=${dpr}&hl=tr&x={x}&y={y}&z={z}&apistyle=s.t%3A3%7Cs.e%3Ag%7Cs.e%3Al.i%7Cp.v%3Aoff%2Cs.t%3A3%7Cs.e%3Ag%7Clabels%3Aon`;
+
+  if (!locations) {
+    return <div> Loading...</div>;
+  }
 
   return (
     <>
