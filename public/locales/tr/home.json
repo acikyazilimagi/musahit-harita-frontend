@@ -72,5 +72,13 @@
       "details": "Aşağıdaki seçeneklere tıklayarak <b>aynı konumdaki</b> diğer kayıtlara ulaşabilirsiniz."
     },
     "channels": {}
+  },
+  "forms": {
+    "beVolunteer": {
+      "title": "Gönüllü Ol",
+      "kvkkClickableText": "KVKK Açık Rıza Metni’ni",
+      "kvkkText": "okudum onaylıyorum.",
+      "submit": "Gönüllü Ol"
+    }
   }
 }

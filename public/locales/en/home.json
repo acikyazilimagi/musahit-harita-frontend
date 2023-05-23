@@ -72,5 +72,13 @@
       "details": "You can click the below records to access the other records in the <b>same location</b>"
     },
     "channels": {}
+  },
+  "forms": {
+    "beVolunteer": {
+      "title": "Be a Volunteer",
+      "kvkkClickableText": "KVKK Text",
+      "kvkkText": "i read and accept",
+      "submit": "Apply"
+    }
   }
 }
