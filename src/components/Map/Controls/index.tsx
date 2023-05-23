@@ -34,6 +34,7 @@ import {
 } from "@/features/location-categories";
 import { DataSourcesInfo } from "@/components/DataSourcesInfo/DataSourcesInfo";
 import { useState } from "react";
+import BeVolunteer from "@/components/Icons/BeVolunteer";
 
 const typeImages: Record<MapType, string> = {
   [MapType.Default]: "default",
@@ -160,6 +161,16 @@ export const MapControls = () => {
               <FilterButtonComponent
                 buttonLabel={t("filter.findVotingLocationsTitle")}
                 icon={<SearchIcon />}
+                onClick={() => {
+                  votingLocationsFilter.actions.setIsOpen(
+                    !votingLocationsFilter.isOpen
+                  );
+                }}
+              />
+
+              <FilterButtonComponent
+                buttonLabel={t("filter.beVolunteerTitle")}
+                icon={<BeVolunteer />}
                 onClick={() => {
                   votingLocationsFilter.actions.setIsOpen(
                     !votingLocationsFilter.isOpen
