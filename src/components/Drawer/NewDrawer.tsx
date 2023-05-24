@@ -20,7 +20,7 @@ import {
 import { useEffect, useState } from "react";
 import { useSingletonsStore } from "@/features/singletons";
 import { MapButtons } from "./components/MapButtons";
-import { getAllNeighborhoodsByID } from "@/data/models";
+import { getAllNeighborhoodsWithAllData } from "@/data/models";
 
 const DrawerIDLabel = ({ id }: { id: number }) => {
   return <span className={styles.contentIdSection}>ID: {id}</span>;
@@ -41,14 +41,11 @@ const LastUpdate = ({ lastUpdate }: { lastUpdate: string }) => {
 
 const NeighbourhoodDetails = ({
   details,
-  name,
 }: {
-  name: string;
   details: ChannelFeedDetails[];
 }) => {
   return (
     <div className={styles.neighbourhoodDetails}>
-      <Typography color={"blue"}>{name}</Typography>
       <div className={styles.neighbourhoodWrapper}>
         {details.map((detail, index) => (
           <Typography key={index}>
@@ -164,8 +161,9 @@ export const Drawer = ({ data, onCopyBillboard }: DrawerProps) => {
   }, [router.query.id, api]);
 
   useEffect(() => {
-    if (data === null && detail !== null) {
-      const neighborhood = getAllNeighborhoodsByID()[detail.neighbourhoodId];
+    if (detail !== null) {
+      const neighborhood =
+        getAllNeighborhoodsWithAllData()[detail.neighbourhoodId];
       setDrawerData({
         intensity: detail.intensity,
         location: {
@@ -174,11 +172,11 @@ export const Drawer = ({ data, onCopyBillboard }: DrawerProps) => {
         },
         properties: {
           name: neighborhood.name,
-          description: null,
+          description: `${neighborhood.districtName}, ${neighborhood.cityName}`,
         },
       });
     }
-  }, [data, detail, setDrawerData]);
+  }, [detail, setDrawerData]);
 
   return (
     <MuiDrawer
@@ -241,9 +239,14 @@ const DrawerContent = ({
   return (
     <div className={styles.content}>
       {detail.neighbourhoodId && <DrawerIDLabel id={detail.neighbourhoodId} />}
-      {title && <h3 style={{ maxWidth: "45ch" }}>{title}</h3>}
+      {title && <h3 style={{ maxWidth: "45ch", marginBottom: 0 }}>{title}</h3>}
+      {detail.name && (
+        <Typography className={styles.subtitle} sx={{ marginBottom: "1rem" }}>
+          {data.properties.description}
+        </Typography>
+      )}
       <LastUpdate lastUpdate={detail.lastUpdateTime} />
-      <NeighbourhoodDetails name={title!} details={detail.details} />
+      <NeighbourhoodDetails details={detail.details} />
       <IntensitySection intensity={data.intensity.toString()} />
       <MapButtons drawerData={data} />
       <ButtonGroup data={detail} onCopyBillboard={onCopyBillboard} />

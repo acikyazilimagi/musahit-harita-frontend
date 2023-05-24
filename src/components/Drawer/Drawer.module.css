@@ -85,6 +85,9 @@
   font-size: 14px;
   color: #636363;
 }
+.content > p.subtitle:first-of-type {
+  color: #0094ff;
+}
 
 .contentInfo {
   display: flex;
