@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import { useTranslation } from "next-i18next";
 import { MapButtons } from "./components/MapButtons";
 import CloseIcon from "@mui/icons-material/Close";
-import { Box, Typography } from "@mui/material";
+import { Alert, Box, Typography } from "@mui/material";
 import { useWindowSize } from "@/hooks/useWindowSize";
 import { useRouter } from "next/router";
 import omit from "lodash.omit";
@@ -18,6 +18,7 @@ import {
   intensityColorSelector,
   intensityTextSelector,
 } from "@/utils/intensity";
+import { useState } from "react";
 
 const DrawerIDLabel = ({ id }: { id: number }) => {
   return <span className={styles.contentIdSection}>ID: {id}</span>;
@@ -83,43 +84,53 @@ const ButtonGroup = ({
   data: ChannelData;
   onCopyBillboard: (_clipped: string) => void;
 }) => {
+  const [isShared, setIsShared] = useState(false);
   const { t } = useTranslation("home");
 
   const copy = () => {
     onCopyBillboard(
       `https://www.google.com/maps/@${data.location.lat.toString()},${data.location.lng.toString()},22z`
     );
+    setIsShared(true);
   };
 
   const doVolunteer = () => {};
 
   return (
-    <div className={styles.buttonGroup}>
-      <Button onClick={copy} variant="contained" color="inherit">
-        <ShareIcon className={styles.buttonIcon}></ShareIcon>
-        <Typography
-          sx={{
-            marginLeft: "0.5rem",
-          }}
-          color="white"
-        >
-          {t("cluster.shareLink")}
-        </Typography>
-      </Button>
-      <Button onClick={doVolunteer} variant="contained" color="success">
-        <FavoriteBorderOutlinedIcon
-          className={styles.buttonIcon}
-        ></FavoriteBorderOutlinedIcon>
-        <Typography
-          sx={{
-            marginLeft: "0.5rem",
-          }}
-          color="white"
-        >
-          {t("cluster.doVolunteer")}
-        </Typography>
-      </Button>
-    </div>
+    <>
+      <div className={styles.buttonGroup}>
+        <Button onClick={copy} variant="contained" color="inherit">
+          <ShareIcon className={styles.buttonIcon}></ShareIcon>
+          <Typography
+            sx={{
+              marginLeft: "0.5rem",
+            }}
+            color="white"
+          >
+            {t("cluster.shareLink")}
+          </Typography>
+        </Button>
+        <Button onClick={doVolunteer} variant="contained" color="success">
+          <FavoriteBorderOutlinedIcon
+            className={styles.buttonIcon}
+          ></FavoriteBorderOutlinedIcon>
+          <Typography
+            sx={{
+              marginLeft: "0.5rem",
+            }}
+            color="white"
+          >
+            {t("cluster.doVolunteer")}
+          </Typography>
+        </Button>
+      </div>
+
+      {isShared && (
+        <Alert severity="success" color="info" className={styles.shareAlert}>
+          {t("cluster.shareOk")}
+        </Alert>
+      )}
+    </>
   );
 };
 

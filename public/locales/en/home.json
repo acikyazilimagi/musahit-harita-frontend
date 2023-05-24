@@ -58,7 +58,8 @@
       "high": "High"
     },
     "doVolunteer": "Volunteer",
-    "shareLink": "Share"
+    "shareLink": "Share",
+    "shareOk": "The link has been copied to the clipboard."
   },
   "map": {
     "details": "Map Details",

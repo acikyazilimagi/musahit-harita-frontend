@@ -58,7 +58,8 @@
       "high": "Yüksek"
     },
     "doVolunteer": "Gönüllü Ol",
-    "shareLink": "Linki Paylaş"
+    "shareLink": "Linki Paylaş",
+    "shareOk": "Bağlantı başarıyla panoya kopyalandı."
   },
   "map": {
     "details": "Harita Ayrıntıları",

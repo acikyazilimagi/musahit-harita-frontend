@@ -76,6 +76,10 @@
   background-color: #f2f2f2;
 }
 
+.shareAlert {
+  margin-top: 15px;
+}
+
 .content > p:first-of-type {
   font-weight: 600;
   font-size: 14px;
