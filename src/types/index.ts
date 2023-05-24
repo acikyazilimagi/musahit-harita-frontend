@@ -17,11 +17,16 @@ export type ChannelData = {
   isVisited?: boolean;
 };
 
+export type ChannelFeedDetails = {
+  buildingName: string;
+  ballotBoxNos: number[];
+};
+
 export type ChannelDetailData = {
   name: string | null;
   lastUpdateTime: string;
   neighbourhoodId: number;
-  details: string[];
+  details: ChannelFeedDetails[];
   intensity: number;
 };
 

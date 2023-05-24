@@ -1,7 +1,7 @@
 import styles from "./Drawer.module.css";
 import { default as MuiDrawer } from "@mui/material/Drawer";
 import { DrawerData, useMapActions } from "@/stores/mapStore";
-import { ChannelData, ChannelDetailData } from "@/types";
+import { ChannelData, ChannelDetailData, ChannelFeedDetails } from "@/types";
 import Button from "@mui/material/Button";
 import { useTranslation } from "next-i18next";
 import CloseIcon from "@mui/icons-material/Close";
@@ -20,6 +20,7 @@ import {
 import { useEffect, useState } from "react";
 import { useSingletonsStore } from "@/features/singletons";
 import { MapButtons } from "./components/MapButtons";
+import { getAllNeighborhoodsByID } from "@/data/models";
 
 const DrawerIDLabel = ({ id }: { id: number }) => {
   return <span className={styles.contentIdSection}>ID: {id}</span>;
@@ -43,14 +44,16 @@ const NeighbourhoodDetails = ({
   name,
 }: {
   name: string;
-  details: string[];
+  details: ChannelFeedDetails[];
 }) => {
   return (
     <div className={styles.neighbourhoodDetails}>
       <Typography color={"blue"}>{name}</Typography>
       <div className={styles.neighbourhoodWrapper}>
         {details.map((detail, index) => (
-          <Typography key={index}>{detail}</Typography>
+          <Typography key={index}>
+            {detail.buildingName} - {detail.ballotBoxNos.join(" - ")}
+          </Typography>
         ))}
       </div>
     </div>
@@ -79,6 +82,7 @@ const IntensitySection = ({ intensity }: { intensity: string }) => {
 };
 
 const ButtonGroup = ({
+  data,
   onCopyBillboard,
 }: {
   data: ChannelDetailData;
@@ -88,9 +92,9 @@ const ButtonGroup = ({
   const { t } = useTranslation("home");
 
   const copy = () => {
-    const currentUrl = window.location.href;
-    console.log("currentUrl", currentUrl);
-    onCopyBillboard(currentUrl);
+    onCopyBillboard(
+      `${window.location.origin}${window.location.pathname}?id=${data.neighbourhoodId}`
+    );
     setIsShared(true);
   };
 
@@ -154,6 +158,23 @@ export const Drawer = ({ data, onCopyBillboard }: DrawerProps) => {
       setDetail(null);
     }
   }, [router.query.id, api]);
+
+  useEffect(() => {
+    if (data === null && detail !== null) {
+      const neighborhood = getAllNeighborhoodsByID()[detail.neighbourhoodId];
+      setDrawerData({
+        intensity: detail.intensity,
+        location: {
+          lat: neighborhood.lat,
+          lng: neighborhood.lng,
+        },
+        properties: {
+          name: neighborhood.name,
+          description: null,
+        },
+      });
+    }
+  }, [data, detail, setDrawerData]);
 
   return (
     <MuiDrawer

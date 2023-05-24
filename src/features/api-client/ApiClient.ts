@@ -15,11 +15,16 @@ interface ApiResponseFeeds {
   results: ApiResponseIntensity[];
 }
 
+interface FeedDetail {
+  buildingName: string;
+  ballotBoxNos: number[];
+}
+
 interface ApiResponseFeed {
   neighborhoodId: number;
   lastUpdateTime: string;
   intensity: number;
-  details: string[];
+  details: FeedDetail[];
 }
 
 interface ApiResponseIntensity {
