@@ -5,12 +5,19 @@ import { FilterControl } from "@/components/Filter/FilterControl";
 import { FilterOptions } from "@/utils/filterTime";
 import { MenuItem, SelectChangeEvent } from "@mui/material";
 import { useVotingLocations } from "./useVotingLocations";
+import type { District, City } from "./useVotingLocations";
 
 import cities from "@/data/tr-cities.json";
 import cityDistricts from "@/data/tr-city-districts.json";
 
+const sortByName = (a: District | City, b: District | City) => {
+  return a.name.localeCompare(b.name, "tr", { sensitivity: "base" });
+};
+
 const getDistricts = (cityID: number) => {
-  return cityDistricts.filter((district) => district.cityID === cityID);
+  return cityDistricts
+    .filter((district) => district.cityID === cityID)
+    .sort(sortByName);
 };
 
 export const FilterVotingLocations = () => {
@@ -49,7 +56,7 @@ export const FilterVotingLocations = () => {
           actions.setSelectedCity({ id: value });
         }}
       >
-        {cities.map((city) => {
+        {cities.sort(sortByName).map((city) => {
           return (
             <MenuItem key={city.id} value={city.id ?? ""}>
               {city.name}
