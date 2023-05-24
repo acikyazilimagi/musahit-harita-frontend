@@ -11,12 +11,12 @@ import {
   Typography,
 } from "@mui/material";
 import { create } from "zustand";
-import { devtools, persist } from "zustand/middleware";
+import { createJSONStorage, devtools, persist } from "zustand/middleware";
 import CloseIcon from "@mui/icons-material/Close";
 import { useTranslation } from "next-i18next";
 import { MapLayer, MapType } from "@/components/MTMLView/types";
 import { LayerButton } from "@/components//Map/Controls/LayerButton";
-import { getHashStorage } from "@/utils/zustand";
+import { hashStorage } from "@/utils/zustand";
 
 interface IStyles {
   [key: string]: SxProps<Theme>;
@@ -57,7 +57,7 @@ export const useMTMLView = create<MTMLViewStore>()(
     ),
     {
       name: "mtml",
-      getStorage: () => getHashStorage(),
+      storage: createJSONStorage(() => hashStorage),
       partialize: ({ isOpen, mapType, mapLayers }) => ({
         isOpen,
         mapType,

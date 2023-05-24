@@ -1,8 +1,8 @@
 import { DEFAULT_ZOOM } from "@/components/Map/utils";
-import { getHashStorage } from "@/utils/zustand";
+import { hashStorage } from "@/utils/zustand";
 import omit from "lodash.omit";
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import { createJSONStorage, persist } from "zustand/middleware";
 import { DEFAULT_CENTER } from "../components/Map/utils";
 
 type Coordinates = { lat: number; lng: number };
@@ -31,7 +31,7 @@ export const useMapGeographyStore = create<State>()(
     }),
     {
       name: "mg",
-      getStorage: () => getHashStorage(),
+      storage: createJSONStorage(() => hashStorage),
       partialize: (state) => ({ ...omit(state, "actions") }),
     }
   )
