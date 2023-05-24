@@ -10,14 +10,14 @@ import type { District, City } from "./useVotingLocations";
 import cities from "@/data/tr-cities.json";
 import cityDistricts from "@/data/tr-city-districts.json";
 
-const sortingFunction = (a: District | City, b: District | City) => {
+const sortByName = (a: District | City, b: District | City) => {
   return a.name.localeCompare(b.name, "tr", { sensitivity: "base" });
 };
 
 const getDistricts = (cityID: number) => {
   return cityDistricts
     .filter((district) => district.cityID === cityID)
-    .sort(sortingFunction);
+    .sort(sortByName);
 };
 
 export const FilterVotingLocations = () => {
@@ -56,7 +56,7 @@ export const FilterVotingLocations = () => {
           actions.setSelectedCity({ id: value });
         }}
       >
-        {cities.sort(sortingFunction).map((city) => {
+        {cities.sort(sortByName).map((city) => {
           return (
             <MenuItem key={city.id} value={city.id ?? ""}>
               {city.name}
