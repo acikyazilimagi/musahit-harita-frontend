@@ -1,6 +1,6 @@
 import styles from "./Drawer.module.css";
 import { default as MuiDrawer } from "@mui/material/Drawer";
-import { DrawerData } from "@/stores/mapStore";
+import { DrawerData, useMapActions } from "@/stores/mapStore";
 import { ChannelData } from "@/types";
 import Button from "@mui/material/Button";
 import { CopyAll } from "@mui/icons-material";
@@ -81,6 +81,7 @@ export const Drawer = ({ data, onCopyBillboard }: DrawerProps) => {
   const size = useWindowSize();
   const anchor = size.width > 768 ? "left" : "bottom";
   const router = useRouter();
+  const { setDrawerData } = useMapActions();
 
   return (
     <MuiDrawer
@@ -111,7 +112,12 @@ export const Drawer = ({ data, onCopyBillboard }: DrawerProps) => {
             hash: window.location.hash,
           }}
         >
-          <CloseIcon className={styles.closeButton} />
+          <CloseIcon
+            onClick={() => {
+              setDrawerData(null);
+            }}
+            className={styles.closeButton}
+          />
         </Link>
       </Box>
     </MuiDrawer>

@@ -4,14 +4,13 @@ import { MapLayer } from "../MTMLView/types";
 import { memo, useMemo } from "react";
 import { ChannelData } from "@/types";
 import { useMTMLView } from "../MTMLView/MTMLView";
-import { DEFAULT_IMPORTANCY } from "./utils";
 
 const HeatmapLayer = memo(HeatmapLayerFactory<Point>());
 
-type Point = [number, number, number];
+type Point = [lng: number, lat: number, intensity: number];
 
-const longitudeExtractor = (p: Point) => p[1];
-const latitudeExtractor = (p: Point) => p[0];
+const longitudeExtractor = (p: Point) => p[0];
+const latitudeExtractor = (p: Point) => p[1];
 const intensityExtractor = (p: Point) => p[2];
 
 type Props = {
@@ -19,12 +18,14 @@ type Props = {
   onMarkerClick: (_event: any, _markerData: ChannelData) => void;
 };
 
+const getIntensity = (data: ChannelData): number => data.intensity;
+
 const useHeatmapPoints = (locations: ChannelData[]) => {
   return useMemo(
     () =>
       locations.map(
         (item) =>
-          [item.location.lng, item.location.lat, DEFAULT_IMPORTANCY] as Point
+          [item.location.lng, item.location.lat, getIntensity(item)] as Point
       ),
     [locations]
   );
@@ -42,7 +43,9 @@ export const LayerControl = ({ locations, onMarkerClick }: Props) => {
             <HeatmapLayer
               key={idx}
               fitBoundsOnUpdate
+              fitBoundsOnLoad
               radius={15}
+              max={5}
               points={points}
               longitudeExtractor={longitudeExtractor}
               latitudeExtractor={latitudeExtractor}
