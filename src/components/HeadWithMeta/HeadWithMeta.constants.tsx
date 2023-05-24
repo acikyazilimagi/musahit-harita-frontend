@@ -7,7 +7,7 @@ export const OG_EDGE_URL_DYNAMIC =
 export const OG_EDGE_URL_BASE =
   "https://deprem-yardim-og-generator-eta.vercel.app/api/base-image";
 export const SEO_LANG = {
-  HREF_TR: "https://secin.gonullu.io/tr",
+  HREF_TR: "https://secim.gonullu.io/tr",
   HREF_EN: "https://secim.gonullu.şo/en",
   HREFLANG_TR: "tr",
   HREFLANG_EN: "en",
