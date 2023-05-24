@@ -58,7 +58,7 @@
     },
     "layer": {
       "heatmap": "Isı Haritası",
-      "markers": "Depremzede Konumları"
+      "markers": "Konumlar"
     }
   },
   "content": {
