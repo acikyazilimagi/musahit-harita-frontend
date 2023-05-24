@@ -2,7 +2,13 @@ import { Filter } from "@/components/Filter/Filter";
 import { FilterHeader } from "@/components/Filter/FilterHeader";
 import { useTranslation } from "next-i18next";
 import { FilterControl } from "@/components/Filter/FilterControl";
-import { MenuItem, SelectChangeEvent } from "@mui/material";
+import {
+  MenuItem,
+  SelectChangeEvent,
+  Button,
+  SxProps,
+  Theme,
+} from "@mui/material";
 import { useVotingLocations } from "./useVotingLocations";
 import {
   getAllCities,
@@ -12,9 +18,18 @@ import {
   getNeighborhood,
   getNeighborhoods,
 } from "@/data/models";
+import { useMap } from "react-leaflet";
+
+const ZOOM_LEVEL_CITY = 9;
+const ZOOM_LEVEL_DISTRICT = 11;
+const ZOOM_LEVEL_NEIGHBORHOOD = 13;
 
 interface HasName {
   name: string;
+}
+
+interface IStyles {
+  [key: string]: SxProps<Theme>;
 }
 
 const sortByName = (a: HasName, b: HasName) => {
@@ -30,6 +45,7 @@ export const FilterVotingLocations = () => {
     selectedDistrict,
     selectedNeighborhood,
   } = useVotingLocations();
+  const map = useMap();
 
   if (!isOpen) {
     return null;
@@ -122,6 +138,42 @@ export const FilterVotingLocations = () => {
               );
             })}
       </FilterControl>
+
+      <Button
+        sx={styles.button}
+        variant="contained"
+        disabled={!selectedCity}
+        onClick={() => {
+          if (!selectedCity) return;
+
+          let lat = selectedCity.lat;
+          let lng = selectedCity.lng;
+          let zoomLevel = ZOOM_LEVEL_CITY;
+
+          if (selectedDistrict) {
+            lat = selectedDistrict.lat;
+            lng = selectedDistrict.lng;
+            zoomLevel = ZOOM_LEVEL_DISTRICT;
+          }
+
+          if (selectedNeighborhood) {
+            lat = selectedNeighborhood.lat;
+            lng = selectedNeighborhood.lng;
+            zoomLevel = ZOOM_LEVEL_NEIGHBORHOOD;
+          }
+
+          map.setView([lat, lng], zoomLevel, { animate: true });
+        }}
+      >
+        {t("filter.applyOptionsLabel")}
+      </Button>
     </Filter>
   );
+};
+
+const styles: IStyles = {
+  button: () => ({
+    height: "48px",
+    borderRadius: "8px !important",
+  }),
 };

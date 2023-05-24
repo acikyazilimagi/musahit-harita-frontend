@@ -1,7 +1,4 @@
-import omit from "lodash.omit";
 import { create } from "zustand";
-import { getHashStorage } from "@/utils/zustand";
-import { persist } from "zustand/middleware";
 import type { City, District, Neighborhood } from "@/data/models";
 
 interface State {
@@ -19,29 +16,20 @@ interface State {
   };
 }
 
-export const useVotingLocations = create<State>()(
-  persist(
-    (set) => ({
-      isOpen: false,
-      selectedCity: null,
-      selectedDistrict: null,
-      selectedNeighborhood: null,
-      actions: {
-        setSelectedCity: (selectedCity) => set(() => ({ selectedCity })),
-        setSelectedDistrict: (selectedDistrict) =>
-          set(() => ({ selectedDistrict })),
-        setSelectedNeighborhood: (selectedNeighborhood) =>
-          set(() => ({ selectedNeighborhood })),
-        setIsOpen: (isOpen) => set(() => ({ isOpen })),
-      },
-    }),
-    {
-      name: "voting-locations",
-      getStorage: () => getHashStorage(),
-      partialize: (state) => ({ ...omit(state, "actions") }),
-    }
-  )
-);
+export const useVotingLocations = create<State>()((set) => ({
+  isOpen: false,
+  selectedCity: null,
+  selectedDistrict: null,
+  selectedNeighborhood: null,
+  actions: {
+    setSelectedCity: (selectedCity) => set(() => ({ selectedCity })),
+    setSelectedDistrict: (selectedDistrict) =>
+      set(() => ({ selectedDistrict })),
+    setSelectedNeighborhood: (selectedNeighborhood) =>
+      set(() => ({ selectedNeighborhood })),
+    setIsOpen: (isOpen) => set(() => ({ isOpen })),
+  },
+}));
 
 useVotingLocations.subscribe(({ actions, ...state }, prevState) => {
   if (state.selectedCity?.id !== prevState.selectedCity?.id) {
