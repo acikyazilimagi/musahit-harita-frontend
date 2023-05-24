@@ -1,13 +1,30 @@
 import { API_URL } from "@/env";
+import { ChannelDetailData } from "@/types";
 
 const dataFetcher = async <T>(url: string | URL) => {
   const response = await fetch(url);
-  return (await response.json()) as T;
+  try {
+    return (await response.json()) as T;
+  } catch (e) {
+    return null;
+  }
 };
 
 interface ApiResponseFeeds {
   count: number;
   results: ApiResponseIntensity[];
+}
+
+interface FeedDetail {
+  buildingName: string;
+  ballotBoxNos: number[];
+}
+
+interface ApiResponseFeed {
+  neighborhoodId: number;
+  lastUpdateTime: string;
+  intensity: number;
+  details: FeedDetail[];
 }
 
 interface ApiResponseIntensity {
@@ -23,6 +40,16 @@ export interface IntensityData {
 const transformResponse = (response: ApiResponseIntensity): IntensityData => ({
   neighborhoodID: response.neighborhood_id,
   intensity: response.volunteer_data,
+});
+
+const transformDetailResponse = (
+  response: ApiResponseFeed
+): ChannelDetailData => ({
+  details: response.details,
+  intensity: response.intensity,
+  neighbourhoodId: response.neighborhoodId,
+  lastUpdateTime: response.lastUpdateTime,
+  name: "null",
 });
 
 interface ApiClientProps {
@@ -43,7 +70,15 @@ export class ApiClient {
     const url = this.mock
       ? new URL(this.url + "/feeds/mock")
       : new URL(this.url + "/feeds");
-    const { results } = await dataFetcher<ApiResponseFeeds>(url);
-    return results.map(transformResponse);
+    const data = await dataFetcher<ApiResponseFeeds>(url);
+    return data ? data.results.map(transformResponse) : null;
+  }
+
+  async fetchDetail(id: string) {
+    const url = this.mock
+      ? new URL(this.url + "/feed/mock/" + id)
+      : new URL(this.url + "/feed/" + id);
+    const data = await dataFetcher<ApiResponseFeed>(url);
+    return data ? transformDetailResponse(data) : null;
   }
 }

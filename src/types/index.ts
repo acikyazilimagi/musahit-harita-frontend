@@ -10,11 +10,24 @@ export type ChannelData = {
     name: string | null;
     description: string | null;
   };
-  intensity: number;
   location: Point;
+  intensity: number;
   reference?: number | null;
   closeByRecords?: number[];
   isVisited?: boolean;
+};
+
+export type ChannelFeedDetails = {
+  buildingName: string;
+  ballotBoxNos: number[];
+};
+
+export type ChannelDetailData = {
+  name: string | null;
+  lastUpdateTime: string;
+  neighbourhoodId: number;
+  details: ChannelFeedDetails[];
+  intensity: number;
 };
 
 export type APIResponse = {};

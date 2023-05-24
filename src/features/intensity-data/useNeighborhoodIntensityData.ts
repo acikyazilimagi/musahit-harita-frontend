@@ -23,6 +23,20 @@ const useFetchIntensityData = () => {
   });
 };
 
+const useFetchIntensityDetailData = (id: string | null) => {
+  const { api } = useSingletonsStore();
+
+  return useSWR(
+    ["feed", "intensity"],
+    () => (!id ? null : api.fetchDetail(id)),
+    {
+      keepPreviousData: true,
+      revalidateOnFocus: true,
+      refreshInterval: FIVE_MINUTES,
+    }
+  );
+};
+
 export const useNeighborhoodIntensityData = () => {
   const { data } = useFetchIntensityData();
 
@@ -37,4 +51,9 @@ export const useNeighborhoodIntensityData = () => {
       } as NeighborhoodIntensity;
     });
   }, [data]);
+};
+
+export const useNeighborhoodIntensityDetailData = (id: string | null) => {
+  const { data } = useFetchIntensityDetailData(id);
+  return data ?? null;
 };

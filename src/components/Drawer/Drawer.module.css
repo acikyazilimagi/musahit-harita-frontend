@@ -10,6 +10,61 @@
   padding: 0 4px;
 }
 
+.neighbourhoodDetails {
+  margin-top: 8px;
+  max-height: 150px;
+  overflow: auto;
+}
+
+.neighbourhoodWrapper {
+  margin-top: 8px;
+}
+
+.neighbourhoodDetails::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.neighbourhoodDetails::-webkit-scrollbar-track {
+  background: #0094ff20;
+}
+
+.neighbourhoodDetails::-webkit-scrollbar-thumb {
+  background: #0094ff70;
+}
+
+.neighbourhoodDetails::-webkit-scrollbar-thumb:hover {
+  background: #0094ff80;
+}
+
+.neighbourhoodDetails::-webkit-scrollbar-thumb:active {
+  background: #0094ff80;
+}
+
+.intensitySection {
+  margin-top: 8px;
+}
+
+.intensity {
+  border-radius: 10px;
+  color: #fff;
+  padding: 0.25rem 0.5rem;
+}
+
+.buttonGroup {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+.buttonGroup button {
+  width: 80%;
+}
+
+.buttonIcon {
+  color: #fff;
+}
+
 .closeButton {
   position: absolute;
   top: 1rem;
@@ -19,6 +74,10 @@
 
 .closeButton:hover {
   background-color: #f2f2f2;
+}
+
+.shareAlert {
+  margin-top: 15px;
 }
 
 .content > p:first-of-type {

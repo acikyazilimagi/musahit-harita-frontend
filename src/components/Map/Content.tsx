@@ -45,6 +45,7 @@ const transformToChannelData = ({
 });
 
 export const MapContent = () => {
+  const router = useRouter();
   const { mapType } = useMTMLView();
   const { setDrawerData } = useMapActions();
   const data = useNeighborhoodIntensityData();
@@ -54,7 +55,6 @@ export const MapContent = () => {
   const { coordinates, zoom } = useMapGeographyStore();
   const { setEventType } = useMapActions();
   const device = useDevice();
-  const router = useRouter();
 
   useEffect(() => {
     if (data) {
