@@ -1,12 +1,8 @@
-import { parseEnv } from "znv";
-import { z } from "zod";
+import invariant from "tiny-invariant";
 
-export const { API_URL } = parseEnv(process.env, {
-  API_URL: {
-    schema: z.string().url(),
-    defaults: {
-      development: "https://backend.gonullu.io",
-      production: "https://backend.gonullu.io",
-    },
-  },
-});
+invariant(
+  process.env.NEXT_PUBLIC_BASE_URL,
+  "NEXT_PUBLIC_BASE_URL is not defined, change .env.sample filename to .env.development to fix it"
+);
+
+export const API_URL = process.env.NEXT_PUBLIC_BASE_URL;

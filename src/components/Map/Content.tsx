@@ -17,29 +17,37 @@ import { MapClusterStyle } from "@/components/Map/Cluster/ClusterStyle";
 import { latLng, latLngBounds } from "leaflet";
 import { LayerControl } from "./LayerControl";
 import { useMapGeographyStore } from "@/stores/mapGeographyStore";
-import { getAllNeighborhoods } from "@/data/models";
-import useSWR from "swr";
 import { useEffect, useState } from "react";
+import {
+  NeighborhoodIntensity,
+  useNeighborhoodIntensityData,
+} from "@/features/intensity-data";
 
 const MapEvents = () => {
   useMapEvents();
   return null;
 };
 
-type IntensityData = {
-  neighborhood_id: number;
-  volunteer_data: number;
-};
-const fetcher = (url: string): Promise<any> =>
-  fetch(url).then((res) => res.json());
+const transformToChannelData = ({
+  neighborhood,
+  intensity,
+}: NeighborhoodIntensity): ChannelData => ({
+  reference: neighborhood.id,
+  properties: {
+    name: neighborhood.name,
+    description: null,
+  },
+  intensity: intensity.intensity / 10 ?? DEFAULT_IMPORTANCY,
+  location: {
+    lat: neighborhood.lat,
+    lng: neighborhood.lng,
+  },
+});
 
 export const MapContent = () => {
   const { mapType } = useMTMLView();
   const { setDrawerData } = useMapActions();
-  const { data: intensityData } = useSWR<{
-    results: IntensityData[];
-    count: number;
-  }>("https://backend.gonullu.io/feeds/mock", fetcher);
+  const data = useNeighborhoodIntensityData();
 
   const [locations, setLocations] = useState<ChannelData[]>([]);
 
@@ -49,28 +57,11 @@ export const MapContent = () => {
   const router = useRouter();
 
   useEffect(() => {
-    if (intensityData) {
-      const channelData: ChannelData[] = getAllNeighborhoods().map(
-        (hood): ChannelData => ({
-          properties: {
-            name: hood.name,
-            description: null,
-          },
-          intensity:
-            (intensityData.results.find(
-              (data: IntensityData) => data.neighborhood_id === hood.id
-            )?.volunteer_data as number) / 10 || DEFAULT_IMPORTANCY,
-          location: {
-            lat: hood.lat,
-            lng: hood.lng,
-          },
-          reference: hood.id,
-        })
-      );
-
+    if (data) {
+      const channelData: ChannelData[] = data.map(transformToChannelData);
       setLocations(channelData);
     }
-  }, [intensityData, setDrawerData]);
+  }, [data, setDrawerData]);
 
   const onMarkerClick = (_e: any, markerData: ChannelData) => {
     setDrawerData(markerData);

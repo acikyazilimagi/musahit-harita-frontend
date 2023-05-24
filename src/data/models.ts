@@ -8,9 +8,11 @@ export interface City extends Point {
   districts: District[];
 }
 
-export const getCity = (id: number) => geoData[id.toString()];
+// use the cached value to not re-calculate static values
+const allCities = Object.values(geoData);
+export const getAllCities = () => allCities;
 
-export const getAllCities = () => Object.values(geoData);
+export const getCity = (id: number) => geoData[id.toString()];
 
 export interface District extends Point {
   id: number;
@@ -52,22 +54,19 @@ export const getNeighborhood = (
   return getNeighborhoods(cityID, districtID).find((n) => n.id === hoodID);
 };
 
-// we are caching the results of the hoods so we don't loop over the data only once.
-let _hoods: Neighborhood[] | null = null;
-export const getAllNeighborhoods = () => {
-  // if we have a cached result, return that.
-  if (_hoods) {
-    return _hoods;
-  }
+let allNeighborhoods: Neighborhood[] = [];
 
-  let hoods: Neighborhood[] = [];
-  Object.values(geoData).forEach((city) => {
-    city?.districts.forEach((district) => {
-      hoods = hoods.concat(district.neighborhoods);
-    });
+allCities.forEach((city) => {
+  city.districts.forEach((district) => {
+    allNeighborhoods = allNeighborhoods.concat(district.neighborhoods);
   });
+});
+// return the cached value to not re-calculate static values
+export const getAllNeighborhoods = () => allNeighborhoods;
 
-  // write the calculation to cache before return
-  _hoods = hoods;
-  return hoods;
-};
+let allNeighborhoodsByID: Record<number, Neighborhood> = {};
+allNeighborhoods.forEach((hood) => {
+  allNeighborhoodsByID[hood.id] = hood;
+});
+// return the cached value to not re-calculate static values
+export const getAllNeighborhoodsByID = () => allNeighborhoodsByID;

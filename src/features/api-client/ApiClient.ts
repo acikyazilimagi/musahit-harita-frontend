@@ -15,7 +15,7 @@ interface ApiResponseIntensity {
   volunteer_data: number;
 }
 
-interface IntensityData {
+export interface IntensityData {
   neighborhoodID: number;
   intensity: number;
 }
@@ -27,17 +27,22 @@ const transformResponse = (response: ApiResponseIntensity): IntensityData => ({
 
 interface ApiClientProps {
   url?: string;
+  mock?: true;
 }
 
 export class ApiClient {
-  url: string;
+  readonly url: string;
+  readonly mock: boolean;
 
   constructor(props: ApiClientProps = {}) {
     this.url = props.url ?? API_URL;
+    this.mock = !!props.mock;
   }
 
   async fetchFeeds() {
-    const url = new URL(this.url + "/feeds/mock");
+    const url = this.mock
+      ? new URL(this.url + "/feeds/mock")
+      : new URL(this.url + "/feeds");
     const { results } = await dataFetcher<ApiResponseFeeds>(url);
     return results.map(transformResponse);
   }
