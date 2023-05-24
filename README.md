@@ -24,7 +24,7 @@ To Contribute:
 ### 1. Clone the Repo:
 
 ```bash
-git clone https://github.com/acikkaynak/deprem-yardim-frontend.git
+git clone https://github.com/acikkaynak/musahit-harita-frontend.git
 ```
 
 ### 2. Install Dependencies:
