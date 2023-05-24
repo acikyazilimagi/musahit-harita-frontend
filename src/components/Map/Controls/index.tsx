@@ -21,6 +21,7 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import LayersIcon from "@mui/icons-material/Layers";
 import SearchIcon from "@mui/icons-material/Search";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import { useMap } from "react-leaflet";
 import { Control } from "./Control";
 import { LayerButton } from "./LayerButton";
@@ -34,6 +35,7 @@ import {
 } from "@/features/location-categories";
 import { DataSourcesInfo } from "@/components/DataSourcesInfo/DataSourcesInfo";
 import { useState } from "react";
+import { useAboutView } from "@/components/AboutUs/AboutUsOverlay";
 
 const typeImages: Record<MapType, string> = {
   [MapType.Default]: "default",
@@ -107,8 +109,9 @@ const MapLayerControl = (props: IMapLayerControlProps) => {
 
 const HelpViewControl = () => {
   const helpView = useHelpView();
+  const aboutView = useAboutView();
   return (
-    <Box>
+    <Box sx={styles.buttonBox}>
       <IconButton
         sx={styles.button}
         color="inherit"
@@ -117,6 +120,15 @@ const HelpViewControl = () => {
         }}
       >
         <HelpOutline />
+      </IconButton>
+      <IconButton
+        sx={styles.button}
+        color="inherit"
+        onClick={() => {
+          aboutView.toggle(!aboutView.isOpen);
+        }}
+      >
+        <InfoOutlinedIcon />
       </IconButton>
     </Box>
   );
@@ -208,6 +220,11 @@ const styles: IStyles = {
     "&:hover": {
       backgroundColor: theme.palette.common.white,
     },
+  }),
+  buttonBox: () => ({
+    display: "flex",
+    flexDirection: "column",
+    rowGap: "8px",
   }),
   marginTopLeft: {
     margin: "10px 10px",
