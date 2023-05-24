@@ -64,6 +64,7 @@ export const MapContent = () => {
   }, [data, setDrawerData]);
 
   const onMarkerClick = (_e: any, markerData: ChannelData) => {
+    setDrawerData(markerData);
     const query = { ...router.query, id: markerData.reference };
     router.push({ query, hash: location.hash }, { query, hash: location.hash });
   };

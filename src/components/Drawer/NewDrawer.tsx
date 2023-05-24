@@ -1,7 +1,7 @@
 import styles from "./Drawer.module.css";
 import { default as MuiDrawer } from "@mui/material/Drawer";
-import { useMapActions } from "@/stores/mapStore";
-import { ChannelDetailData } from "@/types";
+import { DrawerData, useMapActions } from "@/stores/mapStore";
+import { ChannelData, ChannelDetailData } from "@/types";
 import Button from "@mui/material/Button";
 import { useTranslation } from "next-i18next";
 import CloseIcon from "@mui/icons-material/Close";
@@ -19,6 +19,7 @@ import {
 } from "@/utils/intensity";
 import { useEffect, useState } from "react";
 import { useSingletonsStore } from "@/features/singletons";
+import { MapButtons } from "./components/MapButtons";
 
 const DrawerIDLabel = ({ id }: { id: number }) => {
   return <span className={styles.contentIdSection}>ID: {id}</span>;
@@ -134,29 +135,30 @@ const ButtonGroup = ({
 };
 
 type DrawerProps = {
+  data: DrawerData | null;
   onCopyBillboard: (_clipped: string) => void;
 };
 
-export const Drawer = ({ onCopyBillboard }: DrawerProps) => {
+export const Drawer = ({ data, onCopyBillboard }: DrawerProps) => {
   const size = useWindowSize();
   const { api } = useSingletonsStore();
   const anchor = size.width > 768 ? "left" : "bottom";
   const router = useRouter();
-  const [data, setData] = useState<ChannelDetailData | null>(null);
+  const [detail, setDetail] = useState<ChannelDetailData | null>(null);
   const { setDrawerData } = useMapActions();
 
   useEffect(() => {
     if (router.query.id) {
-      api.fetchDetail(router.query.id as string).then((res) => setData(res));
+      api.fetchDetail(router.query.id as string).then((res) => setDetail(res));
     } else {
-      setData(null);
+      setDetail(null);
     }
   }, [router.query.id, api]);
 
   return (
     <MuiDrawer
       className={styles.drawer}
-      open={!!data}
+      open={!!data && !!detail}
       anchor={anchor}
       hideBackdrop
     >
@@ -172,7 +174,11 @@ export const Drawer = ({ onCopyBillboard }: DrawerProps) => {
         role="presentation"
       >
         {data && (
-          <DrawerContent data={data} onCopyBillboard={onCopyBillboard} />
+          <DrawerContent
+            data={data}
+            detail={detail!}
+            onCopyBillboard={onCopyBillboard}
+          />
         )}
         {/* <CloseByRecord drawerData={drawerData} /> */}
         <Link
@@ -196,24 +202,24 @@ export const Drawer = ({ onCopyBillboard }: DrawerProps) => {
 
 const DrawerContent = ({
   data,
+  detail,
   onCopyBillboard,
 }: {
-  data: ChannelDetailData;
+  detail: ChannelDetailData;
+  data: ChannelData;
   onCopyBillboard: DrawerProps["onCopyBillboard"];
 }) => {
-  const title = data.name;
+  const title = data.properties.name;
 
   return (
     <div className={styles.content}>
-      {data?.neighbourhoodId && <DrawerIDLabel id={data.neighbourhoodId} />}
+      {detail?.neighbourhoodId && <DrawerIDLabel id={detail.neighbourhoodId} />}
       {title && <h3 style={{ maxWidth: "45ch" }}>{title}</h3>}
-      <LastUpdate lastUpdate={data.lastUpdateTime} />
-      <NeighbourhoodDetails name={data.name!} details={data.details} />
+      <LastUpdate lastUpdate={detail.lastUpdateTime} />
+      <NeighbourhoodDetails name={title!} details={detail.details} />
       <IntensitySection intensity={data.intensity.toString()} />
-      {/* we don't have lat and lng for now
       <MapButtons drawerData={data} />
-       */}
-      <ButtonGroup data={data} onCopyBillboard={onCopyBillboard} />
+      <ButtonGroup data={detail} onCopyBillboard={onCopyBillboard} />
     </div>
   );
 };
