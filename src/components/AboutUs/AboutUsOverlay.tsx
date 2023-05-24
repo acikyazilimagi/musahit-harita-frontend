@@ -30,7 +30,7 @@ export default function AboutUsOverlay() {
           onBack={() => {
             aboutView.toggle(!aboutView.isOpen);
           }}
-        ></PopupHeader>
+        />
 
         <AboutUs></AboutUs>
       </Container>
@@ -48,29 +48,29 @@ const styles: IStyles = {
     [theme.breakpoints.up("xs")]: {
       maxWidth: "100%",
       height: "100vh",
-      borderRadius: "0px !important",
+      borderRadius: "0px",
       overflow: "auto",
       padding: "0",
     },
     [theme.breakpoints.up("sm")]: {
       maxWidth: 550,
       height: "auto",
-      borderRadius: "8px !important",
+      borderRadius: "8px",
     },
     [theme.breakpoints.up("md")]: {
       maxWidth: 550,
       height: "auto",
-      borderRadius: "8px !important",
+      borderRadius: "8px",
     },
     [theme.breakpoints.up("lg")]: {
       maxWidth: 550,
       height: "auto",
-      borderRadius: "8px !important",
+      borderRadius: "8px",
     },
     [theme.breakpoints.up("xl")]: {
       maxWidth: 550,
       height: "auto",
-      borderRadius: "8px !important",
+      borderRadius: "8px",
     },
   }),
 };
