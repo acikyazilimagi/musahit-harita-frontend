@@ -15,6 +15,15 @@ interface ApiResponseFeeds {
   results: ApiResponseIntensity[];
 }
 
+interface ApiVolunteerForm {
+  name: string;
+  surname: string;
+  email: string;
+  phone: string;
+  neighborhoodId: number;
+  kvkkAccepted: boolean;
+}
+
 interface FeedDetail {
   buildingName: string;
   ballotBoxNos: number[];
@@ -80,5 +89,17 @@ export class ApiClient {
       : new URL(this.url + "/feed/" + id);
     const data = await dataFetcher<ApiResponseFeed>(url);
     return data ? transformDetailResponse(data) : null;
+  }
+
+  async applyVolunteer(form: ApiVolunteerForm) {
+    const url = new URL(this.url + "/volunteer-form");
+    const response = await fetch(url.toString(), {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(form),
+    });
+    return response.ok;
   }
 }

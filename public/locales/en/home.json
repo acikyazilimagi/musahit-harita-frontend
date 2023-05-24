@@ -92,7 +92,7 @@
       "subtitle": " To be a volunteer, please enter your information here. We will send you an email to confirm your information.",
       "kvkkClickableText": "KVKK Text",
       "kvkkText": "i read and accept",
-      "submit": "Apply",
+      "submit": "Be a Volunteer",
       "info": {
         "title": "Information",
         "content": "The volunteer support to be created will support the location you have chosen. Please do not create an application if you cannot access the region.",
@@ -104,6 +104,17 @@
         "surname": "last name",
         "phone": "Phone Number",
         "email": "Email Address"
+      },
+      "validation": {
+        "name": "Please enter your name.",
+        "surname": "Please enter your last name.",
+        "email": "Please enter a valid email address.",
+        "phone": "Please enter a valid phone number.",
+        "kvkk": "Please read and approve the KVKK Open Consent Text."
+      },
+      "status": {
+        "ok": "Your volunteer request has been successfully created.",
+        "fail": "There was an error creating your volunteer request. Please try again later."
       }
     },
     "kvkk": {

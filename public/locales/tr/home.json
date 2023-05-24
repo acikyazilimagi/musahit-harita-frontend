@@ -104,6 +104,17 @@
         "surname": "Soyisim",
         "phone": "Telefon Numarası",
         "email": "E-posta Adresi"
+      },
+      "validation": {
+        "name": "Lütfen isminizi giriniz.",
+        "surname": "Lütfen soyisminizi giriniz.",
+        "email": "Lütfen geçerli bir e-posta adresi giriniz.",
+        "phone": "Lütfen geçerli bir telefon numarası giriniz.",
+        "kvkk": "Lütfen KVKK Açık Rıza Metni’ni okuyup onaylayınız."
+      },
+      "status": {
+        "ok": "Gönüllü olma talebiniz başarıyla oluşturuldu.",
+        "fail": "Gönüllü olma talebiniz oluşturulurken bir hata oluştu. Lütfen daha sonra tekrar deneyiniz."
       }
     },
     "kvkk": {

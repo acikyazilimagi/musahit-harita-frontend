@@ -24,6 +24,11 @@ import KvkkDialog from "@/components/Texts/Kvkk/KvkkDialog";
 import { useTranslation } from "next-i18next";
 import moduleCss from "./BeVolunteer.module.css";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { ToastContainer, toast, type ToastOptions } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useSingletonsStore } from "@/features/singletons";
 
 type Props = {
   neighborhoodId?: number;
@@ -32,6 +37,17 @@ type Props = {
 type InformationProps = {
   open: boolean;
   onClose: (_: boolean) => void;
+};
+
+const toastConfig: ToastOptions = {
+  position: "top-right",
+  autoClose: 5000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+  theme: "light",
 };
 
 const LocationInformation: React.FC<InformationProps> = ({ open, onClose }) => {
@@ -72,13 +88,45 @@ const LocationInformation: React.FC<InformationProps> = ({ open, onClose }) => {
 
 function BeVolunteerForm({ neighborhoodId }: Props) {
   const { t } = useTranslation("home");
-  const [isKVKKAcknowledged, setIsKVKKAcknowledged] = useState<boolean>(false);
   const [infoPanelOpen, setInfoPanelOpen] = useState<boolean>(false);
-  const [formData] = useState({
-    neighborhoodId: neighborhoodId,
-    name: "",
-    email: "",
-    phone: "",
+  const { api } = useSingletonsStore();
+  const { setFieldValue, ...form } = useFormik({
+    enableReinitialize: true,
+    initialValues: {
+      neighborhoodId: neighborhoodId ?? 0,
+      name: "",
+      surname: "",
+      email: "",
+      phone: "",
+      kvkkAccepted: false,
+    },
+    validationSchema: Yup.object({
+      name: Yup.string().required(
+        t("forms.beVolunteer.validation.name").toString()
+      ),
+      surname: Yup.string().required(
+        t("forms.beVolunteer.validation.surname").toString()
+      ),
+      email: Yup.string()
+        .email(t("forms.beVolunteer.validation.email").toString())
+        .required(t("forms.beVolunteer.validation.email").toString()),
+      phone: Yup.string().required(
+        t("forms.beVolunteer.validation.phone").toString()
+      ),
+      kvkkAccepted: Yup.boolean()
+        .oneOf([true], t("forms.beVolunteer.validation.kvkk").toString())
+        .required(t("forms.beVolunteer.validation.kvkk").toString()),
+    }),
+    onSubmit: async (values) => {
+      const res = await api.applyVolunteer(values);
+      if (res) {
+        toast.success(t("forms.beVolunteer.status.ok"), toastConfig);
+        form.resetForm();
+        return toggleForm();
+      }
+
+      return toast.error(t("forms.beVolunteer.status.fail"), toastConfig);
+    },
   });
 
   const isFormOpen = useIsFormOpen();
@@ -86,14 +134,16 @@ function BeVolunteerForm({ neighborhoodId }: Props) {
   const { toggleForm } = useBeVolunteerStoreActions();
 
   useEffect(() => {
-    formData.neighborhoodId = neighborhoodId;
-  }, [formData, neighborhoodId]);
+    if (neighborhoodId) {
+      setFieldValue("neighborhoodId", neighborhoodId);
+    }
+  }, [setFieldValue, neighborhoodId]);
 
   useEffect(() => {
-    if (isKVKKAcknowledged) {
+    if (form.values.kvkkAccepted) {
       toggleKVKK();
     }
-  }, [isKVKKAcknowledged, toggleKVKK]);
+  }, [form.values.kvkkAccepted, toggleKVKK]);
 
   if (!isFormOpen) return null;
 
@@ -101,19 +151,18 @@ function BeVolunteerForm({ neighborhoodId }: Props) {
     setInfoPanelOpen(true);
   };
 
-  const submit = async () => {};
-
   const onInfoPanelClose = (isConfirmed: boolean) => {
     if (isConfirmed) {
-      submit();
+      form.handleSubmit();
     }
     setInfoPanelOpen(false);
   };
 
   return (
-    <Box component="form" autoComplete="off">
+    <Box component="form" autoComplete="on">
       <KvkkDialog />
       <LocationInformation open={infoPanelOpen} onClose={onInfoPanelClose} />
+      <ToastContainer />
       <Dialog open={isFormOpen} onClose={toggleForm} sx={styles.dialog}>
         <DialogTitle sx={styles.titleContainer}>
           <BeVolunteer color="#344054" />
@@ -131,6 +180,13 @@ function BeVolunteerForm({ neighborhoodId }: Props) {
             label={t("forms.beVolunteer.inputs.name")}
             type="text"
             fullWidth
+            required
+            autoComplete="name"
+            value={form.values.name}
+            onChange={form.handleChange}
+            onBlur={form.handleBlur}
+            error={!!form.touched.name}
+            helperText={form.touched.name && form.errors.name}
           />
           <TextField
             margin="dense"
@@ -138,6 +194,13 @@ function BeVolunteerForm({ neighborhoodId }: Props) {
             label={t("forms.beVolunteer.inputs.surname")}
             type="text"
             fullWidth
+            required
+            autoComplete="family-name"
+            value={form.values.surname}
+            onChange={form.handleChange}
+            onBlur={form.handleBlur}
+            error={!!form.touched.surname}
+            helperText={form.touched.surname && form.errors.surname}
           />
           <TextField
             margin="dense"
@@ -145,6 +208,13 @@ function BeVolunteerForm({ neighborhoodId }: Props) {
             label={t("forms.beVolunteer.inputs.phone")}
             type="phone"
             fullWidth
+            required
+            autoComplete="tel"
+            value={form.values.phone}
+            onChange={form.handleChange}
+            onBlur={form.handleBlur}
+            error={!!form.touched.phone}
+            helperText={form.touched.phone && form.errors.phone}
           />
           <TextField
             margin="dense"
@@ -152,31 +222,51 @@ function BeVolunteerForm({ neighborhoodId }: Props) {
             label={t("forms.beVolunteer.inputs.email")}
             type="email"
             fullWidth
+            required
+            autoComplete="email"
+            value={form.values.email}
+            onChange={form.handleChange}
+            onBlur={form.handleBlur}
+            error={!!form.touched.email}
+            helperText={form.touched.email && form.errors.email}
           />
           <FormControlLabel
             control={
               <Checkbox
-                checked={isKVKKAcknowledged}
-                onChange={(e) => setIsKVKKAcknowledged(e.target.checked)}
+                checked={form.values.kvkkAccepted}
+                onChange={form.handleChange}
+                onBlur={form.handleBlur}
+                name="kvkkAccepted"
+                id="kvkkAccepted"
+                required
               />
             }
             label={
-              <p>
-                <u onClick={toggleKVKK}>
-                  {t("forms.beVolunteer.kvkkClickableText")}
-                </u>{" "}
-                {t("forms.beVolunteer.kvkkText")}
-              </p>
+              <>
+                <p>
+                  <u onClick={toggleKVKK}>
+                    {t("forms.beVolunteer.kvkkClickableText")}
+                  </u>{" "}
+                  {t("forms.beVolunteer.kvkkText")}
+                </p>
+                {form.touched.kvkkAccepted && form.errors.kvkkAccepted
+                  ? form.errors.kvkkAccepted
+                  : null}
+              </>
             }
           />
         </DialogContent>
         <DialogActions>
           <Button
+            type="submit"
             sx={styles.button}
+            size="large"
+            color="success"
             variant="contained"
             onClick={openInfoPanel}
           >
-            <Typography variant="button" color="white">
+            <BeVolunteer />
+            <Typography variant="button" color="white" sx={styles.buttonText}>
               {t("forms.beVolunteer.submit")}
             </Typography>
           </Button>
@@ -222,10 +312,9 @@ const styles: IStyles = {
     },
   }),
   button: () => ({
-    backgroundColor: "#96FFAD",
-    height: "3rem",
-    width: "15rem",
-    margin: "auto",
+    marginBottom: "1rem",
+    marginInline: "auto",
+    paddingInline: "3rem",
   }),
   titleContainer: () => ({
     display: "flex",
@@ -249,6 +338,9 @@ const styles: IStyles = {
   icon: () => ({
     width: "1.2rem",
     height: "1.2rem",
+  }),
+  buttonText: () => ({
+    marginLeft: ".5rem",
   }),
 };
 
