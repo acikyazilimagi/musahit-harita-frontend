@@ -1,4 +1,5 @@
 {
+  "locale": "tr",
   "scanner": {
     "text": "ALANI TARA"
   },
@@ -46,7 +47,18 @@
     "copyFullText": "İçeriği Kopyala",
     "copiedContentSuccessfully": "İçerik başarıyla kopyalandı.",
     "copiedMapLinkSuccessfully": "Harita linki başarıyla kopyalandı.",
-    "noticeCount": "{{count}} ihbar mevcut"
+    "noticeCount": "{{count}} ihbar mevcut",
+    "lastUpdate": "Son güncelleme: {{time}}",
+    "intensity": "İhtiyaç",
+    "intensity_data": {
+      "low": "Düşük",
+      "midLow": "Orta Düşük",
+      "mid": "Orta",
+      "midHigh": "Orta Yüksek",
+      "high": "Yüksek"
+    },
+    "doVolunteer": "Gönüllü Ol",
+    "shareLink": "Linki Paylaş"
   },
   "map": {
     "details": "Harita Ayrıntıları",

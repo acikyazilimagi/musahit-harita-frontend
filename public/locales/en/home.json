@@ -1,4 +1,5 @@
 {
+  "locale": "en",
   "scanner": {
     "text": "SCAN AREA"
   },
@@ -46,7 +47,18 @@
     "copyFullText": "Copy Content",
     "copiedContentSuccessfully": "Copied successfully.",
     "copiedMapLinkSuccessfully": "Copied map link successfully.",
-    "noticeCount": "{{count}} notice available"
+    "noticeCount": "{{count}} notice available",
+    "lastUpdate": "Last Update: {{time}}",
+    "intensity": "Need",
+    "intensity_data": {
+      "low": "Low",
+      "midLow": "Medium Low",
+      "mid": "Medium",
+      "midHigh": "Medium High",
+      "high": "High"
+    },
+    "doVolunteer": "Volunteer",
+    "shareLink": "Share"
   },
   "map": {
     "details": "Map Details",
