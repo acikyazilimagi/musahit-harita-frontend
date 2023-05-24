@@ -224,7 +224,7 @@ export const Drawer = ({ data, onCopyBillboard }: DrawerProps) => {
           />
         </Link>
       </Box>
-      <BeVolunteerForm />
+      <BeVolunteerForm neighborhoodId={detail?.neighbourhoodId} />
     </MuiDrawer>
   );
 };

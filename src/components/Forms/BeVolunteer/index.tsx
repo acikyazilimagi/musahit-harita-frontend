@@ -17,30 +17,47 @@ import {
   Theme,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BeVolunteer from "../../Icons/BeVolunteer";
+import { useModalStoreActions } from "@/stores/modals";
+import KvkkDialog from "@/components/Texts/Kvkk/KvkkDialog";
 
-function BeVolunteerForm() {
+type Props = {
+  neighborhoodId?: number;
+};
+
+function BeVolunteerForm({ neighborhoodId }: Props) {
   const [isKVKKAcknowledged, setIsKVKKAcknowledged] = useState(false);
-  /*
   const [formData] = useState({
+    neighborhoodId: neighborhoodId,
     name: "",
     email: "",
     phone: "",
   });
-  */
 
   const isFormOpen = useIsFormOpen();
+  const { toggleKVKK } = useModalStoreActions();
   const { toggleForm } = useBeVolunteerStoreActions();
+
+  useEffect(() => {
+    formData.neighborhoodId = neighborhoodId;
+  }, [formData, neighborhoodId]);
+
+  useEffect(() => {
+    if (isKVKKAcknowledged) {
+      toggleKVKK();
+    }
+  }, [isKVKKAcknowledged, toggleKVKK]);
 
   if (!isFormOpen) return null;
 
   return (
     <Box component="form" autoComplete="off">
+      <KvkkDialog />
       <Button onClick={toggleForm}>Be a Volunteer</Button>
       <Dialog open={isFormOpen} onClose={toggleForm}>
         <DialogTitle sx={styles.titleContainer}>
-          <BeVolunteer />
+          <BeVolunteer color="#344054" />
           <Typography sx={styles.title}>Be a Volunteer</Typography>
         </DialogTitle>
         <DialogContent>
@@ -86,7 +103,8 @@ function BeVolunteerForm() {
             label={
               <p>
                 {/* TODO: Open KVKK popup by clicking text in <u>...</u> */}
-                <u>KVKK Açık Rıza Metni’ni</u> okudum onaylıyorum.
+                <u onClick={toggleKVKK}>KVKK Açık Rıza Metni’ni</u> okudum
+                onaylıyorum.
               </p>
             }
           />
