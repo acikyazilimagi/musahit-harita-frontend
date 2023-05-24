@@ -22,6 +22,7 @@ import CircleIcon from "@mui/icons-material/Circle";
 import CloseIcon from "@mui/icons-material/Close";
 import { useRouter } from "next/router";
 import { data } from "./data";
+import { intensityColorSelector } from "@/utils/intensity";
 //#endregion
 //#region interfaces
 interface HelpViewStore {
@@ -50,22 +51,7 @@ export const HelpViewComponent = () => {
   const { locale } = useRouter();
   const helpView = useHelpView();
   const [selectedLocale, setselectedLocale] = useState(data.tr);
-  const chipColorSelector = (item: string) => {
-    switch (item) {
-      case "1":
-        return "#FAF7BF";
-      case "2":
-        return "#FCD73F";
-      case "3":
-        return "#FDAE33";
-      case "4":
-        return "#FE8427";
-      case "5":
-        return "#FE591D";
-      default:
-        return "#EB2032";
-    }
-  };
+
   useEffect(() => {
     //TODO: Data interface required
     //@ts-ignore
@@ -141,7 +127,7 @@ export const HelpViewComponent = () => {
                           const shouldShowLabel = firstOrLast
                             ? item[0]
                             : undefined;
-                          const chipColor = chipColorSelector(item[1]);
+                          const chipColor = intensityColorSelector(item[1]);
                           return (
                             <Chip
                               key={`help-view-chip-${index}`}
@@ -210,12 +196,13 @@ const styles: IStyles = {
     fontSize: "12px",
     [theme.breakpoints.up("sm")]: {
       maxHeight: "90vh",
-      overflowY: "scroll",
+      overflowY: "auto",
     },
   }),
   content: (theme: Theme) => ({
+    paddingTop: "0",
     [theme.breakpoints.down("sm")]: {
-      overflowY: "scroll",
+      overflowY: "auto",
     },
   }),
   card: (theme: Theme) => ({
@@ -224,7 +211,7 @@ const styles: IStyles = {
       maxWidth: "100%",
       height: "100vh",
       borderRadius: "0px !important",
-      overflow: "scroll",
+      overflow: "auto",
     },
     [theme.breakpoints.up("sm")]: {
       maxWidth: 550,

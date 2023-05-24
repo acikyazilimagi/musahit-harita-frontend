@@ -4,6 +4,8 @@ import { HelpViewComponent } from "@/components/UserGuide/UserGuide";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useCopyToClipboard } from "@/hooks/useCopyToClipboard";
 import { HeadWithMeta } from "@/components/HeadWithMeta/HeadWithMeta";
+import AboutUsOverlay from "@/components/AboutUs/AboutUsOverlay";
+import { useDrawerData } from "@/stores/mapStore";
 
 const MapContent = dynamic(
   () => import("@/components/Map/Content").then((mod) => mod.MapContent),
@@ -19,6 +21,7 @@ const UIElementsOverlay = () => {
   return (
     <Box sx={styles.overlay}>
       <HelpViewComponent />
+      <AboutUsOverlay />
     </Box>
   );
 };
@@ -33,7 +36,7 @@ const NHome = () => {
         <UIElementsOverlay />
         <MapContent />
         <Drawer
-          data={null}
+          data={useDrawerData()}
           onCopyBillboard={(_clipped) => copyToClipBoard(_clipped as string)}
         />
       </main>
@@ -65,7 +68,11 @@ export async function getServerSideProps(context: any) {
   }
   return {
     props: {
-      ...(await serverSideTranslations(context.locale, ["common", "home"])),
+      ...(await serverSideTranslations(context.locale, [
+        "common",
+        "home",
+        "about-us",
+      ])),
       deviceType: isMobile ? "mobile" : "desktop",
     },
   };

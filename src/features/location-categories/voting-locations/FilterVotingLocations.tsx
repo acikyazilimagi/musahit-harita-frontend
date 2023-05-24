@@ -2,15 +2,23 @@ import { Filter } from "@/components/Filter/Filter";
 import { FilterHeader } from "@/components/Filter/FilterHeader";
 import { useTranslation } from "next-i18next";
 import { FilterControl } from "@/components/Filter/FilterControl";
-import { FilterOptions } from "@/utils/filterTime";
 import { MenuItem, SelectChangeEvent } from "@mui/material";
 import { useVotingLocations } from "./useVotingLocations";
+import {
+  getAllCities,
+  getCity,
+  getDistrict,
+  getDistricts,
+  getNeighborhood,
+  getNeighborhoods,
+} from "@/data/models";
 
-import cities from "@/data/tr-cities.json";
-import cityDistricts from "@/data/tr-city-districts.json";
+interface HasName {
+  name: string;
+}
 
-const getDistricts = (cityID: number) => {
-  return cityDistricts.filter((district) => district.cityID === cityID);
+const sortByName = (a: HasName, b: HasName) => {
+  return a.name.localeCompare(b.name, "tr", { sensitivity: "base" });
 };
 
 export const FilterVotingLocations = () => {
@@ -20,8 +28,7 @@ export const FilterVotingLocations = () => {
     actions,
     selectedCity,
     selectedDistrict,
-    selectedNeighborhoodId,
-    selectedSchoolId,
+    selectedNeighborhood,
   } = useVotingLocations();
 
   if (!isOpen) {
@@ -46,16 +53,20 @@ export const FilterVotingLocations = () => {
         onChange={(event: SelectChangeEvent<number>) => {
           const { value } = event.target;
           if (typeof value !== "number") return;
-          actions.setSelectedCity({ id: value });
+          const city = getCity(value);
+          if (!city) return;
+          actions.setSelectedCity(city);
         }}
       >
-        {cities.map((city) => {
-          return (
-            <MenuItem key={city.id} value={city.id ?? ""}>
-              {city.name}
-            </MenuItem>
-          );
-        })}
+        {getAllCities()
+          .sort(sortByName)
+          .map((city) => {
+            return (
+              <MenuItem key={city.id} value={city.id ?? ""}>
+                {city.name}
+              </MenuItem>
+            );
+          })}
       </FilterControl>
 
       <FilterControl
@@ -64,66 +75,52 @@ export const FilterVotingLocations = () => {
         label={t("filter.district")}
         onChange={(event: SelectChangeEvent<number>) => {
           const { value } = event.target;
-
           if (typeof value !== "number") return;
-
-          actions.setSelectedDistrict({ id: value });
+          const district = getDistrict(selectedCity!.id, value);
+          if (!district) return;
+          actions.setSelectedDistrict(district);
         }}
       >
         {selectedCity?.id &&
-          getDistricts(selectedCity?.id).map((district) => {
-            return (
-              <MenuItem key={district.id} value={district.id}>
-                {district.name}
-              </MenuItem>
-            );
-          })}
+          getDistricts(selectedCity.id)
+            .sort(sortByName)
+            .map((district) => {
+              return (
+                <MenuItem key={district.id} value={district.id}>
+                  {district.name}
+                </MenuItem>
+              );
+            })}
       </FilterControl>
 
       <FilterControl
         disabled={!selectedDistrict?.id}
-        value={selectedNeighborhoodId ?? ""}
+        value={selectedNeighborhood?.id ?? ""}
         label={t("filter.neighborhood")}
         onChange={(event: SelectChangeEvent<number>) => {
           const { value } = event.target;
 
           if (typeof value !== "number") return;
-
-          actions.setSelectedNeighborhoodId(value);
+          const hood = getNeighborhood(
+            selectedCity!.id,
+            selectedDistrict!.id,
+            value
+          );
+          if (!hood) return;
+          actions.setSelectedNeighborhood(hood);
         }}
       >
-        {FilterOptions.map((option, idx) => {
-          return (
-            <MenuItem key={idx} value={option.inMilliseconds}>
-              {/* cityTransformer */}
-              {/* We don't know data yet but it should be city.name */}
-              {t(`filter.time.${option.label}`)}
-            </MenuItem>
-          );
-        })}
-      </FilterControl>
-
-      <FilterControl
-        disabled={!selectedNeighborhoodId}
-        value={selectedSchoolId ?? ""}
-        label={t("filter.school")}
-        onChange={(event: SelectChangeEvent<number>) => {
-          const { value } = event.target;
-
-          if (typeof value !== "number") return;
-
-          actions.setSelectedSchoolId(value);
-        }}
-      >
-        {FilterOptions.map((option, idx) => {
-          return (
-            <MenuItem key={idx} value={option.inMilliseconds}>
-              {/* cityTransformer */}
-              {/* We don't know data yet but it should be city.name */}
-              {t(`filter.time.${option.label}`)}
-            </MenuItem>
-          );
-        })}
+        {selectedCity?.id &&
+          selectedDistrict?.id &&
+          getNeighborhoods(selectedCity.id, selectedDistrict.id)
+            .sort(sortByName)
+            .map((district) => {
+              return (
+                <MenuItem key={district.id} value={district.id}>
+                  {district.name}
+                </MenuItem>
+              );
+            })}
       </FilterControl>
     </Filter>
   );

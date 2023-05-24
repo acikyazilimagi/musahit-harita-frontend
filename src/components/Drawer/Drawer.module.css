@@ -10,6 +10,64 @@
   padding: 0 4px;
 }
 
+.neighbourhoodDetails {
+  margin-top: 8px;
+  overflow: auto;
+}
+
+.neighbourhoodWrapper {
+  margin-top: 8px;
+}
+
+.neighbourhoodDetails::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.neighbourhoodDetails::-webkit-scrollbar-track {
+  background: #0094ff20;
+}
+
+.neighbourhoodDetails::-webkit-scrollbar-thumb {
+  background: #0094ff70;
+}
+
+.neighbourhoodDetails::-webkit-scrollbar-thumb:hover {
+  background: #0094ff80;
+}
+
+.neighbourhoodDetails::-webkit-scrollbar-thumb:active {
+  background: #0094ff80;
+}
+
+.intensitySection {
+  margin-top: 8px;
+}
+
+.intensity {
+  border-radius: 10px;
+  padding: 0.25rem 0.5rem;
+}
+
+.buttonGroup {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 24px;
+}
+.buttonGroup button {
+  width: 80%;
+}
+
+.buttonDarkIcon {
+  color: #000;
+}
+
+.buttonLightIcon {
+  color: #fff;
+}
+
 .closeButton {
   position: absolute;
   top: 1rem;
@@ -21,10 +79,26 @@
   background-color: #f2f2f2;
 }
 
-.content > p:first-of-type {
+.shareAlert {
+  margin-top: 15px;
+}
+
+.content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.content > p:first-of-type:not(.subtitle) {
   font-weight: 600;
   font-size: 14px;
   color: #636363;
+}
+.subtitle {
+  font-weight: 600;
+  font-size: 14px;
+  color: #0094ff;
 }
 
 .contentInfo {
@@ -43,7 +117,6 @@
 }
 
 .contentButtons {
-  margin: 24px 0px;
   display: flex;
   flex-direction: column;
   gap: 8px;

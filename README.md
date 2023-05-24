@@ -1,10 +1,8 @@
 ## To support the project
 
-[Story of Project](./docs/STORY-BEHIND.md)
-
 Communications:
 
-- [Discord Channel](https://t.co/MzLdlNPOmY)
+- [Discord Channel](https://discord.gg/itdepremyardim)
 
 To Contribute:
 
@@ -26,7 +24,7 @@ To Contribute:
 ### 1. Clone the Repo:
 
 ```bash
-git clone https://github.com/acikkaynak/deprem-yardim-frontend.git
+git clone https://github.com/acikkaynak/musahit-harita-frontend.git
 ```
 
 ### 2. Install Dependencies:

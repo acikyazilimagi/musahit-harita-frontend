@@ -1,0 +1,44 @@
+{
+  "title": "About Us",
+  "items": {
+    "whoWeAre": {
+      "title": "Who are we?",
+      "content": [
+        "Dreamcatcher neutra bitters, 8-bit adaptogen chillwave vaporware cloud bread church-key fixie kinfolk. Subway tile four loko venmo etsy raw denim big mood cardigan chillwave paleo food truck green juice."
+      ]
+    },
+    "whatIsOurPurpose": {
+      "title": "What are we doing?",
+      "content": [
+        "Dreamcatcher neutra bitters, 8-bit adaptogen chillwave vaporware cloud bread church-key fixie kinfolk. Subway tile four loko venmo etsy raw denim big mood cardigan chillwave paleo food truck green juice.",
+        "line 2"
+      ]
+    },
+    "ourPurpose": {
+      "title": "What is our purpose?",
+      "content": [
+        "Dreamcatcher neutra bitters, 8-bit adaptogen chillwave vaporware cloud bread church-key fixie kinfolk. Subway tile four loko venmo etsy raw denim big mood cardigan chillwave paleo food truck green juice."
+      ]
+    },
+    "ourDifferent": {
+      "title": "How are we different from other apps?",
+      "content": [
+        "Dreamcatcher neutra bitters, 8-bit adaptogen chillwave vaporware cloud bread church-key fixie kinfolk. Subway tile four loko venmo etsy raw denim big mood cardigan chillwave paleo food truck green juice."
+      ]
+    },
+    "contact": {
+      "title": "Contact info",
+      "content": [
+        "Dreamcatcher neutra bitters, 8-bit adaptogen chillwave vaporware cloud bread church-key fixie kinfolk. Subway tile four loko venmo etsy raw denim big mood cardigan chillwave paleo food truck green juice."
+      ],
+      "Phone": "",
+      "mail": ""
+    },
+    "socialMedia": {
+      "title": "Social media information",
+      "content": [
+        "Dreamcatcher neutra bitters, 8-bit adaptogen chillwave vaporware cloud bread church-key fixie kinfolk. Subway tile four loko venmo etsy raw denim big mood cardigan chillwave paleo food truck green juice."
+      ]
+    }
+  }
+}
