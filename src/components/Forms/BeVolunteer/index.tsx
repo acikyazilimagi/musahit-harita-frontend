@@ -180,12 +180,11 @@ function BeVolunteerForm({ neighborhoodId }: Props) {
             label={t("forms.beVolunteer.inputs.name")}
             type="text"
             fullWidth
-            required
             autoComplete="name"
             value={form.values.name}
             onChange={form.handleChange}
             onBlur={form.handleBlur}
-            error={!!form.touched.name}
+            error={!!form.touched.name && !!form.errors.name}
             helperText={form.touched.name && form.errors.name}
           />
           <TextField
@@ -194,12 +193,11 @@ function BeVolunteerForm({ neighborhoodId }: Props) {
             label={t("forms.beVolunteer.inputs.surname")}
             type="text"
             fullWidth
-            required
             autoComplete="family-name"
             value={form.values.surname}
             onChange={form.handleChange}
             onBlur={form.handleBlur}
-            error={!!form.touched.surname}
+            error={!!form.touched.surname && !!form.errors.surname}
             helperText={form.touched.surname && form.errors.surname}
           />
           <TextField
@@ -208,12 +206,11 @@ function BeVolunteerForm({ neighborhoodId }: Props) {
             label={t("forms.beVolunteer.inputs.phone")}
             type="phone"
             fullWidth
-            required
             autoComplete="tel"
             value={form.values.phone}
             onChange={form.handleChange}
             onBlur={form.handleBlur}
-            error={!!form.touched.phone}
+            error={!!form.touched.phone && !!form.errors.phone}
             helperText={form.touched.phone && form.errors.phone}
           />
           <TextField
@@ -222,12 +219,11 @@ function BeVolunteerForm({ neighborhoodId }: Props) {
             label={t("forms.beVolunteer.inputs.email")}
             type="email"
             fullWidth
-            required
             autoComplete="email"
             value={form.values.email}
             onChange={form.handleChange}
             onBlur={form.handleBlur}
-            error={!!form.touched.email}
+            error={!!form.touched.email && !!form.errors.email}
             helperText={form.touched.email && form.errors.email}
           />
           <FormControlLabel
@@ -238,7 +234,6 @@ function BeVolunteerForm({ neighborhoodId }: Props) {
                 onBlur={form.handleBlur}
                 name="kvkkAccepted"
                 id="kvkkAccepted"
-                required
               />
             }
             label={
