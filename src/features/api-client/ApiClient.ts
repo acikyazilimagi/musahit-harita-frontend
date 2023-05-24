@@ -32,7 +32,7 @@ interface ApiClientProps {
 export class ApiClient {
   url: string;
 
-  constructor(props: ApiClientProps) {
+  constructor(props: ApiClientProps = {}) {
     this.url = props.url ?? API_URL;
   }
 
