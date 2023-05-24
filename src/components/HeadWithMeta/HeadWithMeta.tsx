@@ -25,16 +25,16 @@ export const HeadWithMeta = () => {
       description={DESCRIPTION}
       openGraph={{
         type: "website",
-        url: "https://afetharita.com/",
+        url: "https://secim.gonullu.io/",
         title: TITLE,
         description: DESCRIPTION,
         siteName: "Afet Haritası",
         images: IMAGES,
       }}
       twitter={{
-        handle: "afetharita.com",
+        handle: "secim.gonullu.io",
         cardType: "summary_large_image",
-        site: "afetharita.com",
+        site: "secim.gonullu.io",
       }}
       additionalMetaTags={[
         {
