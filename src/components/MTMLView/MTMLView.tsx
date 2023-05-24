@@ -145,7 +145,7 @@ const styles: IStyles = {
   card: (theme: Theme) => ({
     [theme.breakpoints.up("xs")]: {
       maxWidth: "100%",
-      height: "50vh",
+      height: "auto",
     },
     [theme.breakpoints.up("sm")]: {
       maxWidth: 290,
