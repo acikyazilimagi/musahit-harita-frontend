@@ -12,7 +12,6 @@
 
 .neighbourhoodDetails {
   margin-top: 8px;
-  max-height: 150px;
   overflow: auto;
 }
 
@@ -47,7 +46,6 @@
 
 .intensity {
   border-radius: 10px;
-  color: #fff;
   padding: 0.25rem 0.5rem;
 }
 
@@ -56,12 +54,17 @@
   display: flex;
   justify-content: center;
   gap: 15px;
+  margin-top: 24px;
 }
 .buttonGroup button {
   width: 80%;
 }
 
-.buttonIcon {
+.buttonDarkIcon {
+  color: #000;
+}
+
+.buttonLightIcon {
   color: #fff;
 }
 
@@ -80,12 +83,21 @@
   margin-top: 15px;
 }
 
-.content > p:first-of-type {
+.content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.content > p:first-of-type:not(.subtitle) {
   font-weight: 600;
   font-size: 14px;
   color: #636363;
 }
-.content > p.subtitle:first-of-type {
+.subtitle {
+  font-weight: 600;
+  font-size: 14px;
   color: #0094ff;
 }
 
@@ -105,7 +117,6 @@
 }
 
 .contentButtons {
-  margin: 24px 0px;
   display: flex;
   flex-direction: column;
   gap: 8px;
