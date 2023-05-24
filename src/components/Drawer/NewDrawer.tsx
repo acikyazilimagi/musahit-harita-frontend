@@ -163,7 +163,7 @@ export const Drawer = ({ data, onCopyBillboard }: DrawerProps) => {
   }, [router.query.id, api]);
 
   useEffect(() => {
-    if (detail !== null) {
+    if (detail !== null && data === null) {
       const neighborhood =
         getAllNeighborhoodsWithAllData()[detail.neighbourhoodId];
       setDrawerData({
@@ -178,7 +178,7 @@ export const Drawer = ({ data, onCopyBillboard }: DrawerProps) => {
         },
       });
     }
-  }, [detail, setDrawerData]);
+  }, [data, detail, setDrawerData]);
 
   return (
     <MuiDrawer

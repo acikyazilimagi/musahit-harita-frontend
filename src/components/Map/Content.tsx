@@ -22,6 +22,7 @@ import {
   NeighborhoodIntensity,
   useNeighborhoodIntensityData,
 } from "@/features/intensity-data";
+import { getAllNeighborhoodsWithAllData } from "@/data/models";
 
 const MapEvents = () => {
   useMapEvents();
@@ -64,8 +65,19 @@ export const MapContent = () => {
   }, [data, setDrawerData]);
 
   const onMarkerClick = (_e: any, markerData: ChannelData) => {
-    console.log("markeer data::", markerData);
-    setDrawerData(markerData);
+    const neighborhood =
+      getAllNeighborhoodsWithAllData()[markerData.reference!];
+    setDrawerData({
+      intensity: markerData.intensity,
+      location: {
+        lat: neighborhood.lat,
+        lng: neighborhood.lng,
+      },
+      properties: {
+        name: neighborhood.name,
+        description: `${neighborhood.districtName}, ${neighborhood.cityName}`,
+      },
+    });
     const query = { ...router.query, id: markerData.reference };
     router.push({ query, hash: location.hash }, { query, hash: location.hash });
   };
