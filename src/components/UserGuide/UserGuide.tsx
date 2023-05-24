@@ -210,12 +210,13 @@ const styles: IStyles = {
     fontSize: "12px",
     [theme.breakpoints.up("sm")]: {
       maxHeight: "90vh",
-      overflowY: "scroll",
+      overflowY: "auto",
     },
   }),
   content: (theme: Theme) => ({
+    paddingTop: "0",
     [theme.breakpoints.down("sm")]: {
-      overflowY: "scroll",
+      overflowY: "auto",
     },
   }),
   card: (theme: Theme) => ({
@@ -224,7 +225,7 @@ const styles: IStyles = {
       maxWidth: "100%",
       height: "100vh",
       borderRadius: "0px !important",
-      overflow: "scroll",
+      overflow: "auto",
     },
     [theme.breakpoints.up("sm")]: {
       maxWidth: 550,
