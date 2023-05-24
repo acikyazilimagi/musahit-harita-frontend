@@ -45,12 +45,12 @@ const styles: IStyles = {
     minHeight: "50vh",
     minWidth: "50vw",
     ".MuiDialog-scrollPaper": {
-      [theme.breakpoints.up("xs")]: {
+      [theme.breakpoints.down("sm")]: {
         alignItems: "flex-end",
       },
     },
     ".MuiPaper-root": {
-      [theme.breakpoints.up("xs")]: {
+      [theme.breakpoints.down("sm")]: {
         minWidth: "100vw",
         maxWidth: "100vw",
         minHeight: "90vh",
@@ -62,20 +62,12 @@ const styles: IStyles = {
         borderTopRightRadius: "10px",
       },
       [theme.breakpoints.up("sm")]: {
-        minWidth: "90vw",
-        minHeight: "90vh",
-      },
-      [theme.breakpoints.up("md")]: {
-        minWidth: "90vw",
-        minHeight: "90vh",
-      },
-      [theme.breakpoints.up("lg")]: {
-        minWidth: "90vw",
-        minHeight: "90vh",
-      },
-      [theme.breakpoints.up("xl")]: {
-        minWidth: "90vw",
-        minHeight: "90vh",
+        minWidth: "50vw",
+        minHeight: "50vh",
+        marginBottom: "0",
+        marginLeft: "0",
+        marginRight: "0",
+        borderRadius: "10px",
       },
     },
   }),

@@ -89,6 +89,7 @@
   "forms": {
     "beVolunteer": {
       "title": "Gönüllü Ol",
+      "subtitle": "Gönüllü olmak için lütfen bilgilerinizi buraya giriniz. Bilgilerinizi doğrulamak için size bir e-posta göndereceğiz.",
       "kvkkClickableText": "KVKK Açık Rıza Metni’ni",
       "kvkkText": "okudum onaylıyorum.",
       "submit": "Gönüllü Ol",
@@ -97,6 +98,12 @@
         "content": "Oluşturulacak gönüllü desteği seçtiğiniz konuma destek oluşturmaktadır. Lütfen bölgeye erişemeyecek durumdaysanız başvuru oluşturmayınız.",
         "cancel": "Vazgeç",
         "create": "Yine de oluştur"
+      },
+      "inputs": {
+        "name": "İsim",
+        "surname": "Soyisim",
+        "phone": "Telefon Numarası",
+        "email": "E-posta Adresi"
       }
     },
     "kvkk": {

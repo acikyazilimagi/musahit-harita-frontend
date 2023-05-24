@@ -23,6 +23,7 @@ import { useModalStoreActions } from "@/stores/modals";
 import KvkkDialog from "@/components/Texts/Kvkk/KvkkDialog";
 import { useTranslation } from "next-i18next";
 import moduleCss from "./BeVolunteer.module.css";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 
 type Props = {
   neighborhoodId?: number;
@@ -38,7 +39,12 @@ const LocationInformation: React.FC<InformationProps> = ({ open, onClose }) => {
 
   return (
     <Dialog open={open} onClose={onClose}>
-      <DialogTitle>{t("forms.beVolunteer.info.title")}</DialogTitle>
+      <DialogTitle sx={styles.titleContainer}>
+        <InfoOutlinedIcon sx={styles.icon} />
+        <Typography sx={styles.infoTitle}>
+          {t("forms.beVolunteer.info.title")}
+        </Typography>
+      </DialogTitle>
       <DialogContent>{t("forms.beVolunteer.info.content")}</DialogContent>
       <DialogActions>
         <div className={moduleCss.buttonGroup}>
@@ -108,7 +114,7 @@ function BeVolunteerForm({ neighborhoodId }: Props) {
     <Box component="form" autoComplete="off">
       <KvkkDialog />
       <LocationInformation open={infoPanelOpen} onClose={onInfoPanelClose} />
-      <Dialog open={isFormOpen} onClose={toggleForm}>
+      <Dialog open={isFormOpen} onClose={toggleForm} sx={styles.dialog}>
         <DialogTitle sx={styles.titleContainer}>
           <BeVolunteer color="#344054" />
           <Typography sx={styles.title}>
@@ -117,34 +123,33 @@ function BeVolunteerForm({ neighborhoodId }: Props) {
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
-            To be a volunteer, please enter your information here. We will send
-            you an email to confirm your information.
+            {t("forms.beVolunteer.subtitle")}
           </DialogContentText>
           <TextField
             margin="dense"
             id="name"
-            label="Name"
+            label={t("forms.beVolunteer.inputs.name")}
             type="text"
             fullWidth
           />
           <TextField
             margin="dense"
             id="surname"
-            label="Surname"
+            label={t("forms.beVolunteer.inputs.surname")}
             type="text"
             fullWidth
           />
           <TextField
             margin="dense"
             id="phone"
-            label="Phone"
+            label={t("forms.beVolunteer.inputs.phone")}
             type="phone"
             fullWidth
           />
           <TextField
             margin="dense"
             id="email"
-            label="Email"
+            label={t("forms.beVolunteer.inputs.email")}
             type="email"
             fullWidth
           />
@@ -157,8 +162,10 @@ function BeVolunteerForm({ neighborhoodId }: Props) {
             }
             label={
               <p>
-                <u onClick={toggleKVKK}>KVKK Açık Rıza Metni’ni</u> okudum
-                onaylıyorum.
+                <u onClick={toggleKVKK}>
+                  {t("forms.beVolunteer.kvkkClickableText")}
+                </u>{" "}
+                {t("forms.beVolunteer.kvkkText")}
               </p>
             }
           />
@@ -170,7 +177,7 @@ function BeVolunteerForm({ neighborhoodId }: Props) {
             onClick={openInfoPanel}
           >
             <Typography variant="button" color="white">
-              Basvur
+              {t("forms.beVolunteer.submit")}
             </Typography>
           </Button>
         </DialogActions>
@@ -184,6 +191,36 @@ interface IStyles {
 }
 
 const styles: IStyles = {
+  dialog: (theme: Theme) => ({
+    minHeight: "50vh",
+    minWidth: "50vw",
+    ".MuiDialog-scrollPaper": {
+      [theme.breakpoints.down("sm")]: {
+        alignItems: "flex-end",
+      },
+    },
+    ".MuiPaper-root": {
+      [theme.breakpoints.down("sm")]: {
+        minWidth: "100vw",
+        maxWidth: "100vw",
+        minHeight: "90vh",
+        maxHeight: "90%",
+        marginBottom: "0",
+        marginLeft: "0",
+        marginRight: "0",
+        borderTopLeftRadius: "10px",
+        borderTopRightRadius: "10px",
+      },
+      [theme.breakpoints.up("sm")]: {
+        minWidth: "50vw",
+        minHeight: "50vh",
+        marginBottom: "0",
+        marginLeft: "0",
+        marginRight: "0",
+        borderRadius: "10px",
+      },
+    },
+  }),
   button: () => ({
     backgroundColor: "#96FFAD",
     height: "3rem",
@@ -203,6 +240,15 @@ const styles: IStyles = {
     fontWeight: "500",
     ml: "1rem",
     fontSize: "1.5rem",
+  }),
+  infoTitle: () => ({
+    fontWeight: "500",
+    ml: "1rem",
+    fontSize: "1.2rem",
+  }),
+  icon: () => ({
+    width: "1.2rem",
+    height: "1.2rem",
   }),
 };
 

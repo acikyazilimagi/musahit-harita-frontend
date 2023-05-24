@@ -89,6 +89,7 @@
   "forms": {
     "beVolunteer": {
       "title": "Be a Volunteer",
+      "subtitle": " To be a volunteer, please enter your information here. We will send you an email to confirm your information.",
       "kvkkClickableText": "KVKK Text",
       "kvkkText": "i read and accept",
       "submit": "Apply",
@@ -97,6 +98,12 @@
         "content": "The volunteer support to be created will support the location you have chosen. Please do not create an application if you cannot access the region.",
         "cancel": "Cancel",
         "create": "Create anyway"
+      },
+      "inputs": {
+        "name": "Name",
+        "surname": "last name",
+        "phone": "Phone Number",
+        "email": "Email Address"
       }
     },
     "kvkk": {
