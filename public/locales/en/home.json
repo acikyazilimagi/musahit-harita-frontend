@@ -91,7 +91,13 @@
       "title": "Be a Volunteer",
       "kvkkClickableText": "KVKK Text",
       "kvkkText": "i read and accept",
-      "submit": "Apply"
+      "submit": "Apply",
+      "info": {
+        "title": "Information",
+        "content": "The volunteer support to be created will support the location you have chosen. Please do not create an application if you cannot access the region.",
+        "cancel": "Cancel",
+        "create": "Create anyway"
+      }
     },
     "kvkk": {
       "title": "KVKK Open Consent Text",

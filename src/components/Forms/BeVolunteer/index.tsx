@@ -21,13 +21,53 @@ import { useEffect, useState } from "react";
 import BeVolunteer from "../../Icons/BeVolunteer";
 import { useModalStoreActions } from "@/stores/modals";
 import KvkkDialog from "@/components/Texts/Kvkk/KvkkDialog";
+import { useTranslation } from "next-i18next";
+import moduleCss from "./BeVolunteer.module.css";
 
 type Props = {
   neighborhoodId?: number;
 };
 
+type InformationProps = {
+  open: boolean;
+  onClose: (_: boolean) => void;
+};
+
+const LocationInformation: React.FC<InformationProps> = ({ open, onClose }) => {
+  const { t } = useTranslation("home");
+
+  return (
+    <Dialog open={open} onClose={onClose}>
+      <DialogTitle>{t("forms.beVolunteer.info.title")}</DialogTitle>
+      <DialogContent>{t("forms.beVolunteer.info.content")}</DialogContent>
+      <DialogActions>
+        <div className={moduleCss.buttonGroup}>
+          <Button
+            variant="outlined"
+            size="large"
+            color="inherit"
+            onClick={() => onClose(false)}
+          >
+            {t("forms.beVolunteer.info.cancel")}
+          </Button>
+          <Button
+            variant="contained"
+            size="large"
+            color="primary"
+            onClick={() => onClose(true)}
+          >
+            {t("forms.beVolunteer.info.create")}
+          </Button>
+        </div>
+      </DialogActions>
+    </Dialog>
+  );
+};
+
 function BeVolunteerForm({ neighborhoodId }: Props) {
-  const [isKVKKAcknowledged, setIsKVKKAcknowledged] = useState(false);
+  const { t } = useTranslation("home");
+  const [isKVKKAcknowledged, setIsKVKKAcknowledged] = useState<boolean>(false);
+  const [infoPanelOpen, setInfoPanelOpen] = useState<boolean>(false);
   const [formData] = useState({
     neighborhoodId: neighborhoodId,
     name: "",
@@ -51,14 +91,29 @@ function BeVolunteerForm({ neighborhoodId }: Props) {
 
   if (!isFormOpen) return null;
 
+  const openInfoPanel = () => {
+    setInfoPanelOpen(true);
+  };
+
+  const submit = async () => {};
+
+  const onInfoPanelClose = (isConfirmed: boolean) => {
+    if (isConfirmed) {
+      submit();
+    }
+    setInfoPanelOpen(false);
+  };
+
   return (
     <Box component="form" autoComplete="off">
       <KvkkDialog />
-      <Button onClick={toggleForm}>Be a Volunteer</Button>
+      <LocationInformation open={infoPanelOpen} onClose={onInfoPanelClose} />
       <Dialog open={isFormOpen} onClose={toggleForm}>
         <DialogTitle sx={styles.titleContainer}>
           <BeVolunteer color="#344054" />
-          <Typography sx={styles.title}>Be a Volunteer</Typography>
+          <Typography sx={styles.title}>
+            {t("forms.beVolunteer.title")}
+          </Typography>
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
@@ -102,7 +157,6 @@ function BeVolunteerForm({ neighborhoodId }: Props) {
             }
             label={
               <p>
-                {/* TODO: Open KVKK popup by clicking text in <u>...</u> */}
                 <u onClick={toggleKVKK}>KVKK Açık Rıza Metni’ni</u> okudum
                 onaylıyorum.
               </p>
@@ -110,7 +164,11 @@ function BeVolunteerForm({ neighborhoodId }: Props) {
           />
         </DialogContent>
         <DialogActions>
-          <Button sx={styles.button} variant="contained" onClick={toggleForm}>
+          <Button
+            sx={styles.button}
+            variant="contained"
+            onClick={openInfoPanel}
+          >
             <Typography variant="button" color="white">
               Basvur
             </Typography>

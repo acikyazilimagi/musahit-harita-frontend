@@ -91,7 +91,13 @@
       "title": "Gönüllü Ol",
       "kvkkClickableText": "KVKK Açık Rıza Metni’ni",
       "kvkkText": "okudum onaylıyorum.",
-      "submit": "Gönüllü Ol"
+      "submit": "Gönüllü Ol",
+      "info": {
+        "title": "Bilgilendirme",
+        "content": "Oluşturulacak gönüllü desteği seçtiğiniz konuma destek oluşturmaktadır. Lütfen bölgeye erişemeyecek durumdaysanız başvuru oluşturmayınız.",
+        "cancel": "Vazgeç",
+        "create": "Yine de oluştur"
+      }
     },
     "kvkk": {
       "title": "KVKK Açık Rıza Metni",

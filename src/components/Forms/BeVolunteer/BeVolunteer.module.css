@@ -1,0 +1,8 @@
+.buttonGroup {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.buttonGroup button {
+  width: 48%;
+}
