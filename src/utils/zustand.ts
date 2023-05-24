@@ -1,19 +1,20 @@
-import queryString from "query-string";
 import { StateStorage } from "zustand/middleware";
 
-export const getHashStorage = (): StateStorage => ({
-  getItem: (key) => {
-    const query = queryString.parse(location.hash, { arrayFormat: "comma" });
-    return query[key] as any;
+export const hashStorage: StateStorage = {
+  getItem: (key): string => {
+    const searchParams = new URLSearchParams(location.hash.slice(1));
+    const storedValue = searchParams.get(key) ?? "";
+    console.log("getItem", key, storedValue);
+    return JSON.parse(storedValue);
   },
-  setItem: (key, newValue) => {
-    const query = queryString.parse(location.hash, { arrayFormat: "comma" });
-    query[key] = newValue;
-    location.hash = queryString.stringify(query, { arrayFormat: "comma" });
+  setItem: (key, newValue): void => {
+    const searchParams = new URLSearchParams(location.hash.slice(1));
+    searchParams.set(key, JSON.stringify(newValue));
+    location.hash = searchParams.toString();
   },
-  removeItem: (key) => {
-    const query = queryString.parse(location.hash, { arrayFormat: "comma" });
-    delete query[key];
-    location.hash = queryString.stringify(query, { arrayFormat: "comma" });
+  removeItem: (key): void => {
+    const searchParams = new URLSearchParams(location.hash.slice(1));
+    searchParams.delete(key);
+    location.hash = searchParams.toString();
   },
-});
+};
