@@ -1,0 +1,65 @@
+
+ {
+  "tr": {
+    "title": {
+      "type": "header",
+      "data": {
+        "text": "Nasıl kullanırım?",
+        "level": 3
+      }
+    },
+    "blocks": [
+      {
+        "type": "list",
+        "data": {
+          "style": "unordered",
+          "items": [
+            "Karşınızdaki haritada bölgelere çıkan yuvarlakların üstüne tıklayarak yaklaşın.",
+            "Bölgelere yaklaştıkça müşahit yoğunluğu okul bazlı görünecektir.",
+            "Yakınlaşmayı sürdürdükçe bilgilere erişeceksiniz.",
+            "Mavi pinlere tıklayıp bilgileri görüntüleyin.",
+            "En başta yer adı/adres bilgisini okuyacaksınız. Düğmeler ile amacına uygun ilerlemek isteyebilirsiniz."
+          ]
+        }
+      },
+      {
+        "type": "header",
+        "data": {
+          "text": "Kullanma yöntemleri",
+          "level": 3
+        }
+      },
+      {
+        "type": "list",
+        "data": {
+          "style": "unordered",
+          "items": [
+            "*+* artı düğmesi ile haritayı yakınlaştırıp bakın.",
+            "*-* artı düğmesi ile haritayı uzaklaştırıp bakın."
+          ]
+        }
+      },
+      {
+        "type": "header",
+        "data": {
+          "text": "Renkli alanların anlamları",
+          "level": 6
+        }
+      },
+      {
+        "type": "table",
+        "data": {
+          "withHeadings": false,
+          "content": [
+            ["İhtiyaç Az", "1"],
+            ["İhtiyaç Az-Orta", "2"],
+            ["İhtiyaç Orta", "3"],
+            ["İhtiyaç Orta-Yüksek", "4"],
+            ["İhtiyaç Yüksek", "5"]
+          ]
+        }
+      }
+    ]
+  }
+  
+}
