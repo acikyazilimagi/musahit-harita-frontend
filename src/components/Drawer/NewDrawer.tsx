@@ -91,6 +91,10 @@ const ButtonGroup = ({
   const [isShared, setIsShared] = useState(false);
   const { t } = useTranslation("home");
 
+  useEffect(() => {
+    setIsShared(false);
+  }, [data.neighbourhoodId]);
+
   const copy = () => {
     onCopyBillboard(
       `${window.location.origin}${window.location.pathname}?id=${data.neighbourhoodId}`
@@ -226,15 +230,17 @@ const DrawerContent = ({
   detail,
   onCopyBillboard,
 }: {
-  detail: ChannelDetailData;
+  detail: ChannelDetailData | null;
   data: ChannelData;
   onCopyBillboard: DrawerProps["onCopyBillboard"];
 }) => {
   const title = data.properties.name;
 
+  if (!detail) return null;
+
   return (
     <div className={styles.content}>
-      {detail?.neighbourhoodId && <DrawerIDLabel id={detail.neighbourhoodId} />}
+      {detail.neighbourhoodId && <DrawerIDLabel id={detail.neighbourhoodId} />}
       {title && <h3 style={{ maxWidth: "45ch" }}>{title}</h3>}
       <LastUpdate lastUpdate={detail.lastUpdateTime} />
       <NeighbourhoodDetails name={title!} details={detail.details} />
