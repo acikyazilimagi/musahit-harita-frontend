@@ -56,6 +56,8 @@
     "swr": "^2.0.3",
     "use-debounce": "9.0.3",
     "use-supercluster": "^0.4.0",
+    "znv": "^0.3.2",
+    "zod": "^3.21.4",
     "zustand": "^4.3.2"
   },
   "devDependencies": {
