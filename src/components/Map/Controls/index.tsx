@@ -117,6 +117,7 @@ const HelpViewControl = () => {
         color="inherit"
         onClick={() => {
           helpView.toggle(!helpView.isOpen);
+          aboutView.toggle(false);
         }}
       >
         <HelpOutline />
@@ -126,6 +127,7 @@ const HelpViewControl = () => {
         color="inherit"
         onClick={() => {
           aboutView.toggle(!aboutView.isOpen);
+          helpView.toggle(false);
         }}
       >
         <InfoOutlinedIcon />
