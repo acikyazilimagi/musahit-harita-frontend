@@ -52,14 +52,22 @@ export const getNeighborhood = (
   return getNeighborhoods(cityID, districtID).find((n) => n.id === hoodID);
 };
 
+// we are caching the results of the hoods so we don't loop over the data only once.
+let _hoods: Neighborhood[] | null = null;
 export const getAllNeighborhoods = () => {
-  let hoods: Neighborhood[] = [];
+  // if we have a cached result, return that.
+  if (_hoods) {
+    return _hoods;
+  }
 
+  let hoods: Neighborhood[] = [];
   Object.values(geoData).forEach((city) => {
     city?.districts.forEach((district) => {
       hoods = hoods.concat(district.neighborhoods);
     });
   });
 
+  // write the calculation to cache before return
+  _hoods = hoods;
   return hoods;
 };
