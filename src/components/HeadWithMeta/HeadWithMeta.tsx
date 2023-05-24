@@ -28,7 +28,7 @@ export const HeadWithMeta = () => {
         url: "https://secim.gonullu.io/",
         title: TITLE,
         description: DESCRIPTION,
-        siteName: "Afet Haritası",
+        siteName: "secim.gonullu.io",
         images: IMAGES,
       }}
       twitter={{
