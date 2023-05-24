@@ -1,10 +1,9 @@
 import styles from "./Drawer.module.css";
 import { default as MuiDrawer } from "@mui/material/Drawer";
-import { DrawerData, useMapActions } from "@/stores/mapStore";
-import { ChannelData } from "@/types";
+import { useMapActions } from "@/stores/mapStore";
+import { ChannelDetailData } from "@/types";
 import Button from "@mui/material/Button";
 import { useTranslation } from "next-i18next";
-import { MapButtons } from "./components/MapButtons";
 import CloseIcon from "@mui/icons-material/Close";
 import { Alert, Box, Typography } from "@mui/material";
 import { useWindowSize } from "@/hooks/useWindowSize";
@@ -18,7 +17,8 @@ import {
   intensityColorSelector,
   intensityTextSelector,
 } from "@/utils/intensity";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSingletonsStore } from "@/features/singletons";
 
 const DrawerIDLabel = ({ id }: { id: number }) => {
   return <span className={styles.contentIdSection}>ID: {id}</span>;
@@ -78,19 +78,18 @@ const IntensitySection = ({ intensity }: { intensity: string }) => {
 };
 
 const ButtonGroup = ({
-  data,
   onCopyBillboard,
 }: {
-  data: ChannelData;
+  data: ChannelDetailData;
   onCopyBillboard: (_clipped: string) => void;
 }) => {
   const [isShared, setIsShared] = useState(false);
   const { t } = useTranslation("home");
 
   const copy = () => {
-    onCopyBillboard(
-      `https://www.google.com/maps/@${data.location.lat.toString()},${data.location.lng.toString()},22z`
-    );
+    const currentUrl = window.location.href;
+    console.log("currentUrl", currentUrl);
+    onCopyBillboard(currentUrl);
     setIsShared(true);
   };
 
@@ -135,15 +134,24 @@ const ButtonGroup = ({
 };
 
 type DrawerProps = {
-  data: DrawerData;
   onCopyBillboard: (_clipped: string) => void;
 };
 
-export const Drawer = ({ data, onCopyBillboard }: DrawerProps) => {
+export const Drawer = ({ onCopyBillboard }: DrawerProps) => {
   const size = useWindowSize();
+  const { api } = useSingletonsStore();
   const anchor = size.width > 768 ? "left" : "bottom";
   const router = useRouter();
+  const [data, setData] = useState<ChannelDetailData | null>(null);
   const { setDrawerData } = useMapActions();
+
+  useEffect(() => {
+    if (router.query.id) {
+      api.fetchDetail(router.query.id as string).then((res) => setData(res));
+    } else {
+      setData(null);
+    }
+  }, [router.query.id, api]);
 
   return (
     <MuiDrawer
@@ -190,26 +198,21 @@ const DrawerContent = ({
   data,
   onCopyBillboard,
 }: {
-  data: NonNullable<DrawerData>;
+  data: ChannelDetailData;
   onCopyBillboard: DrawerProps["onCopyBillboard"];
 }) => {
-  const title = data.properties.name;
+  const title = data.name;
 
   return (
     <div className={styles.content}>
-      {data?.reference && <DrawerIDLabel id={data.reference} />}
+      {data?.neighbourhoodId && <DrawerIDLabel id={data.neighbourhoodId} />}
       {title && <h3 style={{ maxWidth: "45ch" }}>{title}</h3>}
-      <LastUpdate lastUpdate={"2023-05-05"} />
-      <NeighbourhoodDetails
-        name="Polatlı Şehitlik Mahallesi"
-        details={[
-          "Okul İsmi 1 - 1002 - 1003 - 1005",
-          "Okul İsmi 2 - 1037 - 1038 - 1039",
-          "Okul İsmi 3 - 1061 - 1062 - 1065 - 1071",
-        ]}
-      />
-      <IntensitySection intensity={"3"} />
+      <LastUpdate lastUpdate={data.lastUpdateTime} />
+      <NeighbourhoodDetails name={data.name!} details={data.details} />
+      <IntensitySection intensity={data.intensity.toString()} />
+      {/* we don't have lat and lng for now
       <MapButtons drawerData={data} />
+       */}
       <ButtonGroup data={data} onCopyBillboard={onCopyBillboard} />
     </div>
   );

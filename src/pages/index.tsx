@@ -5,7 +5,6 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useCopyToClipboard } from "@/hooks/useCopyToClipboard";
 import { HeadWithMeta } from "@/components/HeadWithMeta/HeadWithMeta";
 import AboutUsOverlay from "@/components/AboutUs/AboutUsOverlay";
-import { useDrawerData } from "@/stores/mapStore";
 
 const MapContent = dynamic(
   () => import("@/components/Map/Content").then((mod) => mod.MapContent),
@@ -36,7 +35,6 @@ const NHome = () => {
         <UIElementsOverlay />
         <MapContent />
         <Drawer
-          data={useDrawerData()}
           onCopyBillboard={(_clipped) => copyToClipBoard(_clipped as string)}
         />
       </main>

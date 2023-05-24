@@ -10,14 +10,19 @@ export type ChannelData = {
     name: string | null;
     description: string | null;
   };
+  location: Point;
+  intensity: number;
+  reference?: number | null;
+  closeByRecords?: number[];
+  isVisited?: boolean;
+};
+
+export type ChannelDetailData = {
+  name: string | null;
   lastUpdateTime: string;
   neighbourhoodId: number;
   details: string[];
   intensity: number;
-  location: Point;
-  reference?: number | null;
-  closeByRecords?: number[];
-  isVisited?: boolean;
 };
 
 export type APIResponse = {};
