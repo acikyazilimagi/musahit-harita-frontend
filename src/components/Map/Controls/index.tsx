@@ -31,7 +31,6 @@ import { DoubleClickStopPropagation } from "@/components/DoubleClickStopPropagat
 import {
   FilterVotingLocations,
   useVotingLocations,
-  useVotingLocationsData,
 } from "@/features/location-categories";
 import { DataSourcesInfo } from "@/components/DataSourcesInfo/DataSourcesInfo";
 import { useState } from "react";
@@ -138,8 +137,6 @@ const HelpViewControl = () => {
 
 export const MapControls = () => {
   const { t } = useTranslation("home");
-
-  useVotingLocationsData();
 
   const votingLocationsFilter = useVotingLocations();
   const [dataSourcesOpen, setDataSourcesOpen] = useState(false);
