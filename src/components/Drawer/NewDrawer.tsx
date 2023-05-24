@@ -15,12 +15,13 @@ import ShareIcon from "@mui/icons-material/Share";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import {
   intensityColorSelector,
+  intensityTextColorSelector,
   intensityTextSelector,
 } from "@/utils/intensity";
 import { useEffect, useState } from "react";
 import { useSingletonsStore } from "@/features/singletons";
 import { MapButtons } from "./components/MapButtons";
-import { getAllNeighborhoodsByID } from "@/data/models";
+import { getAllNeighborhoodsWithAllData } from "@/data/models";
 
 const DrawerIDLabel = ({ id }: { id: number }) => {
   return <span className={styles.contentIdSection}>ID: {id}</span>;
@@ -41,14 +42,11 @@ const LastUpdate = ({ lastUpdate }: { lastUpdate: string }) => {
 
 const NeighbourhoodDetails = ({
   details,
-  name,
 }: {
-  name: string;
   details: ChannelFeedDetails[];
 }) => {
   return (
     <div className={styles.neighbourhoodDetails}>
-      <Typography color={"blue"}>{name}</Typography>
       <div className={styles.neighbourhoodWrapper}>
         {details.map((detail, index) => (
           <Typography key={index}>
@@ -71,6 +69,7 @@ const IntensitySection = ({ intensity }: { intensity: string }) => {
         className={styles.intensity}
         style={{
           backgroundColor: intensityColorSelector(intensity),
+          color: intensityTextColorSelector(intensity),
         }}
       >
         <span>
@@ -91,6 +90,10 @@ const ButtonGroup = ({
   const [isShared, setIsShared] = useState(false);
   const { t } = useTranslation("home");
 
+  useEffect(() => {
+    setIsShared(false);
+  }, [data.neighbourhoodId]);
+
   const copy = () => {
     onCopyBillboard(
       `${window.location.origin}${window.location.pathname}?id=${data.neighbourhoodId}`
@@ -104,19 +107,19 @@ const ButtonGroup = ({
     <>
       <div className={styles.buttonGroup}>
         <Button onClick={copy} variant="contained" color="inherit">
-          <ShareIcon className={styles.buttonIcon}></ShareIcon>
+          <ShareIcon className={styles.buttonDarkIcon}></ShareIcon>
           <Typography
             sx={{
               marginLeft: "0.5rem",
             }}
-            color="white"
+            color="black"
           >
             {t("cluster.shareLink")}
           </Typography>
         </Button>
         <Button onClick={doVolunteer} variant="contained" color="success">
           <FavoriteBorderOutlinedIcon
-            className={styles.buttonIcon}
+            className={styles.buttonLightIcon}
           ></FavoriteBorderOutlinedIcon>
           <Typography
             sx={{
@@ -160,8 +163,9 @@ export const Drawer = ({ data, onCopyBillboard }: DrawerProps) => {
   }, [router.query.id, api]);
 
   useEffect(() => {
-    if (data === null && detail !== null) {
-      const neighborhood = getAllNeighborhoodsByID()[detail.neighbourhoodId];
+    if (detail !== null && data === null) {
+      const neighborhood =
+        getAllNeighborhoodsWithAllData()[detail.neighbourhoodId];
       setDrawerData({
         intensity: detail.intensity,
         location: {
@@ -170,7 +174,7 @@ export const Drawer = ({ data, onCopyBillboard }: DrawerProps) => {
         },
         properties: {
           name: neighborhood.name,
-          description: null,
+          description: `${neighborhood.districtName}, ${neighborhood.cityName}`,
         },
       });
     }
@@ -226,21 +230,31 @@ const DrawerContent = ({
   detail,
   onCopyBillboard,
 }: {
-  detail: ChannelDetailData;
+  detail: ChannelDetailData | null;
   data: ChannelData;
   onCopyBillboard: DrawerProps["onCopyBillboard"];
 }) => {
   const title = data.properties.name;
 
+  if (!detail) return null;
+
   return (
     <div className={styles.content}>
-      {detail?.neighbourhoodId && <DrawerIDLabel id={detail.neighbourhoodId} />}
-      {title && <h3 style={{ maxWidth: "45ch" }}>{title}</h3>}
-      <LastUpdate lastUpdate={detail.lastUpdateTime} />
-      <NeighbourhoodDetails name={title!} details={detail.details} />
-      <IntensitySection intensity={data.intensity.toString()} />
+      <div className={styles.contentTop}>
+        {detail.neighbourhoodId && (
+          <DrawerIDLabel id={detail.neighbourhoodId} />
+        )}
+        <h3 style={{ maxWidth: "45ch", marginBottom: 0 }}>{title}</h3>
+        <Typography className={styles.subtitle} sx={{ marginBottom: "1rem" }}>
+          {data.properties.description}
+        </Typography>
+
+        <LastUpdate lastUpdate={detail.lastUpdateTime} />
+        <NeighbourhoodDetails details={detail.details} />
+        <IntensitySection intensity={data.intensity.toString()} />
+        <ButtonGroup data={detail} onCopyBillboard={onCopyBillboard} />
+      </div>
       <MapButtons drawerData={data} />
-      <ButtonGroup data={detail} onCopyBillboard={onCopyBillboard} />
     </div>
   );
 };

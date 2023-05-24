@@ -37,6 +37,11 @@ export interface Neighborhood extends Point {
   name: string;
 }
 
+export interface NeighborhoodWithAll extends Neighborhood {
+  cityName: string;
+  districtName: string;
+}
+
 export const getNeighborhoods = (cityID: number, districtID: number) => {
   const district = getDistrict(cityID, districtID);
   if (!district) {
@@ -70,3 +75,17 @@ allNeighborhoods.forEach((hood) => {
 });
 // return the cached value to not re-calculate static values
 export const getAllNeighborhoodsByID = () => allNeighborhoodsByID;
+
+const allData: Record<number, NeighborhoodWithAll> = {};
+
+getAllNeighborhoods().forEach((hood) => {
+  const city = getCity(hood.cityID);
+  const district = getDistrict(hood.cityID, hood.districtID);
+  allData[hood.id] = {
+    ...hood,
+    cityName: city.name,
+    districtName: district?.name ?? "",
+  };
+});
+
+export const getAllNeighborhoodsWithAllData = () => allData;
