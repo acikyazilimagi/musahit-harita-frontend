@@ -39,7 +39,7 @@ export const MapContent = () => {
   const { data: intensityData } = useSWR<{
     results: IntensityData[];
     count: number;
-  }>("http://18.194.199.255/feeds/mock", fetcher);
+  }>("https://backend.gonullu.io/feeds/mock", fetcher);
 
   const [locations, setLocations] = useState<ChannelData[]>([]);
 
