@@ -12,7 +12,6 @@ import omit from "lodash.omit";
 import Link from "next/link";
 import { getTimeAgo } from "@/utils/date";
 import ShareIcon from "@mui/icons-material/Share";
-import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import {
   intensityColorSelector,
   intensityTextColorSelector,
@@ -22,6 +21,9 @@ import { useEffect, useState } from "react";
 import { useSingletonsStore } from "@/features/singletons";
 import { MapButtons } from "./components/MapButtons";
 import { getAllNeighborhoodsWithAllData } from "@/data/models";
+import BeVolunteerForm from "../Forms/BeVolunteer";
+import BeVolunteer from "../Icons/BeVolunteer";
+import { useBeVolunteerStoreActions } from "@/stores/beVolunteer";
 
 const DrawerIDLabel = ({ id }: { id: number }) => {
   return <span className={styles.contentIdSection}>ID: {id}</span>;
@@ -89,6 +91,7 @@ const ButtonGroup = ({
 }) => {
   const [isShared, setIsShared] = useState(false);
   const { t } = useTranslation("home");
+  const { toggleForm } = useBeVolunteerStoreActions();
 
   useEffect(() => {
     setIsShared(false);
@@ -101,7 +104,9 @@ const ButtonGroup = ({
     setIsShared(true);
   };
 
-  const doVolunteer = () => {};
+  const doVolunteer = () => {
+    toggleForm();
+  };
 
   return (
     <>
@@ -118,9 +123,7 @@ const ButtonGroup = ({
           </Typography>
         </Button>
         <Button onClick={doVolunteer} variant="contained" color="success">
-          <FavoriteBorderOutlinedIcon
-            className={styles.buttonLightIcon}
-          ></FavoriteBorderOutlinedIcon>
+          <BeVolunteer />
           <Typography
             sx={{
               marginLeft: "0.5rem",
@@ -221,6 +224,7 @@ export const Drawer = ({ data, onCopyBillboard }: DrawerProps) => {
           />
         </Link>
       </Box>
+      <BeVolunteerForm />
     </MuiDrawer>
   );
 };

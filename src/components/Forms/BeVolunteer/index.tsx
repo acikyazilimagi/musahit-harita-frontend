@@ -1,4 +1,3 @@
-import { useVotingLocations } from "@/features/location-categories";
 import {
   useBeVolunteerStoreActions,
   useIsFormOpen,
@@ -18,30 +17,21 @@ import {
   Theme,
   Typography,
 } from "@mui/material";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import BeVolunteer from "../../Icons/BeVolunteer";
 
 function BeVolunteerForm() {
   const [isKVKKAcknowledged, setIsKVKKAcknowledged] = useState(false);
-  const [formData, setFormData] = useState({
+  /*
+  const [formData] = useState({
     name: "",
     email: "",
     phone: "",
   });
-
-  const { selectedNeighborhoodId } = useVotingLocations();
+  */
 
   const isFormOpen = useIsFormOpen();
   const { toggleForm } = useBeVolunteerStoreActions();
-
-  const submitForm = useCallback(() => {
-    // TODO: send form data to API (POST /api/volunteer-form)
-
-    return {
-      ...formData,
-      neighborhoodId: selectedNeighborhoodId,
-    };
-  }, [formData, selectedNeighborhoodId]);
 
   if (!isFormOpen) return null;
 
@@ -51,9 +41,7 @@ function BeVolunteerForm() {
       <Dialog open={isFormOpen} onClose={toggleForm}>
         <DialogTitle sx={styles.titleContainer}>
           <BeVolunteer />
-          <Typography variant="h6" sx={{ ml: 1 }}>
-            Be a Volunteer
-          </Typography>
+          <Typography sx={styles.title}>Be a Volunteer</Typography>
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
@@ -61,7 +49,6 @@ function BeVolunteerForm() {
             you an email to confirm your information.
           </DialogContentText>
           <TextField
-            autoFocus
             margin="dense"
             id="name"
             label="Name"
@@ -69,7 +56,6 @@ function BeVolunteerForm() {
             fullWidth
           />
           <TextField
-            autoFocus
             margin="dense"
             id="surname"
             label="Surname"
@@ -77,7 +63,6 @@ function BeVolunteerForm() {
             fullWidth
           />
           <TextField
-            autoFocus
             margin="dense"
             id="phone"
             label="Phone"
@@ -85,7 +70,6 @@ function BeVolunteerForm() {
             fullWidth
           />
           <TextField
-            autoFocus
             margin="dense"
             id="email"
             label="Email"
@@ -134,6 +118,15 @@ const styles: IStyles = {
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
+    svg: {
+      width: "1.5rem",
+      height: "1.5rem",
+    },
+  }),
+  title: () => ({
+    fontWeight: "500",
+    ml: "1rem",
+    fontSize: "1.5rem",
   }),
 };
 
