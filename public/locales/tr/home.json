@@ -38,12 +38,19 @@
     "actions": {
       "copied": "Koordinat bilgisi kopyalandı."
     },
+    "beVolunteer": {
+      "title": "Bilgilendirme",
+      "content": "Oy ve Ötesine Yönlendirileceksiniz. Onaylıyor musunuz?",
+      "cancel": "Vazgeç",
+      "create": "Git"
+    },
     "mapButtons": {
       "copy": "Harita Linkini Kopyala",
       "google": "Google Haritalarda Aç",
       "apple": "Apple Haritalarda Aç",
       "direction": "Yol Tarifi Al"
     },
+    "dataProvider": "Veriler {{provider}} tarafından sağlanmaktadır",
     "copyFullText": "İçeriği Kopyala",
     "copiedContentSuccessfully": "İçerik başarıyla kopyalandı.",
     "copiedMapLinkSuccessfully": "Harita linki başarıyla kopyalandı.",

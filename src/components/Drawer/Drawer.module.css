@@ -60,6 +60,17 @@
   width: 80%;
 }
 
+.dialogButtonGroup {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 0.5rem;
+}
+.dialogButtonGroup button {
+  border-radius: 10px;
+}
+
 .buttonDarkIcon {
   color: #000;
 }
