@@ -40,7 +40,7 @@
     },
     "beVolunteer": {
       "title": "Bilgilendirme",
-      "content": "Oy ve Ötesine Yönlendirileceksiniz. Onaylıyor musunuz?",
+      "content": "Oy ve Ötesi'ne Yönlendirileceksiniz. Onaylıyor musunuz?",
       "cancel": "Vazgeç",
       "create": "Git"
     },
