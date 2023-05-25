@@ -103,10 +103,12 @@ const RedirectInformation = ({
   return (
     <Dialog open={open} onClose={onClose} sx={styles.redirectDialog}>
       <DialogTitle sx={styles.titleContainer}>
-        <InfoOutlinedIcon sx={styles.icon} />
-        <Typography sx={styles.infoTitle}>
-          {t("cluster.beVolunteer.title")}
-        </Typography>
+        <div className={moduleStyles.dialogTitleGroup}>
+          <InfoOutlinedIcon sx={styles.icon} />
+          <Typography sx={styles.infoTitle}>
+            {t("cluster.beVolunteer.title")}
+          </Typography>
+        </div>
       </DialogTitle>
       <DialogContent>{t("cluster.beVolunteer.content")}</DialogContent>
       <DialogActions>
@@ -353,6 +355,7 @@ const styles: IStyles = {
   redirectDialog: () => ({
     ".MuiPaper-root": {
       borderRadius: "10px",
+      textAlign: "center",
     },
   }),
   button: () => ({
@@ -364,6 +367,8 @@ const styles: IStyles = {
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
+    textAlign: "center",
+    justifyContent: "center",
     svg: {
       width: "1.5rem",
       height: "1.5rem",
@@ -371,11 +376,13 @@ const styles: IStyles = {
   }),
   infoTitle: () => ({
     fontWeight: "500",
-    ml: "1rem",
     fontSize: "1.2rem",
   }),
   icon: () => ({
     width: "1.2rem",
+    position: "absolute",
+    left: 0,
+    transform: "translateX(-100%)",
     height: "1.2rem",
   }),
 };
