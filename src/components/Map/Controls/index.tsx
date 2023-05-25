@@ -32,8 +32,6 @@ import {
   FilterVotingLocations,
   useVotingLocations,
 } from "@/features/location-categories";
-import { DataSourcesInfo } from "@/components/DataSourcesInfo/DataSourcesInfo";
-import { useState } from "react";
 import { useAboutView } from "@/components/AboutUs/AboutUsOverlay";
 
 const typeImages: Record<MapType, string> = {
@@ -139,7 +137,6 @@ export const MapControls = () => {
   const { t } = useTranslation("home");
 
   const votingLocationsFilter = useVotingLocations();
-  const [dataSourcesOpen, setDataSourcesOpen] = useState(false);
 
   return (
     <DoubleClickStopPropagation>
@@ -183,10 +180,6 @@ export const MapControls = () => {
             </Stack>
           </Stack>
         </Control>
-        <DataSourcesInfo
-          open={dataSourcesOpen}
-          onClick={() => setDataSourcesOpen(false)}
-        />
         <Control position="bottomright">
           <Stack
             display={"flex"}
@@ -198,7 +191,7 @@ export const MapControls = () => {
               <LocaleSwitchComponent />
             </Stack>
             <Stack display={"flex"} direction={"row"}>
-              <AttributionComponent onClick={() => setDataSourcesOpen(true)} />
+              <AttributionComponent />
             </Stack>
           </Stack>
         </Control>
