@@ -41,7 +41,7 @@
     },
     "beVolunteer": {
       "title": "Bilgilendirme",
-      "content": "Oy ve Ötesi'ne Yönlendirileceksiniz. Onaylıyor musunuz?",
+      "content": "Devam ettiğinizde Oy ve Ötesi gönüllü başvuru formuna ulaşacaksınız. Müşahit başvuruları sonlandırılmış olmakla beraber, seçim gönüllüsü olarak destek verebilir, forma kayıt olduğunuzda tutanakları kolaylıkla gönderebilirsiniz.",
       "cancel": "Vazgeç",
       "create": "Git"
     },
