@@ -4,7 +4,7 @@ export const data = {
     title: {
       type: "header",
       data: {
-        text: "Nasıl kullanırım?",
+        text: "Kullanım rehberi",
         level: 3,
       },
     },
@@ -14,18 +14,16 @@ export const data = {
         data: {
           style: "unordered",
           items: [
-            "Karşınızdaki haritada bölgelere çıkan yuvarlakların üstüne tıklayarak yaklaşın.",
-            "Bölgelere yaklaştıkça müşahit yoğunluğu okul bazlı görünecektir.",
-            "Yakınlaşmayı sürdürdükçe bilgilere erişeceksiniz.",
-            "Mavi pinlere tıklayıp bilgileri görüntüleyin.",
-            "En başta yer adı/adres bilgisini okuyacaksınız. Düğmeler ile amacına uygun ilerlemek isteyebilirsiniz.",
+            "Haritadaki noktalar oradaki toplam mahalle sayısını gösterir, yakınlaştırmak için tıklayın.",
+            "Sarıdan kırmızıya renkli alanlar o bölgede ne kadar müşahit ihtiyacı olduğunu gösterir.",
+            "Yakınlaştıkça göreceğiniz mahalle pinlerine tıklayarak detaylarını görüntüleyin, oradaki okullarda müşahit ihtiyacını göreceksiniz.",
           ],
         },
       },
       {
         type: "header",
         data: {
-          text: "Kullanma yöntemleri",
+          text: "Düğmeler",
           level: 3,
         },
       },
@@ -34,15 +32,16 @@ export const data = {
         data: {
           style: "unordered",
           items: [
-            "*+* artı düğmesi ile haritayı yakınlaştırıp bakın.",
-            "*-* artı düğmesi ile haritayı uzaklaştırıp bakın.",
+            "Sol üst köşedeki + - düğmeleri haritaya yakınlaştırır ve uzaklaştırır",
+            "Sağ üst köşedeki arama düğmesinden il ilçe mahalle seçilir",
+            "Sağ alt köşedeki düğmeden dil Türkçe ya da İngilizce seçilir",
           ],
         },
       },
       {
         type: "header",
         data: {
-          text: "Renkli alanların anlamları",
+          text: "Renkli alanlar",
           level: 6,
         },
       },
@@ -65,7 +64,7 @@ export const data = {
     title: {
       type: "header",
       data: {
-        text: "How do I use it?",
+        text: "User guide",
         level: 3,
       },
     },
@@ -75,18 +74,16 @@ export const data = {
         data: {
           style: "unordered",
           items: [
-            "Approach by clicking on the circles that appear on the map in front of you.",
-            "As you get closer to the regions, the observer density will appear school-based.",
-            "As you continue to zoom in, you will access information.",
-            "Click on the blue pins to view information.",
-            "First of all, you will read the place name/address information. You may want to proceed with the buttons in accordance with its purpose.",
+            "The dots on the map show the total number of neighborhoods in there, click to zoom in.",
+            "Colored areas from yellow to red indicate how much need there is for an observer in that area.",
+            "As you zoom in you will see neighborhood pins, click to view their details, you will see the need for observers in the schools there.",
           ],
         },
       },
       {
         type: "header",
         data: {
-          text: "Using methods",
+          text: "Buttons",
           level: 3,
         },
       },
@@ -95,15 +92,16 @@ export const data = {
         data: {
           style: "unordered",
           items: [
-            "Zoom the map with the *+* plus button.",
-            "*-* zoom out the map with the plus button",
+            "Top left + - buttons zoom in and out on the map",
+            "Top right search button allows selecting a city, district, and neighborhood",
+            "Bottom right switcher allows selecting language Turkish or English.",
           ],
         },
       },
       {
         type: "header",
         data: {
-          text: "Meanings of the colored areas",
+          text: "Colored areas",
           level: 6,
         },
       },
@@ -112,7 +110,7 @@ export const data = {
         data: {
           withHeadings: false,
           content: [
-            ["Low Need", "1"],
+            ["Need Low", "1"],
             ["Need Low-Medium", "2"],
             ["Need Medium", "3"],
             ["Need Medium-High", "4"],
