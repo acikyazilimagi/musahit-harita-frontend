@@ -70,12 +70,6 @@
   },
   "map": {
     "details": "Map Details",
-    "type": "Map Type",
-    "base": {
-      "default": "Default",
-      "satellite": "Satellite",
-      "terrain": "Terrain"
-    },
     "layer": {
       "heatmap": "Heatmap",
       "markers": "Markers"
