@@ -1,6 +1,11 @@
 import { Point } from "@/types";
-import everything from "@/data/tr-everything.json";
-const geoData = everything as Record<string, City>;
+// import everything from "@/data/tr-everything.json";
+import cities from "./cities.json";
+
+// const geoEverything = everything as Record<string, City>;
+const geoCities = cities as Record<string, City>;
+
+const geoData = geoCities;
 
 export interface City extends Point {
   id: number;

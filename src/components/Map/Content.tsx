@@ -17,12 +17,15 @@ import { MapClusterStyle } from "@/components/Map/Cluster/ClusterStyle";
 import { latLng, latLngBounds } from "leaflet";
 import { LayerControl } from "./LayerControl";
 import { useMapGeographyStore } from "@/stores/mapGeographyStore";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   NeighborhoodIntensity,
   useNeighborhoodIntensityData,
 } from "@/features/intensity-data";
-import { getAllNeighborhoodsWithAllData } from "@/data/models";
+import {
+  getAllNeighborhoods,
+  getAllNeighborhoodsWithAllData,
+} from "@/data/models";
 
 const MapEvents = () => {
   useMapEvents();
@@ -51,18 +54,29 @@ export const MapContent = () => {
   const { setDrawerData } = useMapActions();
   const { data } = useNeighborhoodIntensityData();
 
-  const [locations, setLocations] = useState<ChannelData[]>([]);
+  console.log({ data });
+
+  // const data = foo ? { "1": foo["1"] } : ;
+
+  const [locations] = useState<ChannelData[]>(
+    getAllNeighborhoods().map((neighborhood) =>
+      transformToChannelData({
+        neighborhood,
+        intensity: { intensity: 1, neighborhoodID: neighborhood.id },
+      })
+    )
+  );
 
   const { coordinates, zoom } = useMapGeographyStore();
   const { setEventType } = useMapActions();
   const device = useDevice();
 
-  useEffect(() => {
-    if (data) {
-      const channelData: ChannelData[] = data.map(transformToChannelData);
-      setLocations(channelData);
-    }
-  }, [data, setDrawerData]);
+  // useEffect(() => {
+  //   if (data) {
+  //     const channelData: ChannelData[] = data.map(transformToChannelData);
+  //     setLocations(channelData);
+  //   }
+  // }, [data, setDrawerData]);
 
   const onMarkerClick = (_e: any, markerData: ChannelData) => {
     const neighborhood =

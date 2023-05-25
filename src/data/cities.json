@@ -1,0 +1,819 @@
+{
+  "1": {
+    "id": 1,
+    "name": "SİNOP",
+    "lat": 41.431745,
+    "lng": 34.8338559,
+    "districts": [
+      {
+        "id": 9,
+        "name": "BOYABAT",
+        "cityID": 1,
+        "lat": 41.431745,
+        "lng": 34.8338559,
+        "neighborhoods": [
+          {
+            "id": 406,
+            "name": "YEŞİLYURT KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.431745,
+            "lng": 34.8338559
+          },
+          {
+            "id": 407,
+            "name": "YUKARISEYRİCEK KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.3166129,
+            "lng": 34.528001
+          },
+          {
+            "id": 408,
+            "name": "KOZKULE KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.568951,
+            "lng": 34.975985
+          },
+          {
+            "id": 409,
+            "name": "KOÇAK KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.46610500000001,
+            "lng": 34.77112
+          },
+          {
+            "id": 410,
+            "name": "BÖLÜKLÜ KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.46610500000001,
+            "lng": 34.77112
+          },
+          {
+            "id": 411,
+            "name": "GÖKDERE MAH.",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.4624687,
+            "lng": 34.7630539
+          },
+          {
+            "id": 412,
+            "name": "KUMLUK MAH.",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.4630817,
+            "lng": 34.7735795
+          },
+          {
+            "id": 413,
+            "name": "KUYUCAKPINAR KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.562706,
+            "lng": 34.84576
+          },
+          {
+            "id": 414,
+            "name": "ÇALTU KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.557026,
+            "lng": 34.846772
+          },
+          {
+            "id": 415,
+            "name": "AKÇAKESE KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.46610500000001,
+            "lng": 34.77112
+          },
+          {
+            "id": 416,
+            "name": "BEKTAŞ KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.5326569,
+            "lng": 34.7709916
+          },
+          {
+            "id": 417,
+            "name": "EĞLENCE KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.555783,
+            "lng": 34.74429
+          },
+          {
+            "id": 418,
+            "name": "GAZİDERETABAKLI KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.453879,
+            "lng": 34.690405
+          },
+          {
+            "id": 419,
+            "name": "KOZANLI KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.465387,
+            "lng": 34.47525
+          },
+          {
+            "id": 420,
+            "name": "YILDIZ MAH.",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.4589501,
+            "lng": 34.778541
+          },
+          {
+            "id": 421,
+            "name": "BOYALI KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.381454,
+            "lng": 34.68319990000001
+          },
+          {
+            "id": 422,
+            "name": "DARIÖZÜ KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.46610500000001,
+            "lng": 34.77112
+          },
+          {
+            "id": 423,
+            "name": "DAYLI KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.467001,
+            "lng": 34.8030459
+          },
+          {
+            "id": 424,
+            "name": "ÇULHALI KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.578744,
+            "lng": 34.843926
+          },
+          {
+            "id": 425,
+            "name": "ARIOĞLU KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.46610500000001,
+            "lng": 34.77112
+          },
+          {
+            "id": 426,
+            "name": "UZUNÇAY KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.65858799999999,
+            "lng": 34.625538
+          },
+          {
+            "id": 427,
+            "name": "ÇAYBAŞI KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.46610500000001,
+            "lng": 34.77112
+          },
+          {
+            "id": 428,
+            "name": "SARIAĞAÇÇAYI KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.435587,
+            "lng": 34.8531819
+          },
+          {
+            "id": 429,
+            "name": "ŞIHLI KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.4647572,
+            "lng": 34.8372059
+          },
+          {
+            "id": 430,
+            "name": "AKYÜRÜK KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.493232,
+            "lng": 34.7330711
+          },
+          {
+            "id": 431,
+            "name": "ALİBEYLİ KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.46610500000001,
+            "lng": 34.77112
+          },
+          {
+            "id": 432,
+            "name": "BAYAMCA KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.59124,
+            "lng": 34.7652339
+          },
+          {
+            "id": 433,
+            "name": "CAMİİKEBİR MAH.",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.4748631,
+            "lng": 34.7868452
+          },
+          {
+            "id": 434,
+            "name": "MAHMUTLU KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.448728,
+            "lng": 34.911449
+          },
+          {
+            "id": 435,
+            "name": "OKÇUMEHMETLİ KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.575879,
+            "lng": 34.668556
+          },
+          {
+            "id": 436,
+            "name": "DOĞUCA KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.4106581,
+            "lng": 34.805522
+          },
+          {
+            "id": 437,
+            "name": "GÖVE KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.403599,
+            "lng": 34.909698
+          },
+          {
+            "id": 438,
+            "name": "HAMZALI KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.46610500000001,
+            "lng": 34.77112
+          },
+          {
+            "id": 439,
+            "name": "KAVACIK KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.38045,
+            "lng": 34.589658
+          },
+          {
+            "id": 440,
+            "name": "SARIYER KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.493288,
+            "lng": 34.489583
+          },
+          {
+            "id": 441,
+            "name": "ENGİLEKİN KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.46610500000001,
+            "lng": 34.77112
+          },
+          {
+            "id": 442,
+            "name": "EMİROĞLU KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.3603491,
+            "lng": 34.6557199
+          },
+          {
+            "id": 443,
+            "name": "KURTLU KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.667875,
+            "lng": 34.860533
+          },
+          {
+            "id": 444,
+            "name": "TIRNALI KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.636,
+            "lng": 35.0430351
+          },
+          {
+            "id": 445,
+            "name": "YEŞİLKÖY",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.360858,
+            "lng": 34.639156
+          },
+          {
+            "id": 446,
+            "name": "İMAMLI KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.57854409999999,
+            "lng": 34.649545
+          },
+          {
+            "id": 447,
+            "name": "BAĞLICA KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.498924,
+            "lng": 34.7955479
+          },
+          {
+            "id": 448,
+            "name": "BÜRÜM KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.452376,
+            "lng": 34.4704369
+          },
+          {
+            "id": 449,
+            "name": "CURKUŞLAR KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.46610500000001,
+            "lng": 34.77112
+          },
+          {
+            "id": 450,
+            "name": "DEREÇATI KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.374448,
+            "lng": 34.485544
+          },
+          {
+            "id": 451,
+            "name": "YABANLI KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.547355,
+            "lng": 34.6616829
+          },
+          {
+            "id": 452,
+            "name": "MURATLI KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.394447,
+            "lng": 34.842764
+          },
+          {
+            "id": 453,
+            "name": "OSMANKÖY",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.514311,
+            "lng": 34.7609819
+          },
+          {
+            "id": 454,
+            "name": "YENİ MAH.",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.466103,
+            "lng": 34.7695278
+          },
+          {
+            "id": 455,
+            "name": "HACIAHMETLİ KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.565766,
+            "lng": 34.670491
+          },
+          {
+            "id": 456,
+            "name": "MARUF KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.562353,
+            "lng": 34.796742
+          },
+          {
+            "id": 457,
+            "name": "ZİNCİRLİKUYU MAH.",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.4594727,
+            "lng": 34.7717523
+          },
+          {
+            "id": 458,
+            "name": "ŞIHLAR KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.5717235,
+            "lng": 34.7803547
+          },
+          {
+            "id": 459,
+            "name": "KARAMUSALI KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.412982,
+            "lng": 34.46619099999999
+          },
+          {
+            "id": 460,
+            "name": "YEŞİLÇAM KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.658215,
+            "lng": 34.8116539
+          },
+          {
+            "id": 461,
+            "name": "KAYABOĞAZI KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.491222,
+            "lng": 34.9030821
+          },
+          {
+            "id": 462,
+            "name": "KILIÇLI KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.552854,
+            "lng": 34.897655
+          },
+          {
+            "id": 463,
+            "name": "ÇAMLICA MAH.",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.4672787,
+            "lng": 34.7912748
+          },
+          {
+            "id": 464,
+            "name": "EKİNÖREN KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.5806501,
+            "lng": 34.791146
+          },
+          {
+            "id": 465,
+            "name": "ESENGAZİLİ KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.384566,
+            "lng": 34.722681
+          },
+          {
+            "id": 466,
+            "name": "KARACAÖREN KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.46610500000001,
+            "lng": 34.77112
+          },
+          {
+            "id": 467,
+            "name": "İSAOĞLU KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.53561699999999,
+            "lng": 34.869939
+          },
+          {
+            "id": 468,
+            "name": "ÇORAK KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.450396,
+            "lng": 34.780755
+          },
+          {
+            "id": 469,
+            "name": "DOĞRUL KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.371681,
+            "lng": 34.570585
+          },
+          {
+            "id": 470,
+            "name": "ÇATTEPE KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.524369,
+            "lng": 34.8775261
+          },
+          {
+            "id": 471,
+            "name": "AŞAĞISEYRİCEK KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.328762,
+            "lng": 34.516853
+          },
+          {
+            "id": 472,
+            "name": "BENGÜBELEN KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.415523,
+            "lng": 34.7059489
+          },
+          {
+            "id": 473,
+            "name": "ESENTEPE MAH.",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.4590615,
+            "lng": 34.7905162
+          },
+          {
+            "id": 474,
+            "name": "ÇARŞAK KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.461912,
+            "lng": 34.899776
+          },
+          {
+            "id": 475,
+            "name": "ÇEŞNİGİR KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.5526109,
+            "lng": 34.944254
+          },
+          {
+            "id": 476,
+            "name": "AŞIKLI KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.4636179,
+            "lng": 34.520313
+          },
+          {
+            "id": 477,
+            "name": "CEMALETTİNKÖY",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.526156,
+            "lng": 34.7864379
+          },
+          {
+            "id": 478,
+            "name": "ERKEÇ KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.3685959,
+            "lng": 34.7083181
+          },
+          {
+            "id": 479,
+            "name": "ESENTEPE KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.46610500000001,
+            "lng": 34.77112
+          },
+          {
+            "id": 480,
+            "name": "KAVAK KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.426032,
+            "lng": 34.5299241
+          },
+          {
+            "id": 481,
+            "name": "TEKKE KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.531424,
+            "lng": 34.7248019
+          },
+          {
+            "id": 482,
+            "name": "ÖREN KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.417079,
+            "lng": 34.661389
+          },
+          {
+            "id": 483,
+            "name": "DÜZKARAAĞAÇ KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.35341700000001,
+            "lng": 34.532869
+          },
+          {
+            "id": 484,
+            "name": "EDİL KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.579836,
+            "lng": 34.6891929
+          },
+          {
+            "id": 485,
+            "name": "GÖKÇUKUR KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.6696903,
+            "lng": 34.68755180000001
+          },
+          {
+            "id": 486,
+            "name": "OĞLAKÇILAR KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.612375,
+            "lng": 34.6731131
+          },
+          {
+            "id": 487,
+            "name": "PİREFENDİDERESİ KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.33197699999999,
+            "lng": 34.463991
+          },
+          {
+            "id": 488,
+            "name": "ÇATPINAR KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.46610500000001,
+            "lng": 34.77112
+          },
+          {
+            "id": 489,
+            "name": "DAĞTABAKLI KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.350616,
+            "lng": 34.594821
+          },
+          {
+            "id": 490,
+            "name": "KARTALOĞLU KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.46610500000001,
+            "lng": 34.77112
+          },
+          {
+            "id": 491,
+            "name": "SALAR KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.535288,
+            "lng": 34.684588
+          },
+          {
+            "id": 492,
+            "name": "ÖMERKÖY",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.5383349,
+            "lng": 34.743119
+          },
+          {
+            "id": 493,
+            "name": "ARDIÇ KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.484411,
+            "lng": 34.785467
+          },
+          {
+            "id": 494,
+            "name": "KÖPRÜCEK KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.46065,
+            "lng": 34.597707
+          },
+          {
+            "id": 495,
+            "name": "GAZİDERESİ KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.46610500000001,
+            "lng": 34.77112
+          },
+          {
+            "id": 496,
+            "name": "KADINLI KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.558737,
+            "lng": 34.7266319
+          },
+          {
+            "id": 497,
+            "name": "YAYLACIK KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.499825,
+            "lng": 34.9347449
+          },
+          {
+            "id": 498,
+            "name": "ÇUKURHAN KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.5910741,
+            "lng": 34.954157
+          },
+          {
+            "id": 499,
+            "name": "BENİŞLİ KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.362068,
+            "lng": 34.68225
+          },
+          {
+            "id": 500,
+            "name": "PAŞALIOĞLU KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.651962,
+            "lng": 34.7778279
+          },
+          {
+            "id": 501,
+            "name": "YAZIKÖY",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.4085749,
+            "lng": 34.647176
+          },
+          {
+            "id": 502,
+            "name": "GÖKÇEAĞAÇSAKIZI KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.625887,
+            "lng": 34.6038949
+          },
+          {
+            "id": 503,
+            "name": "KURUSARAY KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.475554,
+            "lng": 34.6570201
+          },
+          {
+            "id": 504,
+            "name": "MARUFALINCA KÖYÜ",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.59641,
+            "lng": 34.7464439
+          },
+          {
+            "id": 505,
+            "name": "YENİKÖY",
+            "cityID": 1,
+            "districtID": 9,
+            "lat": 41.5594749,
+            "lng": 34.8580532
+          }
+        ]
+      }
+    ]
+  }
+}
