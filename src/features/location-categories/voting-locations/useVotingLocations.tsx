@@ -1,78 +1,45 @@
-import omit from "lodash.omit";
 import { create } from "zustand";
-import { getHashStorage } from "@/utils/zustand";
-import { persist } from "zustand/middleware";
-import cities from "@/data/tr-cities.json";
-import cityDistricts from "@/data/tr-city-districts.json";
-
-export type City = (typeof cities)[number];
-export type District = (typeof cityDistricts)[number];
+import type { City, District, Neighborhood } from "@/data/models";
 
 interface State {
   isOpen: boolean;
-  selectedCity: City | Pick<City, "id"> | null;
-  selectedDistrict: District | Pick<District, "id"> | null;
-  selectedNeighborhoodId: number | null;
-  selectedSchoolId: number | null;
+  selectedCity: City | null;
+  selectedDistrict: District | null;
+  selectedNeighborhood: Neighborhood | null;
   actions: {
-    setSelectedNeighborhoodId: (_selectedNeighborhoodId: number | null) => void;
-    setSelectedSchoolId: (_selectedSchoolId: number | null) => void;
-    setIsOpen: (_isOpen: boolean) => void;
-    setSelectedCity: (_selectedCity: City | Pick<City, "id"> | null) => void;
-    setSelectedDistrict: (
-      _selectedDistrict: District | Pick<District, "id"> | null
+    setSelectedNeighborhood: (
+      _selectedNeighborhood: Neighborhood | null
     ) => void;
+    setIsOpen: (_isOpen: boolean) => void;
+    setSelectedCity: (_selectedCity: City | null) => void;
+    setSelectedDistrict: (_selectedDistrict: District | null) => void;
   };
 }
 
-export const useVotingLocations = create<State>()(
-  persist(
-    (set) => ({
-      isOpen: false,
-      selectedCity: null,
-      selectedDistrict: null,
-      selectedNeighborhoodId: null,
-      selectedSchoolId: null,
-      actions: {
-        setSelectedCity: (selectedCity) => set(() => ({ selectedCity })),
-        setSelectedDistrict: (selectedDistrict) =>
-          set(() => ({ selectedDistrict })),
-        setSelectedNeighborhoodId: (selectedNeighborhoodId) =>
-          set(() => ({ selectedNeighborhoodId })),
-        setSelectedSchoolId: (selectedSchoolId) =>
-          set(() => ({ selectedSchoolId })),
-        setIsOpen: (isOpen) => set(() => ({ isOpen })),
-      },
-    }),
-    {
-      name: "voting-locations",
-      getStorage: () => getHashStorage(),
-      partialize: (state) => ({ ...omit(state, "actions") }),
-    }
-  )
-);
+export const useVotingLocations = create<State>()((set) => ({
+  isOpen: false,
+  selectedCity: null,
+  selectedDistrict: null,
+  selectedNeighborhood: null,
+  actions: {
+    setSelectedCity: (selectedCity) => set(() => ({ selectedCity })),
+    setSelectedDistrict: (selectedDistrict) =>
+      set(() => ({ selectedDistrict })),
+    setSelectedNeighborhood: (selectedNeighborhood) =>
+      set(() => ({ selectedNeighborhood })),
+    setIsOpen: (isOpen) => set(() => ({ isOpen })),
+  },
+}));
 
-useVotingLocations.subscribe((state, previousState) => {
-  if (state.selectedDistrict?.id != previousState.selectedDistrict?.id) {
-    const district = cityDistricts.find(
-      (district) => district.id == state.selectedDistrict?.id
-    );
+useVotingLocations.subscribe(({ actions, ...state }, prevState) => {
+  if (state.selectedCity?.id !== prevState.selectedCity?.id) {
+    actions.setSelectedDistrict(null);
+    actions.setSelectedNeighborhood(null);
+    return;
+  }
 
-    if (!district || district.id == previousState.selectedDistrict?.id) return;
-
-    state.actions.setSelectedDistrict(district);
-
-    state.actions.setSelectedNeighborhoodId(null);
-    state.actions.setSelectedSchoolId(null);
-  } else if (state.selectedCity?.id != previousState.selectedCity?.id) {
-    const city = cities.find((city) => city.id === state.selectedCity?.id);
-
-    if (!city || city.id == previousState.selectedCity?.id) return;
-
-    state.actions.setSelectedCity(city);
-
-    state.actions.setSelectedDistrict(null);
-    state.actions.setSelectedNeighborhoodId(null);
-    state.actions.setSelectedSchoolId(null);
+  if (state.selectedDistrict?.id !== prevState.selectedDistrict?.id) {
+    actions.setSelectedNeighborhood(null);
+    return;
   }
 });

@@ -1,4 +1,5 @@
 {
+  "locale": "en",
   "scanner": {
     "text": "SCAN AREA"
   },
@@ -43,10 +44,29 @@
       "apple": "Open in Apple Maps",
       "direction": "Get Directions"
     },
+    "beVolunteer": {
+      "title": "Information",
+      "content": "You Will Be Redirected to Oy ve Ötesi. Do you approve?",
+      "cancel": "Cancel",
+      "create": "Open"
+    },
+    "dataProvider": "Data is provided by {{provider}}",
     "copyFullText": "Copy Content",
     "copiedContentSuccessfully": "Copied successfully.",
     "copiedMapLinkSuccessfully": "Copied map link successfully.",
-    "noticeCount": "{{count}} notice available"
+    "noticeCount": "{{count}} notice available",
+    "lastUpdate": "Last Update: {{time}}",
+    "intensity": "Need",
+    "intensity_data": {
+      "low": "Low",
+      "midLow": "Medium Low",
+      "mid": "Medium",
+      "midHigh": "Medium High",
+      "high": "High"
+    },
+    "doVolunteer": "Volunteer",
+    "shareLink": "Share",
+    "shareOk": "The link has been copied to the clipboard."
   },
   "map": {
     "details": "Map Details",

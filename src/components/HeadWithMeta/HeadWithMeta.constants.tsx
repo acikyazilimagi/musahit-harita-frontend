@@ -1,14 +1,14 @@
-export const TITLE = "Afet Haritası | Anasayfa";
+export const TITLE = "secim.gonullu.io | Anasayfa";
 export const DESCRIPTION =
-  "Twitter, Instagram, Whatsapp ve çeşitli web siteleri gibi farklı kaynaklardan gelen tüm yardım çağrılarını topluyoruz ve bu veriyi sahada kullanılmak üzere anlamlı, rafine hale getiriyoruz. Amacımız bilgi teknolojilerini kullanarak ilgili kurum ve STK'lara yardımcı olmak ve afet zamanlarında açık bir veri platformu sağlamak.";
-export const URL = "https://afetharita.com/";
+  "Ülkenin çeşitli bölgelerindeki müşahit eksikliklerini harita üzerinde ısı haritaları ile görselleştirip sandıkların gözlemcisiz kalmamasını sağlamaya çalışıyoruz.";
+export const URL = "https://secim.gonullu.io/";
 export const OG_EDGE_URL_DYNAMIC =
   "https://deprem-yardim-og-generator-eta.vercel.app/api/dynamic-image";
 export const OG_EDGE_URL_BASE =
-  "https://deprem-yardim-og-generator-eta.vercel.app/api/base-image";
+  "https://musahit-harita-frontend-git-stage-acikyazilim.vercel.app/images/og_image.png";
 export const SEO_LANG = {
-  HREF_TR: "https://afetharita.com/tr",
-  HREF_EN: "https://afetharita.com/en",
+  HREF_TR: "https://secim.gonullu.io/tr",
+  HREF_EN: "https://secim.gonullu.io/en",
   HREFLANG_TR: "tr",
   HREFLANG_EN: "en",
 };

@@ -1,6 +1,7 @@
 import { useMTMLView } from "@/components/MTMLView/MTMLView";
 import { useDevice, useMapActions } from "@/stores/mapStore";
 import {
+  DEFAULT_IMPORTANCY,
   DEFAULT_MIN_ZOOM_DESKTOP,
   DEFAULT_MIN_ZOOM_MOBILE,
 } from "@/components/Map/utils";
@@ -16,20 +17,67 @@ import { MapClusterStyle } from "@/components/Map/Cluster/ClusterStyle";
 import { latLng, latLngBounds } from "leaflet";
 import { LayerControl } from "./LayerControl";
 import { useMapGeographyStore } from "@/stores/mapGeographyStore";
+import { useEffect, useState } from "react";
+import {
+  NeighborhoodIntensity,
+  useNeighborhoodIntensityData,
+} from "@/features/intensity-data";
+import { getAllNeighborhoodsWithAllData } from "@/data/models";
 
 const MapEvents = () => {
   useMapEvents();
   return null;
 };
 
+const transformToChannelData = ({
+  neighborhood,
+  intensity,
+}: NeighborhoodIntensity): ChannelData => ({
+  reference: neighborhood.id,
+  properties: {
+    name: neighborhood.name,
+    description: null,
+  },
+  intensity: intensity.intensity / 10 ?? DEFAULT_IMPORTANCY,
+  location: {
+    lat: neighborhood.lat,
+    lng: neighborhood.lng,
+  },
+});
+
 export const MapContent = () => {
+  const router = useRouter();
   const { mapType } = useMTMLView();
+  const { setDrawerData } = useMapActions();
+  const { data } = useNeighborhoodIntensityData();
+
+  const [locations, setLocations] = useState<ChannelData[]>([]);
+
   const { coordinates, zoom } = useMapGeographyStore();
   const { setEventType } = useMapActions();
   const device = useDevice();
-  const router = useRouter();
+
+  useEffect(() => {
+    if (data) {
+      const channelData: ChannelData[] = data.map(transformToChannelData);
+      setLocations(channelData);
+    }
+  }, [data, setDrawerData]);
 
   const onMarkerClick = (_e: any, markerData: ChannelData) => {
+    const neighborhood =
+      getAllNeighborhoodsWithAllData()[markerData.reference!];
+    setDrawerData({
+      intensity: markerData.intensity,
+      location: {
+        lat: neighborhood.lat,
+        lng: neighborhood.lng,
+      },
+      properties: {
+        name: neighborhood.name,
+        description: `${neighborhood.districtName}, ${neighborhood.cityName}`,
+      },
+    });
     const query = { ...router.query, id: markerData.reference };
     router.push({ query, hash: location.hash }, { query, hash: location.hash });
   };
@@ -42,7 +90,11 @@ export const MapContent = () => {
   const bounds = latLngBounds(mapBoundaries.southWest, mapBoundaries.northEast);
 
   const dpr = window.devicePixelRatio;
-  const baseMapUrl = `https://mt0.google.com/vt/lyrs=${mapType}&scale=${dpr}&hl=en&x={x}&y={y}&z={z}&apistyle=s.e%3Al.i%7Cp.v%3Aoff%2Cs.t%3A3%7Cs.e%3Ag%7C`;
+  const baseMapUrl = `https://mt0.google.com/vt/lyrs=${mapType}&scale=${dpr}&hl=tr&x={x}&y={y}&z={z}&apistyle=s.t%3A3%7Cs.e%3Ag%7Cs.e%3Al.i%7Cp.v%3Aoff%2Cs.t%3A3%7Cs.e%3Ag%7Clabels%3Aon`;
+
+  if (!locations) {
+    return <div> Loading...</div>;
+  }
 
   return (
     <>
@@ -74,7 +126,7 @@ export const MapContent = () => {
         <MapControls />
         <TileLayer url={baseMapUrl} />
 
-        <LayerControl locations={[]} onMarkerClick={onMarkerClick} />
+        <LayerControl locations={locations} onMarkerClick={onMarkerClick} />
       </Map>
       <Box sx={styles.fixedMidBottom}>
         <CooldownButtonComponent />

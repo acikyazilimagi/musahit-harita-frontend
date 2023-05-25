@@ -21,6 +21,7 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import LayersIcon from "@mui/icons-material/Layers";
 import SearchIcon from "@mui/icons-material/Search";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import { useMap } from "react-leaflet";
 import { Control } from "./Control";
 import { LayerButton } from "./LayerButton";
@@ -30,10 +31,8 @@ import { DoubleClickStopPropagation } from "@/components/DoubleClickStopPropagat
 import {
   FilterVotingLocations,
   useVotingLocations,
-  useVotingLocationsData,
 } from "@/features/location-categories";
-import { DataSourcesInfo } from "@/components/DataSourcesInfo/DataSourcesInfo";
-import { useState } from "react";
+import { useAboutView } from "@/components/AboutUs/AboutUsOverlay";
 
 const typeImages: Record<MapType, string> = {
   [MapType.Default]: "default",
@@ -107,16 +106,28 @@ const MapLayerControl = (props: IMapLayerControlProps) => {
 
 const HelpViewControl = () => {
   const helpView = useHelpView();
+  const aboutView = useAboutView();
   return (
-    <Box>
+    <Box sx={styles.buttonBox}>
       <IconButton
         sx={styles.button}
         color="inherit"
         onClick={() => {
           helpView.toggle(!helpView.isOpen);
+          aboutView.toggle(false);
         }}
       >
         <HelpOutline />
+      </IconButton>
+      <IconButton
+        sx={styles.button}
+        color="inherit"
+        onClick={() => {
+          aboutView.toggle(!aboutView.isOpen);
+          helpView.toggle(false);
+        }}
+      >
+        <InfoOutlinedIcon />
       </IconButton>
     </Box>
   );
@@ -125,10 +136,7 @@ const HelpViewControl = () => {
 export const MapControls = () => {
   const { t } = useTranslation("home");
 
-  useVotingLocationsData();
-
   const votingLocationsFilter = useVotingLocations();
-  const [dataSourcesOpen, setDataSourcesOpen] = useState(false);
 
   return (
     <DoubleClickStopPropagation>
@@ -172,10 +180,6 @@ export const MapControls = () => {
             </Stack>
           </Stack>
         </Control>
-        <DataSourcesInfo
-          open={dataSourcesOpen}
-          onClick={() => setDataSourcesOpen(false)}
-        />
         <Control position="bottomright">
           <Stack
             display={"flex"}
@@ -187,7 +191,7 @@ export const MapControls = () => {
               <LocaleSwitchComponent />
             </Stack>
             <Stack display={"flex"} direction={"row"}>
-              <AttributionComponent onClick={() => setDataSourcesOpen(true)} />
+              <AttributionComponent />
             </Stack>
           </Stack>
         </Control>
@@ -208,6 +212,11 @@ const styles: IStyles = {
     "&:hover": {
       backgroundColor: theme.palette.common.white,
     },
+  }),
+  buttonBox: () => ({
+    display: "flex",
+    flexDirection: "column",
+    rowGap: "8px",
   }),
   marginTopLeft: {
     margin: "10px 10px",

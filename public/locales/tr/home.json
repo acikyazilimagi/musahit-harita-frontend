@@ -1,4 +1,5 @@
 {
+  "locale": "tr",
   "scanner": {
     "text": "ALANI TARA"
   },
@@ -37,16 +38,35 @@
     "actions": {
       "copied": "Koordinat bilgisi kopyalandı."
     },
+    "beVolunteer": {
+      "title": "Bilgilendirme",
+      "content": "Oy ve Ötesi'ne Yönlendirileceksiniz. Onaylıyor musunuz?",
+      "cancel": "Vazgeç",
+      "create": "Git"
+    },
     "mapButtons": {
       "copy": "Harita Linkini Kopyala",
       "google": "Google Haritalarda Aç",
       "apple": "Apple Haritalarda Aç",
       "direction": "Yol Tarifi Al"
     },
+    "dataProvider": "Veriler {{provider}} tarafından sağlanmaktadır",
     "copyFullText": "İçeriği Kopyala",
     "copiedContentSuccessfully": "İçerik başarıyla kopyalandı.",
     "copiedMapLinkSuccessfully": "Harita linki başarıyla kopyalandı.",
-    "noticeCount": "{{count}} ihbar mevcut"
+    "noticeCount": "{{count}} ihbar mevcut",
+    "lastUpdate": "Son güncelleme: {{time}}",
+    "intensity": "İhtiyaç",
+    "intensity_data": {
+      "low": "Düşük",
+      "midLow": "Orta Düşük",
+      "mid": "Orta",
+      "midHigh": "Orta Yüksek",
+      "high": "Yüksek"
+    },
+    "doVolunteer": "Gönüllü Ol",
+    "shareLink": "Linki Paylaş",
+    "shareOk": "Bağlantı başarıyla panoya kopyalandı."
   },
   "map": {
     "details": "Harita Ayrıntıları",
@@ -58,7 +78,7 @@
     },
     "layer": {
       "heatmap": "Isı Haritası",
-      "markers": "Depremzede Konumları"
+      "markers": "Konumlar"
     }
   },
   "content": {
