@@ -4,7 +4,8 @@ export const DESCRIPTION =
 export const URL = "https://secim.gonullu.io/";
 export const OG_EDGE_URL_DYNAMIC =
   "https://deprem-yardim-og-generator-eta.vercel.app/api/dynamic-image";
-export const OG_EDGE_URL_BASE = "/images/og_image.png";
+export const OG_EDGE_URL_BASE =
+  "https://musahit-harita-frontend-git-stage-acikyazilim.vercel.app/images/og_image.png";
 export const SEO_LANG = {
   HREF_TR: "https://secim.gonullu.io/tr",
   HREF_EN: "https://secim.gonullu.io/en",
