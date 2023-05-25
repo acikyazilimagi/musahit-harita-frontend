@@ -91,12 +91,20 @@ export const FilterVotingLocations = () => {
         label={t("filter.district")}
         onChange={(event: SelectChangeEvent<number>) => {
           const { value } = event.target;
+          if (value === "") {
+            actions.setSelectedDistrict(null);
+            return;
+          }
           if (typeof value !== "number") return;
           const district = getDistrict(selectedCity!.id, value);
           if (!district) return;
           actions.setSelectedDistrict(district);
         }}
       >
+        <MenuItem value="">
+          <em>{t("filter.clear")}</em>
+        </MenuItem>
+
         {selectedCity?.id &&
           getDistricts(selectedCity.id)
             .sort(sortByName)
@@ -115,7 +123,10 @@ export const FilterVotingLocations = () => {
         label={t("filter.neighborhood")}
         onChange={(event: SelectChangeEvent<number>) => {
           const { value } = event.target;
-
+          if (value === "") {
+            actions.setSelectedNeighborhood(null);
+            return;
+          }
           if (typeof value !== "number") return;
           const hood = getNeighborhood(
             selectedCity!.id,
@@ -126,6 +137,10 @@ export const FilterVotingLocations = () => {
           actions.setSelectedNeighborhood(hood);
         }}
       >
+        <MenuItem value="">
+          <em>{t("filter.clear")}</em>
+        </MenuItem>
+
         {selectedCity?.id &&
           selectedDistrict?.id &&
           getNeighborhoods(selectedCity.id, selectedDistrict.id)

@@ -24,7 +24,8 @@
       "lastDay": "Son 24 saat",
       "lastThreeDays": "Son 3 gün",
       "all": "Tüm zamanlar"
-    }
+    },
+    "clear": "Temizle"
   },
   "tags": {
     "safe": "Az Yoğun",
