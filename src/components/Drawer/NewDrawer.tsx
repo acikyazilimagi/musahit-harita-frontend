@@ -1,11 +1,21 @@
-import styles from "./Drawer.module.css";
+import moduleStyles from "./Drawer.module.css";
 import { default as MuiDrawer } from "@mui/material/Drawer";
 import { DrawerData, useMapActions } from "@/stores/mapStore";
 import { ChannelData, ChannelDetailData, ChannelFeedDetails } from "@/types";
 import Button from "@mui/material/Button";
 import { useTranslation } from "next-i18next";
 import CloseIcon from "@mui/icons-material/Close";
-import { Alert, Box, Typography } from "@mui/material";
+import {
+  Alert,
+  Box,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  SxProps,
+  Theme,
+  Typography,
+} from "@mui/material";
 import { useWindowSize } from "@/hooks/useWindowSize";
 import { useRouter } from "next/router";
 import omit from "lodash.omit";
@@ -13,6 +23,7 @@ import Link from "next/link";
 import { getTimeAgo } from "@/utils/date";
 import ShareIcon from "@mui/icons-material/Share";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import {
   intensityColorSelector,
   intensityTextColorSelector,
@@ -24,13 +35,13 @@ import { MapButtons } from "./components/MapButtons";
 import { getAllNeighborhoodsWithAllData } from "@/data/models";
 
 const DrawerIDLabel = ({ id }: { id: number }) => {
-  return <span className={styles.contentIdSection}>ID: {id}</span>;
+  return <span className={moduleStyles.contentIdSection}>ID: {id}</span>;
 };
 
 const LastUpdate = ({ lastUpdate }: { lastUpdate: string }) => {
   const { t } = useTranslation("home");
   return (
-    <div className={styles.contentInfo}>
+    <div className={moduleStyles.contentInfo}>
       <span>
         {t("cluster.lastUpdate", {
           time: getTimeAgo(lastUpdate, t("locale") ?? "en"),
@@ -46,8 +57,8 @@ const NeighbourhoodDetails = ({
   details: ChannelFeedDetails[];
 }) => {
   return (
-    <div className={styles.neighbourhoodDetails}>
-      <div className={styles.neighbourhoodWrapper}>
+    <div className={moduleStyles.neighbourhoodDetails}>
+      <div className={moduleStyles.neighbourhoodWrapper}>
         {details.map((detail, index) => (
           <Typography key={index}>
             {detail.buildingName} - {detail.ballotBoxNos.join(" - ")}
@@ -61,12 +72,12 @@ const NeighbourhoodDetails = ({
 const IntensitySection = ({ intensity }: { intensity: string }) => {
   const { t } = useTranslation("home");
   return (
-    <div className={styles.intensitySection}>
+    <div className={moduleStyles.intensitySection}>
       <Typography color={"blue"} sx={{ marginBottom: "0.5rem" }}>
         {t("cluster.intensity")}
       </Typography>
       <span
-        className={styles.intensity}
+        className={moduleStyles.intensity}
         style={{
           backgroundColor: intensityColorSelector(intensity),
           color: intensityTextColorSelector(intensity),
@@ -80,6 +91,48 @@ const IntensitySection = ({ intensity }: { intensity: string }) => {
   );
 };
 
+const RedirectInformation = ({
+  open,
+  onClose,
+}: {
+  open: boolean;
+  onClose: (_: boolean) => void;
+}) => {
+  const { t } = useTranslation("home");
+
+  return (
+    <Dialog open={open} onClose={onClose} sx={styles.redirectDialog}>
+      <DialogTitle sx={styles.titleContainer}>
+        <InfoOutlinedIcon sx={styles.icon} />
+        <Typography sx={styles.infoTitle}>
+          {t("cluster.beVolunteer.title")}
+        </Typography>
+      </DialogTitle>
+      <DialogContent>{t("cluster.beVolunteer.content")}</DialogContent>
+      <DialogActions>
+        <div className={moduleStyles.dialogButtonGroup}>
+          <Button
+            variant="outlined"
+            size="large"
+            color="inherit"
+            onClick={() => onClose(false)}
+          >
+            {t("cluster.beVolunteer.cancel")}
+          </Button>
+          <Button
+            variant="contained"
+            size="large"
+            color="primary"
+            onClick={() => onClose(true)}
+          >
+            {t("cluster.beVolunteer.create")}
+          </Button>
+        </div>
+      </DialogActions>
+    </Dialog>
+  );
+};
+
 const ButtonGroup = ({
   data,
   onCopyBillboard,
@@ -87,7 +140,9 @@ const ButtonGroup = ({
   data: ChannelDetailData;
   onCopyBillboard: (_clipped: string) => void;
 }) => {
-  const [isShared, setIsShared] = useState(false);
+  const [isShared, setIsShared] = useState<boolean>(false);
+  const [isVolunteerInfoOpen, setIsVolunteerInfoOpen] =
+    useState<boolean>(false);
   const { t } = useTranslation("home");
 
   useEffect(() => {
@@ -101,13 +156,26 @@ const ButtonGroup = ({
     setIsShared(true);
   };
 
-  const doVolunteer = () => {};
+  const doVolunteer = () => {
+    setIsVolunteerInfoOpen(true);
+  };
+
+  const checkConfirmRedirect = (isConfirmed: boolean) => {
+    setIsVolunteerInfoOpen(false);
+    if (isConfirmed) {
+      window.open(process.env.NEXT_PUBLIC_BE_VOLUNTEER_URL, "_blank");
+    }
+  };
 
   return (
     <>
-      <div className={styles.buttonGroup}>
+      <RedirectInformation
+        open={isVolunteerInfoOpen}
+        onClose={checkConfirmRedirect}
+      />
+      <div className={moduleStyles.buttonGroup}>
         <Button onClick={copy} variant="contained" color="inherit">
-          <ShareIcon className={styles.buttonDarkIcon}></ShareIcon>
+          <ShareIcon className={moduleStyles.buttonDarkIcon}></ShareIcon>
           <Typography
             sx={{
               marginLeft: "0.5rem",
@@ -119,7 +187,7 @@ const ButtonGroup = ({
         </Button>
         <Button onClick={doVolunteer} variant="contained" color="success">
           <FavoriteBorderOutlinedIcon
-            className={styles.buttonLightIcon}
+            className={moduleStyles.buttonLightIcon}
           ></FavoriteBorderOutlinedIcon>
           <Typography
             sx={{
@@ -133,10 +201,25 @@ const ButtonGroup = ({
       </div>
 
       {isShared && (
-        <Alert severity="success" color="info" className={styles.shareAlert}>
+        <Alert
+          severity="success"
+          color="info"
+          className={moduleStyles.shareAlert}
+        >
           {t("cluster.shareOk")}
         </Alert>
       )}
+
+      <Typography
+        sx={{
+          textAlign: "center",
+          marginTop: "1rem",
+          opacity: 0.8,
+          fontSize: ".9rem",
+        }}
+      >
+        {t("cluster.dataProvider", { provider: "Oy ve Ötesi" })}
+      </Typography>
     </>
   );
 };
@@ -182,7 +265,7 @@ export const Drawer = ({ data, onCopyBillboard }: DrawerProps) => {
 
   return (
     <MuiDrawer
-      className={styles.drawer}
+      className={moduleStyles.drawer}
       open={!!data && !!detail}
       anchor={anchor}
       hideBackdrop
@@ -217,7 +300,7 @@ export const Drawer = ({ data, onCopyBillboard }: DrawerProps) => {
             onClick={() => {
               setDrawerData(null);
             }}
-            className={styles.closeButton}
+            className={moduleStyles.closeButton}
           />
         </Link>
       </Box>
@@ -239,13 +322,16 @@ const DrawerContent = ({
   if (!detail) return null;
 
   return (
-    <div className={styles.content}>
-      <div className={styles.contentTop}>
+    <div className={moduleStyles.content}>
+      <div className={moduleStyles.contentTop}>
         {detail.neighbourhoodId && (
           <DrawerIDLabel id={detail.neighbourhoodId} />
         )}
         <h3 style={{ maxWidth: "45ch", marginBottom: 0 }}>{title}</h3>
-        <Typography className={styles.subtitle} sx={{ marginBottom: "1rem" }}>
+        <Typography
+          className={moduleStyles.subtitle}
+          sx={{ marginBottom: "1rem" }}
+        >
           {data.properties.description}
         </Typography>
 
@@ -257,4 +343,39 @@ const DrawerContent = ({
       <MapButtons drawerData={data} />
     </div>
   );
+};
+
+interface IStyles {
+  [key: string]: SxProps<Theme>;
+}
+
+const styles: IStyles = {
+  redirectDialog: () => ({
+    ".MuiPaper-root": {
+      borderRadius: "10px",
+    },
+  }),
+  button: () => ({
+    marginBottom: "1rem",
+    marginInline: "auto",
+    paddingInline: "3rem",
+  }),
+  titleContainer: () => ({
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    svg: {
+      width: "1.5rem",
+      height: "1.5rem",
+    },
+  }),
+  infoTitle: () => ({
+    fontWeight: "500",
+    ml: "1rem",
+    fontSize: "1.2rem",
+  }),
+  icon: () => ({
+    width: "1.2rem",
+    height: "1.2rem",
+  }),
 };

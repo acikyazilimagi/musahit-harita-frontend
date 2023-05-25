@@ -44,6 +44,13 @@
       "apple": "Open in Apple Maps",
       "direction": "Get Directions"
     },
+    "beVolunteer": {
+      "title": "Information",
+      "content": "You Will Be Redirected to Oy ve Ötesi. Do you approve?",
+      "cancel": "Cancel",
+      "create": "Open"
+    },
+    "dataProvider": "Data is provided by {{provider}}",
     "copyFullText": "Copy Content",
     "copiedContentSuccessfully": "Copied successfully.",
     "copiedMapLinkSuccessfully": "Copied map link successfully.",
