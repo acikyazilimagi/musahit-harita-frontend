@@ -49,7 +49,7 @@ export const MapContent = () => {
   const router = useRouter();
   const { mapType } = useMTMLView();
   const { setDrawerData } = useMapActions();
-  const data = useNeighborhoodIntensityData();
+  const { data } = useNeighborhoodIntensityData();
 
   const [locations, setLocations] = useState<ChannelData[]>([]);
 
