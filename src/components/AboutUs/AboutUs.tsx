@@ -6,7 +6,9 @@ import {
   AccordionDetails,
   SxProps,
   Theme,
+  Button,
 } from "@mui/material";
+import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import { ExpandMore } from "@mui/icons-material";
 import { useTranslation } from "next-i18next";
 import moduleStyles from "./AboutUs.module.css";
@@ -17,11 +19,9 @@ interface IStyles {
 
 const translationKeys = [
   "whoWeAre",
-  "whatIsOurPurpose",
+  "whatAreWeDoing",
   "ourPurpose",
-  "ourDifferent",
-  "contact",
-  "socialMedia",
+  "howCanYouHelp",
 ];
 
 export default function AboutUs() {
@@ -57,9 +57,60 @@ export default function AboutUs() {
           </AccordionDetails>
         </Accordion>
       ))}
+      <Accordion sx={styles.accordion}>
+        <AccordionSummary
+          expandIcon={<ExpandMore />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+          sx={styles.accordionSummary}
+        >
+          <Typography>
+            <b>{t(`items.contact.title`)}</b>
+          </Typography>
+        </AccordionSummary>
+        <AccordionDetails sx={styles.accordionRoot}>
+          Email: <strong>info@gonullu.io</strong>
+          <Links />
+        </AccordionDetails>
+      </Accordion>
     </Container>
   );
 }
+
+const links = {
+  Discord: "https://discord.gg/itdepremyardim",
+  Github: "https://github.com/orgs/acikkaynak",
+  Instagram: "https://www.instagram.com/acikyazilimagi",
+  Twitter: "https://twitter.com/acikyazilimagi",
+  Linkedin: "https://www.linkedin.com/company/aya-tr",
+};
+
+const Links = () => {
+  return (
+    <>
+      {Object.entries(links).map(([label, href]) => (
+        <div
+          key={label}
+          style={{ display: "flex", gap: 4, alignItems: "center" }}
+        >
+          <div>{label}</div>
+          <div>
+            <strong>
+              <Button
+                href={href}
+                endIcon={<OpenInNewIcon />}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Link
+              </Button>
+            </strong>
+          </div>
+        </div>
+      ))}
+    </>
+  );
+};
 
 const styles: IStyles = {
   container: (theme: Theme) => ({
@@ -68,6 +119,8 @@ const styles: IStyles = {
     [theme.breakpoints.up("xs")]: {
       height: "100%",
     },
+    maxHeight: "70vh",
+    overflowY: "auto",
   }),
   accordion: () => ({
     borderRadius: "8px !important",
