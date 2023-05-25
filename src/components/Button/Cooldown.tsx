@@ -1,10 +1,12 @@
-import { useLoading } from "@/stores/loadingStore";
+import {
+  invalidateIntensityData,
+  useNeighborhoodIntensityData,
+} from "@/features/intensity-data";
 import { useEventType } from "@/stores/mapStore";
 import { EVENT_TYPES } from "@/types";
 import { Button, LinearProgress, SxProps, Theme } from "@mui/material";
 import { useTranslation } from "next-i18next";
 import { useEffect, useState } from "react";
-import { mutate } from "swr";
 
 interface IStyles {
   [key: string]: SxProps<Theme>;
@@ -13,8 +15,9 @@ interface IStyles {
 const scanAreaAllowList: Partial<EVENT_TYPES[]> = ["moveend", "zoomend"];
 
 export const CooldownButtonComponent = () => {
-  const { t } = useTranslation("home");
-  const { loading } = useLoading();
+  const { t: tHome } = useTranslation("home");
+  const { t: tCommon } = useTranslation("common");
+  const { isLoading, isValidating } = useNeighborhoodIntensityData();
   const eventType = useEventType();
   const [isDisabled, setIsDisabled] = useState(false);
 
@@ -26,7 +29,7 @@ export const CooldownButtonComponent = () => {
 
   const refetch = () => {
     setIsDisabled(true);
-    mutate((key) => Array.isArray(key) && key[0] == "areas");
+    invalidateIntensityData();
   };
 
   return (
@@ -34,10 +37,14 @@ export const CooldownButtonComponent = () => {
       sx={styles.button}
       variant="contained"
       onClick={refetch}
-      disabled={isDisabled}
+      disabled={isLoading || isValidating || isDisabled}
     >
-      {t("scanner.text")}
-      {loading ? <LinearProgress sx={styles.progress} /> : null}
+      {isLoading || isValidating
+        ? tCommon("loaders.loading")
+        : tHome("scanner.text")}
+      {isLoading || isValidating ? (
+        <LinearProgress sx={styles.progress} />
+      ) : null}
     </Button>
   );
 };

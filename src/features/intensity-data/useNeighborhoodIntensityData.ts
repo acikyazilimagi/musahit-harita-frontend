@@ -1,4 +1,4 @@
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
 import { getAllNeighborhoodsByID, type Neighborhood } from "@/data/models";
 import { useSingletonsStore } from "@/features/singletons";
 import type { IntensityData } from "@/features/api-client";
@@ -13,34 +13,37 @@ export interface NeighborhoodIntensity {
   intensity: IntensityData;
 }
 
+const intensityDataKey = "intensity:all";
+
 const useFetchIntensityData = () => {
   const { api } = useSingletonsStore();
 
-  return useSWR(["feeds", "intensity"], () => api.fetchFeeds(), {
+  return useSWR(intensityDataKey, () => api.fetchFeeds(), {
     keepPreviousData: true,
     revalidateOnFocus: true,
     refreshInterval: FIVE_MINUTES,
   });
 };
 
-const useFetchIntensityDetailData = (id: string | null) => {
+const intensityDetailDataKey = "intensity:single";
+
+const useFetchIntensityDetailData = (neighborhoodID: string | null) => {
   const { api } = useSingletonsStore();
 
   return useSWR(
-    ["feed", "intensity"],
-    () => (!id ? null : api.fetchDetail(id)),
+    [intensityDetailDataKey, neighborhoodID],
+    ([_, id]) => (!id ? null : api.fetchDetail(id)),
     {
       keepPreviousData: true,
       revalidateOnFocus: true,
-      refreshInterval: FIVE_MINUTES,
     }
   );
 };
 
 export const useNeighborhoodIntensityData = () => {
-  const { data } = useFetchIntensityData();
+  const { data, isLoading, isValidating, mutate } = useFetchIntensityData();
 
-  return useMemo(() => {
+  const intensities = useMemo(() => {
     if (!data) {
       return null;
     }
@@ -51,9 +54,26 @@ export const useNeighborhoodIntensityData = () => {
       } as NeighborhoodIntensity;
     });
   }, [data]);
+
+  return {
+    isLoading,
+    isValidating,
+    mutate,
+    data: intensities,
+  };
 };
 
 export const useNeighborhoodIntensityDetailData = (id: string | null) => {
   const { data } = useFetchIntensityDetailData(id);
   return data ?? null;
+};
+
+export const invalidateIntensityData = () => {
+  return mutate((key) => key === intensityDataKey);
+};
+
+export const invalidateIntensityDetailData = (id: string) => {
+  return mutate((key) => {
+    return Array.isArray(key) && key[0] === "feeds" && key[1] === id;
+  });
 };
