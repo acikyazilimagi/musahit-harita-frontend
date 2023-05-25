@@ -24,7 +24,8 @@
       "lastDay": "Last 24 hours",
       "lastThreeDays": "Last 3 days",
       "all": "All time"
-    }
+    },
+    "clear": "Clear"
   },
   "tags": {
     "safe": "Low Dense",
