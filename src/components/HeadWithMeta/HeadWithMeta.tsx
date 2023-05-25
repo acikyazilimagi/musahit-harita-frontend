@@ -46,11 +46,11 @@ export const HeadWithMeta = () => {
       additionalLinkTags={[
         {
           rel: "icon",
-          href: "/favicon.ico",
+          href: "/icon.png",
         },
         {
           rel: "shortcut icon",
-          href: "/favicon.ico",
+          href: "/icon.png",
         },
       ]}
       languageAlternates={[
