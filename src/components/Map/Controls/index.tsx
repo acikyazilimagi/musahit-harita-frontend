@@ -3,7 +3,6 @@ import {
   MapTypeMapLayerViewComponent,
   useMTMLView,
 } from "../../MTMLView/MTMLView";
-import { MapType } from "../../MTMLView/types";
 import { AttributionComponent } from "../../Attributions/Attributions";
 import {
   ButtonGroup,
@@ -34,11 +33,6 @@ import {
 } from "@/features/location-categories";
 import { useAboutView } from "@/components/AboutUs/AboutUsOverlay";
 
-const typeImages: Record<MapType, string> = {
-  [MapType.Default]: "default",
-  [MapType.Satellite]: "satellite",
-  [MapType.Terrain]: "terrain",
-};
 interface IStyles {
   [key: string]: SxProps<Theme>;
 }
@@ -87,7 +81,7 @@ const MapLayerControl = (props: IMapLayerControlProps) => {
     props.showOnly === "desktop" ? (
       <LayerButton
         onClick={() => mtmlView.toggle(!mtmlView.isOpen)}
-        image={typeImages[mtmlView.mapType]}
+        image={"default"}
         checked={false}
       />
     ) : null

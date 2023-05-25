@@ -14,7 +14,7 @@ import { create } from "zustand";
 import { createJSONStorage, devtools, persist } from "zustand/middleware";
 import CloseIcon from "@mui/icons-material/Close";
 import { useTranslation } from "next-i18next";
-import { MapLayer, MapType } from "@/components/MTMLView/types";
+import { MapLayer } from "@/components/MTMLView/types";
 import { LayerButton } from "@/components//Map/Controls/LayerButton";
 import { hashStorage } from "@/utils/zustand";
 
@@ -24,10 +24,8 @@ interface IStyles {
 
 type MTMLViewStore = {
   isOpen: boolean;
-  mapType: MapType;
   mapLayers: MapLayer[];
   toggle: (_checked: boolean) => void;
-  setMapType: (_type: MapType) => void;
   toggleMapLayer: (_layer: MapLayer) => void;
 };
 
@@ -36,12 +34,9 @@ export const useMTMLView = create<MTMLViewStore>()(
     devtools(
       (set) => ({
         isOpen: false,
-        mapType: MapType.Default,
         mapLayers: [MapLayer.Markers, MapLayer.Heatmap],
         toggle: (checked: boolean) =>
           set(() => ({ isOpen: checked }), undefined, { type: "set" }),
-        setMapType: (type: MapType) =>
-          set(() => ({ mapType: type }), undefined, { type: "set" }),
         toggleMapLayer: (layer: MapLayer) =>
           set(
             ({ mapLayers }) => ({
@@ -58,9 +53,8 @@ export const useMTMLView = create<MTMLViewStore>()(
     {
       name: "mtml",
       storage: createJSONStorage(() => hashStorage),
-      partialize: ({ isOpen, mapType, mapLayers }) => ({
+      partialize: ({ isOpen, mapLayers }) => ({
         isOpen,
-        mapType,
         mapLayers,
       }),
     }
@@ -68,8 +62,7 @@ export const useMTMLView = create<MTMLViewStore>()(
 );
 
 export const MapTypeMapLayerViewComponent = () => {
-  const { isOpen, toggle, setMapType, mapType, mapLayers, toggleMapLayer } =
-    useMTMLView();
+  const { isOpen, toggle, mapLayers, toggleMapLayer } = useMTMLView();
   const { t } = useTranslation("home");
   if (!isOpen) return null;
   return (
@@ -86,29 +79,8 @@ export const MapTypeMapLayerViewComponent = () => {
                 <CloseIcon />
               </IconButton>
               <Typography fontSize="18px" sx={{ paddingTop: "1rem" }}>
-                {t("map.type")}
+                {t("map.details")}
               </Typography>
-              <Stack direction={"row"} gap={4} sx={styles.mapType}>
-                <LayerButton
-                  onClick={() => setMapType(MapType.Default)}
-                  image="default"
-                  checked={mapType === MapType.Default}
-                  title={t("map.base.default")}
-                />
-                <LayerButton
-                  onClick={() => setMapType(MapType.Satellite)}
-                  image="satellite"
-                  checked={mapType === MapType.Satellite}
-                  title={t("map.base.satellite")}
-                />
-                <LayerButton
-                  onClick={() => setMapType(MapType.Terrain)}
-                  image="terrain"
-                  checked={mapType === MapType.Terrain}
-                  title={t("map.base.terrain")}
-                />
-              </Stack>
-              <Typography fontSize="18px">{t("map.details")}</Typography>
               <Stack direction={"row"} gap={4} sx={styles.mapDetails}>
                 <LayerButton
                   onClick={() => toggleMapLayer(MapLayer.Markers)}
@@ -163,13 +135,6 @@ const styles: IStyles = {
       maxWidth: 290,
       height: "auto",
     },
-  }),
-  mapType: () => ({
-    display: "flex",
-    alignItems: "flex-start",
-    margin: "0.5rem 0 1rem",
-    borderBottom: "1px solid #ddd",
-    paddingBottom: "1rem",
   }),
   mapDetails: () => ({
     display: "flex",

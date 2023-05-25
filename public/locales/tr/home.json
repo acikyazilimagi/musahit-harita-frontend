@@ -70,12 +70,6 @@
   },
   "map": {
     "details": "Harita Ayrıntıları",
-    "type": "Harita Türü",
-    "base": {
-      "default": "Varsayılan",
-      "satellite": "Uydu",
-      "terrain": "Arazi"
-    },
     "layer": {
       "heatmap": "Isı Haritası",
       "markers": "Konumlar"

@@ -1,4 +1,3 @@
-import { useMTMLView } from "@/components/MTMLView/MTMLView";
 import { useDevice, useMapActions } from "@/stores/mapStore";
 import {
   DEFAULT_IMPORTANCY,
@@ -23,7 +22,6 @@ import {
   useNeighborhoodIntensityData,
 } from "@/features/intensity-data";
 import { getAllNeighborhoodsWithAllData } from "@/data/models";
-import { MapType } from "../MTMLView/types";
 
 const MapEvents = () => {
   useMapEvents();
@@ -48,7 +46,6 @@ const transformToChannelData = ({
 
 export const MapContent = () => {
   const router = useRouter();
-  const { mapType } = useMTMLView();
   const { setDrawerData } = useMapActions();
   const { data } = useNeighborhoodIntensityData();
 
@@ -89,12 +86,7 @@ export const MapContent = () => {
   };
 
   const bounds = latLngBounds(mapBoundaries.southWest, mapBoundaries.northEast);
-
-  const dpr = window.devicePixelRatio;
-  const baseMapUrl =
-    mapType === MapType.Default
-      ? `https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png`
-      : `https://mt0.google.com/vt/lyrs=${mapType}&scale=${dpr}&hl=tr&x={x}&y={y}&z={z}&apistyle=s.t%3A3%7Cs.e%3Ag%7Cs.e%3Al.i%7Cp.v%3Aoff%2Cs.t%3A3%7Cs.e%3Ag%7Clabels%3Aon`;
+  const baseMapUrl = `https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png`;
 
   if (!locations) {
     return <div> Loading...</div>;
