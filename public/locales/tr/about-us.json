@@ -4,41 +4,29 @@
     "whoWeAre": {
       "title": "Biz kimiz?",
       "content": [
-        "Dreamcatcher neutra bitters, 8-bit adaptogen chillwave vaporware cloud bread church-key fixie kinfolk. Subway tile four loko venmo etsy raw denim big mood cardigan chillwave paleo food truck green juice."
+        "Merhaba! Bizler, Açık Yazılım Ağı (AYA) olarak, yazılım sektöründe profesyonel olarak yer alan gönüllüleriz. Amacımız, toplumun ihtiyaçlarına yardımcı olabilecek teknolojileri açık kaynaklı olarak geliştirmek ve herhangi bir ihtiyaç anında gerekli teknik desteği sağlamaktır. Gönüllü ekibimiz, şu anda 20,000'den fazla üyeden oluşmaktadır ve sürekli büyümekteyiz."
       ]
     },
-    "whatIsOurPurpose": {
+    "whatAreWeDoing": {
       "title": "Ne yapıyoruz?",
       "content": [
-        "Dreamcatcher neutra bitters, 8-bit adaptogen chillwave vaporware cloud bread church-key fixie kinfolk. Subway tile four loko venmo etsy raw denim big mood cardigan chillwave paleo food truck green juice.",
-        "line 2"
+        "AYA olarak, toplumu ilgilendiren süreçlerde teknolojinin kullanım alanlarını göstermeye önem veriyoruz. Bu doğrultuda, seçim süreçlerindeki müşahit ihtiyacını takip etmek ve görselleştirmek için \"secim.gonullu.io\" adında bir proje geliştirdik."
       ]
     },
     "ourPurpose": {
       "title": "Amacımız nedir?",
       "content": [
-        "Dreamcatcher neutra bitters, 8-bit adaptogen chillwave vaporware cloud bread church-key fixie kinfolk. Subway tile four loko venmo etsy raw denim big mood cardigan chillwave paleo food truck green juice."
+        "Secim.gonullu.io, kullanıcı dostu bir çevrimiçi platform sunarak kullanıcıların bulundukları bölgeye ve tercih ettikleri okula göre müşahit eksikliklerini kontrol etmelerine, iletişim kurmalarına ve gözlemci olarak görev almalarına olanak sağlamaktadır. Bu platformu, dernek ve siyasi parti üyeleri, seçim sürecine katılmak isteyen paydaşlar ve müşahitlerin dağılımını takip etmek isteyen herkes için özel olarak tasarladık."
       ]
     },
-    "ourDifferent": {
-      "title": "Diğer uygulamalardan farkımız?",
+    "howCanYouHelp": {
+      "title": "Nasıl yardımcı olabilirsiniz?",
       "content": [
-        "Dreamcatcher neutra bitters, 8-bit adaptogen chillwave vaporware cloud bread church-key fixie kinfolk. Subway tile four loko venmo etsy raw denim big mood cardigan chillwave paleo food truck green juice."
+        "Bölgenizde olan okullara gidip tutanakların görüntülerini çekebilir, seçim akşamı bölgelerde gönüllü gözlümcüler olarak yer alabilirsiniz."
       ]
     },
     "contact": {
-      "title": "İletişim bilgileri",
-      "content": [
-        "Dreamcatcher neutra bitters, 8-bit adaptogen chillwave vaporware cloud bread church-key fixie kinfolk. Subway tile four loko venmo etsy raw denim big mood cardigan chillwave paleo food truck green juice."
-      ],
-      "tel": "",
-      "mail": ""
-    },
-    "socialMedia": {
-      "title": "Sosyal medya bilgileri",
-      "content": [
-        "Dreamcatcher neutra bitters, 8-bit adaptogen chillwave vaporware cloud bread church-key fixie kinfolk. Subway tile four loko venmo etsy raw denim big mood cardigan chillwave paleo food truck green juice."
-      ]
+      "title": "İletişim & Sosyal medya"
     }
   }
 }
