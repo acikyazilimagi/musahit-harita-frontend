@@ -10,9 +10,9 @@ const styles = css`
     (tag) => `
     .leaflet-custom-cluster-${tag.id} {
       .cluster-inner {
-        background-color: ${tag.color}DE;
-        border: ${tag.color} 2px solid;
-        color: #212121;
+        background-color: #1a3866DE;
+        border: ##1a3866 2px solid;
+        color: #FFFFFF;
         width: 36px;
         height: 36px;
         opacity: 0.9;
