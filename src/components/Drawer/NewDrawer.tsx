@@ -96,9 +96,7 @@ const RedirectInformation = ({
   onClose,
 }: {
   open: boolean;
-  onClose: (
-    _: "backdropClick" | "escapeKeyDown" | "cancelled" | "accepted"
-  ) => void;
+  onClose: (_: boolean | "cancelled" | "accepted") => void;
 }) => {
   const { t } = useTranslation("home");
 
@@ -164,9 +162,7 @@ const ButtonGroup = ({
     setIsVolunteerInfoOpen(true);
   };
 
-  const checkConfirmRedirect = (
-    reason: "backdropClick" | "escapeKeyDown" | "cancelled" | "accepted"
-  ) => {
+  const checkConfirmRedirect = (reason: boolean | "cancelled" | "accepted") => {
     setIsVolunteerInfoOpen(false);
     if (reason === "accepted") {
       window.open(process.env.NEXT_PUBLIC_BE_VOLUNTEER_URL, "_blank");
