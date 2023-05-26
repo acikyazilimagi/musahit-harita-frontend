@@ -44,13 +44,13 @@ export const LayerControl = ({ locations, onMarkerClick }: Props) => {
               key={idx}
               fitBoundsOnUpdate={false}
               fitBoundsOnLoad={false}
-              radius={15}
+              radius={30}
               max={5}
               points={points}
               longitudeExtractor={longitudeExtractor}
               latitudeExtractor={latitudeExtractor}
               intensityExtractor={intensityExtractor}
-              useLocalExtrema={false}
+              useLocalExtrema={true}
             />
           );
         }
