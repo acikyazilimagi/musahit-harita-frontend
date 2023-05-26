@@ -15,21 +15,30 @@ const fetchIcon = (count: number) => {
 };
 
 function getMarkerWithIntensity(intensity: number, isVisited: boolean) {
-  if (isVisited) {
-    return getSVGMarker({ color: "#353535", secondaryColor: "#FFFFFF" });
-  }
   switch (intensity) {
     case 1:
+      if (isVisited)
+        return getSVGMarker({ color: "#353535", secondaryColor: "#FAF7BF" });
       return getSVGMarker({ color: "#FAF7BF", secondaryColor: "#000000" });
     case 2:
+      if (isVisited)
+        return getSVGMarker({ color: "#353535", secondaryColor: "#FCD73F" });
       return getSVGMarker({ color: "#FCD73F", secondaryColor: "#FFFFFF" });
     case 3:
+      if (isVisited)
+        return getSVGMarker({ color: "#353535", secondaryColor: "#FDAE33" });
       return getSVGMarker({ color: "#FDAE33", secondaryColor: "#FFFFFF" });
     case 4:
+      if (isVisited)
+        return getSVGMarker({ color: "#353535", secondaryColor: "#FE8427" });
       return getSVGMarker({ color: "#FE8427", secondaryColor: "#FFFFFF" });
     case 5:
+      if (isVisited)
+        return getSVGMarker({ color: "#353535", secondaryColor: "#FE591D" });
       return getSVGMarker({ color: "#FE591D", secondaryColor: "#FFFFFF" });
     default:
+      if (isVisited)
+        return getSVGMarker({ color: "#353535", secondaryColor: "#FFFFFF" });
       return getSVGMarker({ color: "#193866", secondaryColor: "#FFFFFF" });
   }
 }
