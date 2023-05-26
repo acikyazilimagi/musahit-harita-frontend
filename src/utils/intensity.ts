@@ -18,15 +18,11 @@ export const intensityColorSelector = (item: string) => {
 export const intensityTextColorSelector = (item: string) => {
   switch (item) {
     case "1":
-      return "#00000";
     case "2":
-      return "#00000";
     case "3":
-      return "#00000";
+      return "#000000";
     case "4":
-      return "#ffffff";
     case "5":
-      return "#ffffff";
     default:
       return "#ffffff";
   }
