@@ -4,7 +4,6 @@ import useSupercluster from "use-supercluster";
 import { findTagByClusterCount } from "../../Tag/Tag.types";
 import { ChannelData } from "@/types";
 import { useVisitedMarkersStore } from "@/stores/visitedMarkersStore";
-import styles from "./MapMarker.module.css";
 
 const fetchIcon = (count: number) => {
   const tag = findTagByClusterCount(count);
@@ -15,15 +14,84 @@ const fetchIcon = (count: number) => {
   });
 };
 
-const markerBlueIcon = L.Icon.Default.extend({
-  options: {},
-});
+function getMarkerWithIntensity(intensity: number, isVisited: boolean) {
+  switch (intensity) {
+    case 1:
+      if (isVisited)
+        return getSVGMarker({ color: "#353535", secondaryColor: "#FAF7BF" });
+      return getSVGMarker({ color: "#FAF7BF", secondaryColor: "#000000" });
+    case 2:
+      if (isVisited)
+        return getSVGMarker({ color: "#353535", secondaryColor: "#FCD73F" });
+      return getSVGMarker({ color: "#FCD73F", secondaryColor: "#FFFFFF" });
+    case 3:
+      if (isVisited)
+        return getSVGMarker({ color: "#353535", secondaryColor: "#FDAE33" });
+      return getSVGMarker({ color: "#FDAE33", secondaryColor: "#FFFFFF" });
+    case 4:
+      if (isVisited)
+        return getSVGMarker({ color: "#353535", secondaryColor: "#FE8427" });
+      return getSVGMarker({ color: "#FE8427", secondaryColor: "#FFFFFF" });
+    case 5:
+      if (isVisited)
+        return getSVGMarker({ color: "#353535", secondaryColor: "#FE591D" });
+      return getSVGMarker({ color: "#FE591D", secondaryColor: "#FFFFFF" });
+    default:
+      if (isVisited)
+        return getSVGMarker({ color: "#353535", secondaryColor: "#FFFFFF" });
+      return getSVGMarker({ color: "#193866", secondaryColor: "#FFFFFF" });
+  }
+}
 
-const markerGrayIcon = L.Icon.Default.extend({
-  options: {
-    className: styles.marker_icon__visited,
-  },
-});
+function getSVGMarker(
+  { color, secondaryColor }: { color: string; secondaryColor: string } = {
+    color: "#FF6E6E",
+    secondaryColor: "#FFFFFF",
+  }
+) {
+  // icon URL: https://www.svgrepo.com/svg/302636/map-marker
+  return L.divIcon({
+    html: `
+      <svg
+      viewBox="-4 0 36 36"
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g
+        stroke="none"
+        stroke-width="1"
+        fill="none"
+        fill-rule="evenodd"
+      >
+        <g id="Vivid-Icons" transform="translate(-125.000000, -643.000000)">
+          <g id="Icons" transform="translate(37.000000, 169.000000)">
+            <g id="map-marker" transform="translate(78.000000, 468.000000)">
+              <g transform="translate(10.000000, 6.000000)">
+                <path
+                  d="M14,0 C21.732,0 28,5.641 28,12.6 C28,23.963 14,36 14,36 C14,36 0,24.064 0,12.6 C0,5.641 6.268,0 14,0 Z"
+                  id="Shape"
+                  fill=${color}
+                ></path>
+                <circle
+                  id="Oval"
+                  fill=${secondaryColor}
+                  fill-rule="nonzero"
+                  cx="14"
+                  cy="14"
+                  r="7"
+                ></circle>
+              </g>
+            </g>
+          </g>
+        </g>
+      </g>
+    </svg>
+  `,
+    className: "svg-marker-icon",
+    iconSize: [28, 28],
+    iconAnchor: [14, 14],
+  });
+}
 
 type Props = {
   data: ChannelData[];
@@ -66,7 +134,6 @@ export const GenericClusterGroup = ({ data, onMarkerClick }: Props) => {
         // the point may be either a cluster or a crime point
         const { cluster: isCluster, point_count: pointCount } =
           cluster.properties;
-
         if (isCluster) {
           return (
             <Marker
@@ -94,17 +161,11 @@ export const GenericClusterGroup = ({ data, onMarkerClick }: Props) => {
             position={[latitude, longitude]}
             icon={
               cluster.properties.icon
-                ? L.icon({
-                    iconUrl: "/" + cluster.properties.icon,
-                    iconSize: [28, 28],
-                    iconAnchor: [14, 14],
-                    className: isVisited(cluster.item.reference)
-                      ? styles.marker_icon__visited
-                      : "",
-                  })
-                : isVisited(cluster.item.reference)
-                ? new markerGrayIcon()
-                : new markerBlueIcon()
+                ? getSVGMarker()
+                : getMarkerWithIntensity(
+                    cluster.item.intensity,
+                    isVisited(cluster.item.reference)
+                  )
             }
             eventHandlers={{
               click: (e) => {
