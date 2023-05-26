@@ -37,7 +37,7 @@ const transformToChannelData = ({
     name: neighborhood.name,
     description: null,
   },
-  intensity: intensity.intensity / 10 ?? DEFAULT_IMPORTANCY,
+  intensity: intensity.intensity ?? DEFAULT_IMPORTANCY,
   location: {
     lat: neighborhood.lat,
     lng: neighborhood.lng,
