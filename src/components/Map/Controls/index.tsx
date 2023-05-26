@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { HelpOutline } from "@mui/icons-material";
 import {
   MapTypeMapLayerViewComponent,
@@ -21,6 +22,7 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import LayersIcon from "@mui/icons-material/Layers";
 import SearchIcon from "@mui/icons-material/Search";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import CloseIcon from "@mui/icons-material/Close";
 import { useMap } from "react-leaflet";
 import { Control } from "./Control";
 import { LayerButton } from "./LayerButton";
@@ -132,6 +134,7 @@ export const MapControls = () => {
   const { t } = useTranslation("home");
 
   const votingLocationsFilter = useVotingLocations();
+  const [infoSnackbarOpen, setInfoSnackbarOpen] = useState(true);
 
   return (
     <DoubleClickStopPropagation>
@@ -192,6 +195,27 @@ export const MapControls = () => {
         </Control>
 
         <Box sx={styles.fixedMidBottom}>
+          {infoSnackbarOpen && (
+            <Box sx={styles.infoSnackbar}>
+              <Box sx={styles.infoSnackbarText}>
+                Haritada görmüş olduğunuz bu veriler Oy ve Ötesi tarafından
+                sağlanmış olup, tutanak sağlayacak gönüllü ihtiyacını
+                göstermektedir. İhtiyaç olmayan bölgeler haritada
+                gösterilmemektedir.
+              </Box>
+
+              <IconButton
+                size="small"
+                aria-label="close"
+                color="inherit"
+                onClick={() => setInfoSnackbarOpen(false)}
+                sx={styles.infoSnackbarCloseButton}
+              >
+                <CloseIcon fontSize="small" />
+              </IconButton>
+            </Box>
+          )}
+
           <CooldownButtonComponent />
         </Box>
       </div>
@@ -231,14 +255,33 @@ const styles: IStyles = {
   },
   fixedMidBottom: () => ({
     position: "fixed",
-    bottom: "0px",
+    bottom: "32px",
     left: "0px",
     width: "100%",
-    height: "110px",
     zIndex: 1030,
     display: "flex",
+    flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
     pointerEvents: "none",
   }),
+  infoSnackbar: {
+    background: "#fff",
+    boxShadow: "0px 2px 4px rgba(22, 22, 22, 0.16)",
+    borderRadius: "16px",
+    pointerEvents: "all",
+    margin: "0 8px 12px 8px",
+    maxWidth: "420px",
+    display: "flex",
+    alignItems: "flex-start",
+  },
+  infoSnackbarText: {
+    fontSize: "14px",
+    padding: "12px 0 12px 12px",
+  },
+  infoSnackbarCloseButton: {
+    position: "relative",
+    top: "4px",
+    right: "4px",
+  },
 };
