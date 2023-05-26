@@ -96,7 +96,9 @@ const RedirectInformation = ({
   onClose,
 }: {
   open: boolean;
-  onClose: (_: boolean) => void;
+  onClose: (
+    _: "backdropClick" | "escapeKeyDown" | "cancelled" | "accepted"
+  ) => void;
 }) => {
   const { t } = useTranslation("home");
 
@@ -117,7 +119,7 @@ const RedirectInformation = ({
             variant="outlined"
             size="large"
             color="inherit"
-            onClick={() => onClose(false)}
+            onClick={() => onClose("cancelled")}
           >
             {t("cluster.beVolunteer.cancel")}
           </Button>
@@ -125,7 +127,7 @@ const RedirectInformation = ({
             variant="contained"
             size="large"
             color="primary"
-            onClick={() => onClose(true)}
+            onClick={() => onClose("accepted")}
           >
             {t("cluster.beVolunteer.create")}
           </Button>
@@ -162,9 +164,11 @@ const ButtonGroup = ({
     setIsVolunteerInfoOpen(true);
   };
 
-  const checkConfirmRedirect = (isConfirmed: boolean) => {
+  const checkConfirmRedirect = (
+    reason: "backdropClick" | "escapeKeyDown" | "cancelled" | "accepted"
+  ) => {
     setIsVolunteerInfoOpen(false);
-    if (isConfirmed) {
+    if (reason === "accepted") {
       window.open(process.env.NEXT_PUBLIC_BE_VOLUNTEER_URL, "_blank");
     }
   };
