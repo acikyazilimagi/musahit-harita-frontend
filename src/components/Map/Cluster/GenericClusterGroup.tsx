@@ -4,7 +4,6 @@ import useSupercluster from "use-supercluster";
 import { findTagByClusterCount } from "../../Tag/Tag.types";
 import { ChannelData } from "@/types";
 import { useVisitedMarkersStore } from "@/stores/visitedMarkersStore";
-import styles from "./MapMarker.module.css";
 
 const fetchIcon = (count: number) => {
   const tag = findTagByClusterCount(count);
@@ -15,7 +14,32 @@ const fetchIcon = (count: number) => {
   });
 };
 
-function getSVGMarker({ color }: { color: string } = { color: "#FF6E6E" }) {
+function getMarkerWithIntensity(intensity: number, isVisited: boolean) {
+  if (isVisited) {
+    return getSVGMarker({ color: "#353535", secondaryColor: "#FFFFFF" });
+  }
+  switch (intensity) {
+    case 1:
+      return getSVGMarker({ color: "#FAF7BF", secondaryColor: "#000000" });
+    case 2:
+      return getSVGMarker({ color: "#FCD73F", secondaryColor: "#FFFFFF" });
+    case 3:
+      return getSVGMarker({ color: "#FDAE33", secondaryColor: "#FFFFFF" });
+    case 4:
+      return getSVGMarker({ color: "#FE8427", secondaryColor: "#FFFFFF" });
+    case 5:
+      return getSVGMarker({ color: "#FE591D", secondaryColor: "#FFFFFF" });
+    default:
+      return getSVGMarker({ color: "#193866", secondaryColor: "#FFFFFF" });
+  }
+}
+
+function getSVGMarker(
+  { color, secondaryColor }: { color: string; secondaryColor: string } = {
+    color: "#FF6E6E",
+    secondaryColor: "#FFFFFF",
+  }
+) {
   // icon URL: https://www.svgrepo.com/svg/302636/map-marker
   return L.divIcon({
     html: `
@@ -41,7 +65,7 @@ function getSVGMarker({ color }: { color: string } = { color: "#FF6E6E" }) {
                 ></path>
                 <circle
                   id="Oval"
-                  fill="#fff"
+                  fill=${secondaryColor}
                   fill-rule="nonzero"
                   cx="14"
                   cy="14"
@@ -101,7 +125,6 @@ export const GenericClusterGroup = ({ data, onMarkerClick }: Props) => {
         // the point may be either a cluster or a crime point
         const { cluster: isCluster, point_count: pointCount } =
           cluster.properties;
-
         if (isCluster) {
           return (
             <Marker
@@ -130,9 +153,10 @@ export const GenericClusterGroup = ({ data, onMarkerClick }: Props) => {
             icon={
               cluster.properties.icon
                 ? getSVGMarker()
-                : isVisited(cluster.item.reference)
-                ? getSVGMarker({ color: "#353535" })
-                : getSVGMarker({ color: "#193866" })
+                : getMarkerWithIntensity(
+                    cluster.item.intensity,
+                    isVisited(cluster.item.reference)
+                  )
             }
             eventHandlers={{
               click: (e) => {
