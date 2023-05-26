@@ -4,11 +4,9 @@ import {
   DEFAULT_MIN_ZOOM_DESKTOP,
   DEFAULT_MIN_ZOOM_MOBILE,
 } from "@/components/Map/utils";
-import { CooldownButtonComponent } from "@/components/Button/Cooldown";
 import { Map } from "@/components/Map/Map";
 import { MapControls } from "./Controls/index";
 import { TileLayer } from "react-leaflet";
-import { Box } from "@mui/material";
 import { ChannelData } from "@/types";
 import { useRouter } from "next/router";
 import { useMapEvents } from "@/hooks/useMapEvents";
@@ -124,24 +122,6 @@ export const MapContent = () => {
 
         <LayerControl locations={locations} onMarkerClick={onMarkerClick} />
       </Map>
-      <Box sx={styles.fixedMidBottom}>
-        <CooldownButtonComponent />
-      </Box>
     </>
   );
-};
-
-const styles = {
-  fixedMidBottom: () => ({
-    position: "fixed",
-    bottom: "0px",
-    left: "0px",
-    width: "100%",
-    height: "110px",
-    zIndex: 1030,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    pointerEvents: "none",
-  }),
 };

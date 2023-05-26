@@ -32,6 +32,7 @@ import {
   useVotingLocations,
 } from "@/features/location-categories";
 import { useAboutView } from "@/components/AboutUs/AboutUsOverlay";
+import { CooldownButtonComponent } from "@/components/Button/Cooldown";
 
 interface IStyles {
   [key: string]: SxProps<Theme>;
@@ -189,6 +190,10 @@ export const MapControls = () => {
             </Stack>
           </Stack>
         </Control>
+
+        <Box sx={styles.fixedMidBottom}>
+          <CooldownButtonComponent />
+        </Box>
       </div>
     </DoubleClickStopPropagation>
   );
@@ -224,4 +229,16 @@ const styles: IStyles = {
   pointerAll: {
     pointerEvents: "all",
   },
+  fixedMidBottom: () => ({
+    position: "fixed",
+    bottom: "0px",
+    left: "0px",
+    width: "100%",
+    height: "110px",
+    zIndex: 1030,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    pointerEvents: "none",
+  }),
 };
