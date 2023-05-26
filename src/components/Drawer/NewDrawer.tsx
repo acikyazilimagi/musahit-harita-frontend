@@ -96,17 +96,19 @@ const RedirectInformation = ({
   onClose,
 }: {
   open: boolean;
-  onClose: (_: boolean) => void;
+  onClose: (_: boolean | "cancelled" | "accepted") => void;
 }) => {
   const { t } = useTranslation("home");
 
   return (
     <Dialog open={open} onClose={onClose} sx={styles.redirectDialog}>
       <DialogTitle sx={styles.titleContainer}>
-        <InfoOutlinedIcon sx={styles.icon} />
-        <Typography sx={styles.infoTitle}>
-          {t("cluster.beVolunteer.title")}
-        </Typography>
+        <div className={moduleStyles.dialogTitleGroup}>
+          <InfoOutlinedIcon sx={styles.icon} />
+          <Typography sx={styles.infoTitle}>
+            {t("cluster.beVolunteer.title")}
+          </Typography>
+        </div>
       </DialogTitle>
       <DialogContent>{t("cluster.beVolunteer.content")}</DialogContent>
       <DialogActions>
@@ -115,7 +117,7 @@ const RedirectInformation = ({
             variant="outlined"
             size="large"
             color="inherit"
-            onClick={() => onClose(false)}
+            onClick={() => onClose("cancelled")}
           >
             {t("cluster.beVolunteer.cancel")}
           </Button>
@@ -123,7 +125,7 @@ const RedirectInformation = ({
             variant="contained"
             size="large"
             color="primary"
-            onClick={() => onClose(true)}
+            onClick={() => onClose("accepted")}
           >
             {t("cluster.beVolunteer.create")}
           </Button>
@@ -160,9 +162,9 @@ const ButtonGroup = ({
     setIsVolunteerInfoOpen(true);
   };
 
-  const checkConfirmRedirect = (isConfirmed: boolean) => {
+  const checkConfirmRedirect = (reason: boolean | "cancelled" | "accepted") => {
     setIsVolunteerInfoOpen(false);
-    if (isConfirmed) {
+    if (reason === "accepted") {
       window.open(process.env.NEXT_PUBLIC_BE_VOLUNTEER_URL, "_blank");
     }
   };
@@ -353,6 +355,7 @@ const styles: IStyles = {
   redirectDialog: () => ({
     ".MuiPaper-root": {
       borderRadius: "10px",
+      textAlign: "center",
     },
   }),
   button: () => ({
@@ -364,6 +367,8 @@ const styles: IStyles = {
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
+    textAlign: "center",
+    justifyContent: "center",
     svg: {
       width: "1.5rem",
       height: "1.5rem",
@@ -371,11 +376,13 @@ const styles: IStyles = {
   }),
   infoTitle: () => ({
     fontWeight: "500",
-    ml: "1rem",
     fontSize: "1.2rem",
   }),
   icon: () => ({
     width: "1.2rem",
+    position: "absolute",
+    left: 0,
+    transform: "translateX(-100%)",
     height: "1.2rem",
   }),
 };
