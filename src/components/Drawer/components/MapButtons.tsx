@@ -4,6 +4,7 @@ import styles from "../Drawer.module.css";
 import Button from "@mui/material/Button";
 import { useTranslation } from "next-i18next";
 import { DrawerData } from "@/stores/mapStore";
+import ShareIcon from "@mui/icons-material/Share";
 
 interface MapsButton {
   label: string;
@@ -67,18 +68,42 @@ export function MapButtons({ drawerData }: Props) {
       {mapsButtons.map((button) => (
         <Button
           key={t(`cluster.mapButtons.${button.label}`).toString()}
-          variant="contained"
+          variant="outlined"
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            borderRadius: "8px",
+            fontSize: "14px",
+            padding: "8px 10px",
+            color: "#344054 !important",
+            boxShadow: "0px 1px 2px rgba(16, 24, 40, 0.05)",
+            borderColor: "#E2E2E2 !important",
+          }}
           onClick={() => {
             button.urlCallback(
               drawerData.location.lat,
               drawerData.location.lng
             );
           }}
-          color={button.color}
-          className={styles.externalLinkButton}
-          startIcon={button.icon}
         >
-          {t(`cluster.mapButtons.${button.label}`)}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "8px",
+            }}
+          >
+            {button.icon}
+            <span
+              style={{
+                fontWeight: "normal",
+              }}
+            >
+              {t(`cluster.mapButtons.${button.label}`)}
+            </span>
+          </div>
+
+          <ShareIcon fontSize="small" />
         </Button>
       ))}
     </div>

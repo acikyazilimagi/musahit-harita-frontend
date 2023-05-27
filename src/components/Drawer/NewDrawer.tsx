@@ -60,8 +60,17 @@ const NeighbourhoodDetails = ({
     <div className={moduleStyles.neighbourhoodDetails}>
       <div className={moduleStyles.neighbourhoodWrapper}>
         {details.map((detail, index) => (
-          <Typography key={index}>
-            {detail.buildingName} - {detail.ballotBoxNos.join(" - ")}
+          <Typography
+            sx={{
+              marginBottom: "0.5rem",
+              fontSize: "16px",
+              color: "#6C6C6C",
+              textTransform: "capitalize",
+            }}
+            key={index}
+          >
+            {detail.buildingName.toLocaleLowerCase()} -{" "}
+            {detail.ballotBoxNos.join(" - ")}
           </Typography>
         ))}
       </div>
@@ -73,17 +82,30 @@ const IntensitySection = ({ intensity }: { intensity: string }) => {
   const { t } = useTranslation("home");
   return (
     <div className={moduleStyles.intensitySection}>
-      <Typography color={"blue"} sx={{ marginBottom: "0.5rem" }}>
+      <Typography
+        color={"blue"}
+        sx={{
+          marginBottom: "0.5rem",
+          color: "#0C8CE9",
+          fontSize: "16px",
+          fontWeight: "500",
+        }}
+      >
         {t("cluster.intensity")}
       </Typography>
       <span
         className={moduleStyles.intensity}
         style={{
           backgroundColor: intensityColorSelector(intensity),
-          color: intensityTextColorSelector(intensity),
         }}
       >
-        <span>
+        <span
+          style={{
+            color: intensityTextColorSelector(intensity),
+            fontSize: "14px",
+            fontWeight: "500",
+          }}
+        >
           {t(`cluster.intensity_data.${intensityTextSelector(intensity)}`)}
         </span>
       </span>
@@ -181,6 +203,7 @@ const ButtonGroup = ({
           <Typography
             sx={{
               marginLeft: "0.5rem",
+              fontWeight: "400",
             }}
             color="black"
           >
@@ -201,7 +224,6 @@ const ButtonGroup = ({
           </Typography>
         </Button>
       </div>
-
       {isShared && (
         <Alert
           severity="success"
@@ -211,17 +233,6 @@ const ButtonGroup = ({
           {t("cluster.shareOk")}
         </Alert>
       )}
-
-      <Typography
-        sx={{
-          textAlign: "center",
-          marginTop: "1rem",
-          opacity: 0.8,
-          fontSize: ".9rem",
-        }}
-      >
-        {t("cluster.dataProvider", { provider: "Oy ve Ötesi" })}
-      </Typography>
     </>
   );
 };
@@ -277,8 +288,8 @@ export const Drawer = ({ data, onCopyBillboard }: DrawerProps) => {
         sx={{
           width: size.width > 768 ? 400 : "full",
           display: "flex",
-          height: "100%",
-          padding: "1rem 2rem 1rem 1rem",
+          height: "100vh",
+          padding: "12px 24px 24px 24px",
           flexDirection: "column",
           overflow: "auto",
         }}
@@ -300,6 +311,7 @@ export const Drawer = ({ data, onCopyBillboard }: DrawerProps) => {
           }}
         >
           <CloseIcon
+            fontSize="medium"
             onClick={() => {
               setDrawerData(null);
             }}
@@ -321,6 +333,7 @@ const DrawerContent = ({
   onCopyBillboard: DrawerProps["onCopyBillboard"];
 }) => {
   const title = data.properties.name;
+  const { t } = useTranslation("home");
 
   if (!detail) return null;
 
@@ -330,20 +343,56 @@ const DrawerContent = ({
         {detail.neighbourhoodId && (
           <DrawerIDLabel id={detail.neighbourhoodId} />
         )}
-        <h3 style={{ maxWidth: "45ch", marginBottom: 0 }}>{title}</h3>
+        <h3
+          style={{
+            fontSize: "18px",
+            fontWeight: 600,
+            maxWidth: "45ch",
+            marginBottom: 0,
+            marginTop: "2rem",
+            textTransform: "capitalize",
+          }}
+        >
+          {title?.toLocaleLowerCase()}
+        </h3>
+
         <Typography
           className={moduleStyles.subtitle}
           sx={{ marginBottom: "1rem" }}
         >
-          {data.properties.description}
+          {data.properties.description?.toLocaleLowerCase()}
         </Typography>
-
         <LastUpdate lastUpdate={detail.lastUpdateTime} />
+
         <NeighbourhoodDetails details={detail.details} />
         <IntensitySection intensity={data.intensity.toString()} />
-        <ButtonGroup data={detail} onCopyBillboard={onCopyBillboard} />
+        <Typography
+          color={"blue"}
+          sx={{
+            marginBottom: "0.5rem",
+            color: "#0C8CE9",
+            fontSize: "16px",
+            fontWeight: "500",
+            marginTop: "1rem",
+          }}
+        >
+          {t("cluster.mapButtons.title")}
+        </Typography>
+        <MapButtons drawerData={data} />
       </div>
-      <MapButtons drawerData={data} />
+      <div>
+        <ButtonGroup data={detail} onCopyBillboard={onCopyBillboard} />
+        <Typography
+          sx={{
+            textAlign: "center",
+            marginTop: "1rem",
+            opacity: 0.8,
+            fontSize: ".9rem",
+          }}
+        >
+          {t("cluster.dataProvider", { provider: "Oy ve Ötesi" })}
+        </Typography>
+      </div>
     </div>
   );
 };
