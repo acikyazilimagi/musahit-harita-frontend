@@ -1,4 +1,4 @@
-import { useDevice, useMapActions } from "@/stores/mapStore";
+import { useDevice, useDrawerData, useMapActions } from "@/stores/mapStore";
 import {
   DEFAULT_IMPORTANCY,
   DEFAULT_MIN_ZOOM_DESKTOP,
@@ -6,7 +6,7 @@ import {
 } from "@/components/Map/utils";
 import { Map } from "@/components/Map/Map";
 import { MapControls } from "./Controls/index";
-import { TileLayer } from "react-leaflet";
+import { TileLayer, useMap } from "react-leaflet";
 import { ChannelData } from "@/types";
 import { useRouter } from "next/router";
 import { useMapEvents } from "@/hooks/useMapEvents";
@@ -20,6 +20,9 @@ import {
   useNeighborhoodIntensityData,
 } from "@/features/intensity-data";
 import { getAllNeighborhoodsWithAllData } from "@/data/models";
+import { ZOOM_LEVEL_NEIGHBORHOOD } from "@/features/map/constants";
+import { usePrevious } from "@/hooks/usePrevious";
+import { useVisitedMarkersStore } from "@/stores/visitedMarkersStore";
 
 const MapEvents = () => {
   useMapEvents();
@@ -42,6 +45,23 @@ const transformToChannelData = ({
   },
 });
 
+const ZoomToDetailContent = () => {
+  const map = useMap();
+  const drawerData = useDrawerData();
+  const prevDrawerData = usePrevious(drawerData);
+  const { setVisited } = useVisitedMarkersStore();
+
+  useEffect(() => {
+    if (drawerData && drawerData.reference !== prevDrawerData?.reference) {
+      const { lat, lng } = drawerData.location;
+      map.setView([lat, lng], ZOOM_LEVEL_NEIGHBORHOOD, { animate: true });
+      setVisited(drawerData.reference);
+    }
+  }, [drawerData, map, prevDrawerData?.reference, setVisited]);
+
+  return null;
+};
+
 export const MapContent = () => {
   const router = useRouter();
   const { setDrawerData } = useMapActions();
@@ -61,9 +81,9 @@ export const MapContent = () => {
   }, [data, setDrawerData]);
 
   const onMarkerClick = (_e: any, markerData: ChannelData) => {
-    const neighborhood =
-      getAllNeighborhoodsWithAllData()[markerData.reference!];
+    const neighborhood = getAllNeighborhoodsWithAllData()[markerData.reference];
     setDrawerData({
+      reference: markerData.reference,
       intensity: markerData.intensity,
       location: {
         lat: neighborhood.lat,
@@ -119,6 +139,7 @@ export const MapContent = () => {
         <MapEvents />
         <MapControls />
         <TileLayer url={baseMapUrl} />
+        <ZoomToDetailContent />
 
         <LayerControl locations={locations} onMarkerClick={onMarkerClick} />
       </Map>

@@ -46,6 +46,7 @@
       "create": "Git"
     },
     "mapButtons": {
+      "title": "Yol Tarifi",
       "copy": "Harita Linkini Kopyala",
       "google": "Google Haritalarda Aç",
       "apple": "Apple Haritalarda Aç",

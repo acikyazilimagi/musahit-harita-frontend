@@ -12,7 +12,7 @@ export type ChannelData = {
   };
   location: Point;
   intensity: number;
-  reference?: number | null;
+  reference: number;
   closeByRecords?: number[];
   isVisited?: boolean;
 };

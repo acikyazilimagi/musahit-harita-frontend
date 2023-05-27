@@ -9,9 +9,9 @@
 - Create a PR to fix an issue.
 - Create a PR to fix an error in the documentation.
 
-### [**PR Rules**](https://github.com/acikkaynak/deprem-yardim-frontend/blob/development/.github/PULL_REQUEST_TEMPLATE.md)
+### [**PR Rules**](https://github.com/acikkaynak/musahit-harita-frontend/blob/development/.github/PULL_REQUEST_TEMPLATE.md)
 
-### [**Issue Rules**](https://github.com/acikkaynak/deprem-yardim-frontend/tree/development/.github/ISSUE_TEMPLATE)
+### [**Issue Rules**](https://github.com/acikkaynak/musahit-harita-frontend/tree/development/.github/ISSUE_TEMPLATE)
 
 ## Before you begin
 
@@ -27,7 +27,7 @@ Requirements:
 git clone
 
 # Move to project directory
-cd deprem-yardim-frontend
+cd musahit-harita-frontend
 
 # Copy sample environment file to development environment file
 cp .env.sample .env.development
@@ -41,7 +41,7 @@ yarn dev
 
 ### Formatting the code
 
-We use [`prettier`](https://prettier.io/) on this project for code formatting. Linter configuration can be found [here](https://github.com/acikkaynak/deprem-yardim-frontend/blob/main/.prettierrc).
+We use [`prettier`](https://prettier.io/) on this project for code formatting. Linter configuration can be found [here](https://github.com/acikkaynak/musahit-harita-frontend/blob/main/.prettierrc).
 
 ### Commit messages
 
