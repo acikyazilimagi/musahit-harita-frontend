@@ -86,5 +86,8 @@
       "details": "Aşağıdaki seçeneklere tıklayarak <b>aynı konumdaki</b> diğer kayıtlara ulaşabilirsiniz."
     },
     "channels": {}
+  },
+  "info": {
+    "infoSnackbarText": "Haritada görmüş olduğunuz bu veriler Oy ve Ötesi tarafından sağlanmış olup, tutanak sağlayacak gönüllü ihtiyacını göstermektedir. İhtiyaç olmayan bölgeler haritada gösterilmemektedir."
   }
 }
