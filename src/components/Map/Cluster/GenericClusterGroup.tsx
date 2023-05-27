@@ -47,50 +47,20 @@ function getMarkerWithIntensity(intensity: number, isVisited: boolean) {
 function getSVGMarker(
   { color, secondaryColor }: { color: string; secondaryColor: string } = {
     color: "#FF6E6E",
-    secondaryColor: "#FFFFFF",
+    secondaryColor: "#0d0d0d",
   }
 ) {
   // icon URL: https://www.svgrepo.com/svg/302636/map-marker
   return L.divIcon({
     html: `
-      <svg
-      viewBox="-4 0 36 36"
-      version="1.1"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <g
-        stroke="none"
-        stroke-width="1"
-        fill="none"
-        fill-rule="evenodd"
-      >
-        <g id="Vivid-Icons" transform="translate(-125.000000, -643.000000)">
-          <g id="Icons" transform="translate(37.000000, 169.000000)">
-            <g id="map-marker" transform="translate(78.000000, 468.000000)">
-              <g transform="translate(10.000000, 6.000000)">
-                <path
-                  d="M14,0 C21.732,0 28,5.641 28,12.6 C28,23.963 14,36 14,36 C14,36 0,24.064 0,12.6 C0,5.641 6.268,0 14,0 Z"
-                  id="Shape"
-                  fill=${color}
-                ></path>
-                <circle
-                  id="Oval"
-                  fill=${secondaryColor}
-                  fill-rule="nonzero"
-                  cx="14"
-                  cy="14"
-                  r="7"
-                ></circle>
-              </g>
-            </g>
-          </g>
-        </g>
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="32" height="32" viewBox="0 0 200 200" xml:space="preserve">
+      <g transform="matrix(0.39 0 0 0.39 100.2 100.2)">
+      <path style="stroke: rgba(0,0,0, 0.24); stroke-width: 24; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4;  fill: ${color}; fill-rule: nonzero; opacity: 1;"  transform=" translate(-256, -256)" d="M 256 0 C 162.928 0 86.552 76.376 86.552 169.448 C 86.552 310.856 256 512 256 512 C 256 512 425.448 310.856 425.448 169.448 C 425.448 76.376 349.072 0 256 0 Z M 256 246.552 C 224.928 246.552 199.448 221.072 199.448 190 C 199.448 158.928 224.928 133.448 256 133.448 C 287.072 133.448 312.552 158.928 312.552 190 C 312.552 221.072 287.072 246.552 256 246.552 Z" stroke-linecap="round" />
       </g>
     </svg>
-  `,
+    `,
     className: "svg-marker-icon",
-    iconSize: [28, 28],
-    iconAnchor: [14, 14],
+    iconAnchor: [16, 16],
   });
 }
 
