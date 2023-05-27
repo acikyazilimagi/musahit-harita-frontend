@@ -22,10 +22,10 @@ export const DisposableLinkButtonComponent = (
 ) => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
+  if (props.dispose) return <></>;
   return matches ? (
     <Button
       sx={styles.button}
-      style={{ opacity: props.dispose ? 0 : 1 }}
       color="inherit"
       variant="contained"
       startIcon={props.icon}
@@ -46,6 +46,7 @@ const styles: IStyles = {
     border: `solid 1px ${theme.palette.grey[300]}`,
     color: `${theme.palette.grey[700]} !important`,
     borderRadius: "8px !important",
+    minWidth: "18.5rem",
     justifyContent: "left",
     [theme.breakpoints.down("sm")]: {
       boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.1)",

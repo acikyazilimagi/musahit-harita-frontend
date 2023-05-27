@@ -194,7 +194,6 @@ export const MapControls = () => {
                   );
                 }}
               />
-              <FilterVotingLocations />
               <DisposableLinkButtonComponent
                 href="https://oytutanak.com"
                 dispose={votingLocationsFilter.isOpen}
@@ -207,6 +206,9 @@ export const MapControls = () => {
                 buttonLabel={t("links.sendDocumentMobileTitle")}
                 icon={<TelegramIcon />}
               />
+            </Stack>
+            <Stack display={"flex"} direction={"row"} columnGap={2}>
+              <FilterVotingLocations />
             </Stack>
           </Stack>
         </Control>

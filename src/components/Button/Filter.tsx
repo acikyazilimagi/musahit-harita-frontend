@@ -40,6 +40,7 @@ const styles: IStyles = {
     backgroundColor: theme.palette.common.white,
     border: `solid 1px ${theme.palette.grey[300]}`,
     color: `${theme.palette.grey[700]} !important`,
+    minWidth: "18.5rem",
     borderRadius: "8px !important",
     justifyContent: "left",
     [theme.breakpoints.down("sm")]: {
