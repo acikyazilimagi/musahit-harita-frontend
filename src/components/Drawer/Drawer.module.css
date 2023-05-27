@@ -1,11 +1,9 @@
 .contentIdSection {
   position: absolute;
-  left: 16px;
+  left: 20px;
   top: 8px;
-  background-color: #e5e5e5;
   font-size: 12px;
-  font-weight: 600;
-  color: #3f3131;
+  color: #6c6c6c;
   border-radius: 6px;
   padding: 0 4px;
 }
@@ -45,8 +43,9 @@
 }
 
 .intensity {
-  border-radius: 10px;
-  padding: 0.25rem 0.5rem;
+  border-radius: 8px;
+  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+  padding: 4px 8px;
 }
 
 .buttonGroup {
@@ -54,10 +53,13 @@
   display: flex;
   justify-content: center;
   gap: 15px;
-  margin-top: 24px;
+  margin-top: 36px;
 }
 .buttonGroup button {
   width: 80%;
+  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+  border-radius: 8px;
+  padding: 12px 18px;
 }
 
 .dialogTitleGroup {
@@ -87,8 +89,8 @@
 
 .closeButton {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: 0.5rem;
+  right: 0.5rem;
   cursor: pointer;
 }
 
@@ -108,14 +110,15 @@
 }
 
 .content > p:first-of-type:not(.subtitle) {
-  font-weight: 600;
+  font-weight: 500;
   font-size: 14px;
   color: #636363;
 }
 .subtitle {
   font-weight: 600;
-  font-size: 14px;
+  font-size: 12px;
   color: #0094ff;
+  text-transform: capitalize;
 }
 
 .contentInfo {
@@ -130,115 +133,19 @@
 }
 
 .contentInfo span {
-  font-size: 14px;
+  font-size: 12px;
+  text-transform: capitalize;
 }
 
 .contentButtons {
   display: flex;
   flex-direction: column;
   gap: 8px;
-}
-
-@media screen and (max-width: 768px) {
-  .content {
-    font-size: 0.75rem;
-  }
-
-  .sourceContentIframeWrapper {
-    height: 18rem !important;
-    overflow: scroll;
-  }
-
-  .sourceContentIframe {
-    height: 17.5rem !important;
-  }
-}
-
-.drawer {
-  position: relative;
-}
-
-.clipboard {
-  margin-top: 0.75rem;
-  margin-bottom: 10px;
-}
-
-.clipboardLabel {
-  font-weight: 500;
-  font-size: 1.1rem;
+  color: black;
 }
 
 .btnIcon {
-  font-size: 0.9rem;
+  width: 16px;
 }
-
-.externalLinkButton {
-  text-transform: none;
-}
-
-.actionButtons {
-  display: flex;
-  flex-direction: row;
-  gap: 8px;
-}
-
-.sourceContentTitle {
-  font-weight: bold;
-  font-size: 1rem;
-}
-
-.sourceContentSwitch {
-  display: flex;
-  align-items: center;
-  font-size: 14px;
-}
-
-.sourceContentText {
-  max-height: 300px;
-  overflow: auto;
-  border: 1px solid #c9c6c6;
-  border-radius: 10px;
-  padding: 10px;
-  border-radius: 5px;
-  text-align: left;
-  transition: 500ms ease-in-out;
-}
-
-.sourceContentText:hover {
-  background-color: #f3f3f3;
-}
-
-.sourceContentIframeWrapper {
-  max-height: 33.5rem;
-  overflow: scroll;
-}
-
-.sourceContentIframe {
-  height: 33rem;
-}
-
-.sourceHelpContent {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.layerContent {
-  width: 100%;
-  display: flex;
-  padding: 1rem;
-  overflow: auto;
-}
-
 @media (min-width: 768px) {
-  .layerContent {
-    height: auto;
-    width: 300px;
-    position: fixed;
-    background: white;
-    left: 50px;
-    border-radius: 4px;
-    top: 130px;
-    border: 1px solid teal;
-  }
 }

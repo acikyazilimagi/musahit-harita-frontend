@@ -40,6 +40,7 @@
       "copied": "Coordinate information was copied."
     },
     "mapButtons": {
+      "title": "Directions",
       "copy": "Copy Map Link",
       "google": "Open in Google Maps",
       "apple": "Open in Apple Maps",
