@@ -77,12 +77,8 @@ export const Map = (props: MapProps) => {
             loading="eager"
             width={100}
             height={60}
-            style={{
-              transform: "scale(3)",
-            }}
           />
         </div>
-
         <ul
           style={{
             display: "flex",
