@@ -1,3 +1,7 @@
+.drawer {
+  position: relative;
+}
+
 .contentIdSection {
   position: absolute;
   left: 20px;
