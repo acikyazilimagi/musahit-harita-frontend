@@ -19,10 +19,11 @@ import {
   getNeighborhoods,
 } from "@/data/models";
 import { useMap } from "react-leaflet";
-
-const ZOOM_LEVEL_CITY = 9;
-const ZOOM_LEVEL_DISTRICT = 11;
-const ZOOM_LEVEL_NEIGHBORHOOD = 13;
+import {
+  ZOOM_LEVEL_CITY,
+  ZOOM_LEVEL_DISTRICT,
+  ZOOM_LEVEL_NEIGHBORHOOD,
+} from "@/features/map/constants";
 
 interface HasName {
   name: string;

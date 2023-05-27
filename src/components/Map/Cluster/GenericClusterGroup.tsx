@@ -4,6 +4,7 @@ import useSupercluster from "use-supercluster";
 import { findTagByClusterCount } from "../../Tag/Tag.types";
 import { ChannelData } from "@/types";
 import { useVisitedMarkersStore } from "@/stores/visitedMarkersStore";
+import { ZOOM_LEVEL_NEIGHBORHOOD } from "@/features/map/constants";
 
 const fetchIcon = (count: number) => {
   const tag = findTagByClusterCount(count);
@@ -101,7 +102,7 @@ type Props = {
 export const GenericClusterGroup = ({ data, onMarkerClick }: Props) => {
   const map = useMap();
   const bounds = map.getBounds();
-  const { setVisited, isVisited } = useVisitedMarkersStore();
+  const { isVisited } = useVisitedMarkersStore();
 
   const geoJSON = data.map((item) => {
     return {
@@ -124,7 +125,7 @@ export const GenericClusterGroup = ({ data, onMarkerClick }: Props) => {
       bounds.getNorthEast().lat,
     ],
     zoom: map.getZoom(),
-    options: { radius: 150, maxZoom: 17 },
+    options: { radius: 150, maxZoom: ZOOM_LEVEL_NEIGHBORHOOD - 1 },
   });
 
   return (
@@ -170,7 +171,6 @@ export const GenericClusterGroup = ({ data, onMarkerClick }: Props) => {
             eventHandlers={{
               click: (e) => {
                 if (cluster.item.reference) {
-                  setVisited(cluster.item.reference);
                   onMarkerClick(e, cluster.item);
                 }
               },
