@@ -355,21 +355,7 @@ export const Drawer = ({ data, onCopyBillboard }: DrawerProps) => {
             hash: window.location.hash,
           }}
         >
-          <CloseIcon
-            fontSize="medium"
-            onClick={() => {
-              setDrawerData(null);
-              const query = {
-                ...router.query,
-                id: null,
-              };
-              router.push(
-                { query, hash: location.hash },
-                { query, hash: location.hash }
-              );
-            }}
-            className={moduleStyles.closeButton}
-          />
+          <CloseIcon fontSize="medium" className={moduleStyles.closeButton} />
         </Link>
       </Box>
     </MuiDrawer>

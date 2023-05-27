@@ -45,7 +45,7 @@ function getMarkerWithIntensity(intensity: number, isVisited: boolean) {
 }
 
 function getSVGMarker(
-  { color, secondaryColor }: { color: string; secondaryColor: string } = {
+  { color }: { color: string; secondaryColor: string } = {
     color: "#FF6E6E",
     secondaryColor: "#0d0d0d",
   }
