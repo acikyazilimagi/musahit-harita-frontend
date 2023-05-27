@@ -128,7 +128,7 @@ export const MapControls = () => {
             >
               <Link target="_blank" href="https://afet.org">
                 <img
-                  src="/images/aya.png"
+                  src="/aya.jpeg"
                   style={{
                     borderRadius: "10px",
                     boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.1)",
