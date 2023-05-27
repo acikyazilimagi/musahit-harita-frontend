@@ -76,7 +76,7 @@ export const data = {
           items: [
             "The dots on the map show the total number of neighborhoods in there, click to zoom in.",
             "Colored areas from yellow to red indicate how much need there is for an observer in that area.",
-            "As you zoom in you will see neighborhood dots, click to view their details, you will see the need for observers in the building (school, headman's office, etc.) located there.",
+            "As you zoom in you will see neighborhood pins, click to view their details, you will see the need for observers in the building (school, headman's office, etc.) located there.",
           ],
         },
       },
