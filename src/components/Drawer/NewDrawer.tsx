@@ -1,6 +1,6 @@
 import moduleStyles from "./Drawer.module.css";
 import { default as MuiDrawer } from "@mui/material/Drawer";
-import { DrawerData, useMapActions } from "@/stores/mapStore";
+import { DrawerData, useDrawerData, useMapActions } from "@/stores/mapStore";
 import { ChannelData, ChannelDetailData, ChannelFeedDetails } from "@/types";
 import Button from "@mui/material/Button";
 import { useTranslation } from "next-i18next";
@@ -33,6 +33,8 @@ import { useEffect, useState } from "react";
 import { useSingletonsStore } from "@/features/singletons";
 import { MapButtons } from "./components/MapButtons";
 import { getAllNeighborhoodsWithAllData } from "@/data/models";
+import { useMap } from "react-leaflet";
+import { ZOOM_LEVEL_NEIGHBORHOOD } from "@/features/map/constants";
 
 const DrawerIDLabel = ({ id }: { id: number }) => {
   return <span className={moduleStyles.contentIdSection}>ID: {id}</span>;
@@ -168,7 +170,9 @@ const ButtonGroup = ({
   const [isVolunteerInfoOpen, setIsVolunteerInfoOpen] =
     useState<boolean>(false);
   const { t } = useTranslation("home");
-
+  const map = useMap();
+  const size = useWindowSize();
+  const drawerData = useDrawerData();
   useEffect(() => {
     setIsShared(false);
   }, [data.neighbourhoodId]);
@@ -184,6 +188,13 @@ const ButtonGroup = ({
     setIsVolunteerInfoOpen(true);
   };
 
+  const goToPin = () => {
+    if (!drawerData?.location) return;
+    const { lat, lng } = drawerData.location;
+
+    map.setView([lat, lng], ZOOM_LEVEL_NEIGHBORHOOD, { animate: true });
+  };
+
   const checkConfirmRedirect = (reason: boolean | "cancelled" | "accepted") => {
     setIsVolunteerInfoOpen(false);
     if (reason === "accepted") {
@@ -197,6 +208,35 @@ const ButtonGroup = ({
         open={isVolunteerInfoOpen}
         onClose={checkConfirmRedirect}
       />
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          marginTop: "1rem",
+        }}
+      >
+        <Button
+          sx={{
+            width: "100%",
+            height: "3rem",
+          }}
+          onClick={doVolunteer}
+          variant="contained"
+          color="success"
+        >
+          <FavoriteBorderOutlinedIcon
+            className={moduleStyles.buttonLightIcon}
+          ></FavoriteBorderOutlinedIcon>
+          <Typography
+            sx={{
+              marginLeft: "0.5rem",
+            }}
+            color="white"
+          >
+            {t("cluster.doVolunteer")}
+          </Typography>
+        </Button>
+      </Box>
       <div className={moduleStyles.buttonGroup}>
         <Button onClick={copy} variant="contained" color="inherit">
           <ShareIcon className={moduleStyles.buttonDarkIcon}></ShareIcon>
@@ -210,20 +250,25 @@ const ButtonGroup = ({
             {t("cluster.shareLink")}
           </Typography>
         </Button>
-        <Button onClick={doVolunteer} variant="contained" color="success">
-          <FavoriteBorderOutlinedIcon
-            className={moduleStyles.buttonLightIcon}
-          ></FavoriteBorderOutlinedIcon>
+        <Button
+          sx={{
+            display: size?.width > 768 ? "block" : "none",
+          }}
+          onClick={goToPin}
+          variant="contained"
+          color="info"
+        >
           <Typography
             sx={{
               marginLeft: "0.5rem",
             }}
             color="white"
           >
-            {t("cluster.doVolunteer")}
+            {t("cluster.actions.goToPin")}
           </Typography>
         </Button>
       </div>
+
       {isShared && (
         <Alert
           severity="success"
@@ -280,11 +325,6 @@ export const Drawer = ({ data, onCopyBillboard }: DrawerProps) => {
   return (
     <MuiDrawer
       className={moduleStyles.drawer}
-      sx={{
-        "& .MuiDrawer-paper": {
-          top: "60px !important",
-        },
-      }}
       open={!!data && !!detail}
       anchor={anchor}
       hideBackdrop
@@ -293,7 +333,7 @@ export const Drawer = ({ data, onCopyBillboard }: DrawerProps) => {
         sx={{
           width: size.width > 768 ? 400 : "full",
           display: "flex",
-          height: "100vh - 60px",
+          height: "100vh",
           padding: "12px 24px 24px 24px",
           flexDirection: "column",
           overflow: "auto",
@@ -319,6 +359,14 @@ export const Drawer = ({ data, onCopyBillboard }: DrawerProps) => {
             fontSize="medium"
             onClick={() => {
               setDrawerData(null);
+              const query = {
+                ...router.query,
+                id: null,
+              };
+              router.push(
+                { query, hash: location.hash },
+                { query, hash: location.hash }
+              );
             }}
             className={moduleStyles.closeButton}
           />

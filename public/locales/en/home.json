@@ -37,7 +37,8 @@
   },
   "cluster": {
     "actions": {
-      "copied": "Coordinate information was copied."
+      "copied": "Coordinate information was copied.",
+      "goToPin": "Go to pin"
     },
     "mapButtons": {
       "title": "Directions",

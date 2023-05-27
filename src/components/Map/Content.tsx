@@ -23,6 +23,9 @@ import { getAllNeighborhoodsWithAllData } from "@/data/models";
 import { ZOOM_LEVEL_NEIGHBORHOOD } from "@/features/map/constants";
 import { usePrevious } from "@/hooks/usePrevious";
 import { useVisitedMarkersStore } from "@/stores/visitedMarkersStore";
+import { useCopyToClipboard } from "@/hooks/useCopyToClipboard";
+
+import { Drawer } from "@/components/Drawer/NewDrawer";
 
 const MapEvents = () => {
   useMapEvents();
@@ -68,6 +71,7 @@ export const MapContent = () => {
   const { data } = useNeighborhoodIntensityData();
 
   const [locations, setLocations] = useState<ChannelData[]>([]);
+  const { copyToClipBoard } = useCopyToClipboard();
 
   const { coordinates, zoom } = useMapGeographyStore();
   const { setEventType } = useMapActions();
@@ -105,6 +109,7 @@ export const MapContent = () => {
 
   const bounds = latLngBounds(mapBoundaries.southWest, mapBoundaries.northEast);
   const baseMapUrl = `https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png`;
+  const drawerData = useDrawerData();
 
   if (!locations) {
     return <div> Loading...</div>;
@@ -142,6 +147,10 @@ export const MapContent = () => {
         <ZoomToDetailContent />
 
         <LayerControl locations={locations} onMarkerClick={onMarkerClick} />
+        <Drawer
+          data={drawerData}
+          onCopyBillboard={(_clipped) => copyToClipBoard(_clipped as string)}
+        />
       </Map>
     </>
   );
