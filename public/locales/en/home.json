@@ -91,5 +91,9 @@
   },
   "info": {
     "infoSnackbarText": "Following the lifting of the election bans on May 28th, information about ballot records will be available on map."
+  },
+  "header": {
+    "aboutUs": "About Us",
+    "userGuide": "User Guide"
   }
 }

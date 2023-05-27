@@ -91,5 +91,9 @@
   },
   "info": {
     "infoSnackbarText": "28 Mayıs günü seçim yasaklarının kaldırılmasını takiben tutanak kayıtlarının verisi haritada gösterilecektir."
+  },
+  "header": {
+    "aboutUs": "Hakkımızda",
+    "userGuide": "Kullanma Kılavuzu"
   }
 }
