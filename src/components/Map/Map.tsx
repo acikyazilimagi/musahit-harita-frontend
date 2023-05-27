@@ -79,7 +79,6 @@ export const Map = (props: MapProps) => {
             height={60}
           />
         </div>
-
         <ul
           style={{
             display: "flex",

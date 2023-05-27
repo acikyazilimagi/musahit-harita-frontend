@@ -31,6 +31,7 @@ import {
   useVotingLocations,
 } from "@/features/location-categories";
 import { CooldownButtonComponent } from "@/components/Button/Cooldown";
+import Link from "next/link";
 
 interface IStyles {
   [key: string]: SxProps<Theme>;
@@ -116,6 +117,29 @@ export const MapControls = () => {
         </Control>
         <Control position="bottomleft">
           <Stack display={"flex"} direction={"column"} rowGap={1}>
+            <Box
+              sx={{
+                padding: {
+                  xs: "0px 0px 28px 8px",
+                  sm: "0",
+                  md: "0",
+                },
+              }}
+            >
+              <Link target="_blank" href="https://afet.org">
+                <img
+                  src="/images/aya.png"
+                  style={{
+                    borderRadius: "10px",
+                    boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.1)",
+                  }}
+                  alt="logo"
+                  loading="eager"
+                  width={48}
+                  height={48}
+                />
+              </Link>
+            </Box>
             <MapTypeMapLayerViewComponent />
             <MapLayerControl showOnly={"desktop"} />
           </Stack>
