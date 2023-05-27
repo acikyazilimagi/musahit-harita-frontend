@@ -126,6 +126,20 @@ const HelpViewControl = () => {
       >
         <InfoOutlinedIcon />
       </IconButton>
+
+      <IconButton
+        sx={styles.imgButton}
+        color="inherit"
+        href="https://linktr.ee/acikyazilimagi"
+      >
+        <Box
+          component={"img"}
+          src="/images/AYA.png"
+          width={42}
+          height={42}
+          alt={"Açık Yazılım Ağı"}
+        />
+      </IconButton>
     </Box>
   );
 };
@@ -232,6 +246,20 @@ const styles: IStyles = {
     [theme.breakpoints.down("sm")]: {
       boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.1)",
     },
+    "&:hover": {
+      backgroundColor: theme.palette.common.white,
+    },
+  }),
+  imgButton: (theme: Theme) => ({
+    backgroundColor: theme.palette.common.white,
+    border: `solid 1px ${theme.palette.grey[300]}`,
+    color: `${theme.palette.grey[700]} !important`,
+    borderRadius: "8px !important",
+    [theme.breakpoints.down("sm")]: {
+      boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.1)",
+    },
+    padding: "0px !important",
+    overflow: "hidden",
     "&:hover": {
       backgroundColor: theme.palette.common.white,
     },
