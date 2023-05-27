@@ -4,7 +4,7 @@ export const data = {
     title: {
       type: "header",
       data: {
-        text: "Kullanım rehberi",
+        text: "Kullanma Kılavuzu",
         level: 3,
       },
     },
@@ -15,8 +15,8 @@ export const data = {
           style: "unordered",
           items: [
             "Haritadaki noktalar oradaki toplam mahalle sayısını gösterir, yakınlaştırmak için tıklayın.",
-            "Sarıdan kırmızıya renkli alanlar o bölgede ne kadar müşahit ihtiyacı olduğunu gösterir.",
-            "Yakınlaştıkça göreceğiniz mahalle noktalarına tıklayarak detaylarını görüntüleyin, orada yer alan binanın (okul, muhtarlık, vb.) müşahit ihtiyacını göreceksiniz.",
+            "Sarıdan kırmızıya renkli alanlar o bölgede ne kadar tutanak eksiği olduğunu gösterir.",
+            "Yakınlaştıkça göreceğiniz mahalle noktalarına tıklayarak detaylarını görüntüleyin, orada yer alan binanın (okul, muhtarlık, vb.) ıslak imzalı tutanak eksiğini göreceksiniz.",
           ],
         },
       },
@@ -75,8 +75,8 @@ export const data = {
           style: "unordered",
           items: [
             "The dots on the map show the total number of neighborhoods in there, click to zoom in.",
-            "Colored areas from yellow to red indicate how much need there is for an observer in that area.",
-            "As you zoom in you will see neighborhood pins, click to view their details, you will see the need for observers in the building (school, headman's office, etc.) located there.",
+            "Colored areas from yellow to red indicate how much need there is for a ballot box record in that area.",
+            "As you zoom in you will see neighborhood pins, click to view their details, you will see the need for ballot box records in the building (school, headman's office, etc.) located there.",
           ],
         },
       },
