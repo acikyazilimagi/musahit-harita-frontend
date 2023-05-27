@@ -61,9 +61,9 @@ export const MapContent = () => {
   }, [data, setDrawerData]);
 
   const onMarkerClick = (_e: any, markerData: ChannelData) => {
-    const neighborhood =
-      getAllNeighborhoodsWithAllData()[markerData.reference!];
+    const neighborhood = getAllNeighborhoodsWithAllData()[markerData.reference];
     setDrawerData({
+      reference: markerData.reference,
       intensity: markerData.intensity,
       location: {
         lat: neighborhood.lat,

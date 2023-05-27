@@ -252,6 +252,7 @@ export const Drawer = ({ data, onCopyBillboard }: DrawerProps) => {
       const neighborhood =
         getAllNeighborhoodsWithAllData()[detail.neighbourhoodId];
       setDrawerData({
+        reference: neighborhood.id,
         intensity: detail.intensity,
         location: {
           lat: neighborhood.lat,
