@@ -86,5 +86,8 @@
       "details": "You can click the below records to access the other records in the <b>same location</b>"
     },
     "channels": {}
+  },
+  "info": {
+    "infoSnackbarText": "The data you see on the map is provided by Oy ve Ötesi and shows the need for volunteers to provide records. Areas that do not need volunteers are not shown on the map."
   }
 }

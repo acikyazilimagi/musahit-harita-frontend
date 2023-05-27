@@ -198,10 +198,7 @@ export const MapControls = () => {
           {infoSnackbarOpen && (
             <Box sx={styles.infoSnackbar}>
               <Box sx={styles.infoSnackbarText}>
-                Haritada görmüş olduğunuz bu veriler Oy ve Ötesi tarafından
-                sağlanmış olup, tutanak sağlayacak gönüllü ihtiyacını
-                göstermektedir. İhtiyaç olmayan bölgeler haritada
-                gösterilmemektedir.
+                {t("info.infoSnackbarText")}
               </Box>
 
               <IconButton
