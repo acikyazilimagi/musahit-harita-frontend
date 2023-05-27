@@ -1,33 +1,47 @@
-import { FormControl, InputLabel, Select, SelectProps } from "@mui/material";
+import {
+  Autocomplete,
+  FormControl,
+  AutocompleteProps,
+  TextField,
+} from "@mui/material";
 import { PropsWithChildren } from "react";
 
-type Props = Pick<
-  SelectProps<any>,
-  "multiple" | "label" | "value" | "name" | "onChange" | "disabled"
+export interface FilterControlOption {
+  id: number;
+  name: string;
+}
+
+type Props<Options extends FilterControlOption> = Pick<
+  AutocompleteProps<Options, false, false, false>,
+  "multiple" | "value" | "onChange" | "disabled"
 > & {
+  name?: string;
+  label: string;
   selected?: string[];
+  options: Options[];
 };
 
 const labelID = () => `filter-control-${Date.now()}`;
 
-export const FilterControl = (props: PropsWithChildren<Props>) => {
+export const FilterControl = <
+  Options extends FilterControlOption = FilterControlOption
+>(
+  props: PropsWithChildren<Props<Options>>
+) => {
   const domID = labelID();
 
   return (
     <FormControl>
-      <InputLabel id={domID}>{props.label}</InputLabel>
-      <Select
-        labelId={domID}
-        multiple={props.multiple}
+      <Autocomplete
+        autoHighlight
+        id={domID}
         value={props.value}
-        id={props.name}
-        label={props.label}
-        name={props.name}
-        onChange={props.onChange}
+        renderInput={(params) => <TextField {...params} label={props.label} />}
+        options={props.options}
         disabled={props.disabled}
-      >
-        {props.children}
-      </Select>
+        getOptionLabel={(option) => option && option.name}
+        onChange={props.onChange}
+      />
     </FormControl>
   );
 };
