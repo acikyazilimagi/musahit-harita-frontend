@@ -30,6 +30,7 @@ export const DisposableLinkButtonComponent = (
       variant="contained"
       startIcon={props.icon}
       href={props.href}
+      target="_blank"
     >
       {props.buttonLabel}
     </Button>
