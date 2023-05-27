@@ -126,7 +126,7 @@ export const MapControls = () => {
                 },
               }}
             >
-              <Link href="https://afet.org">
+              <Link target="_blank" href="https://afet.org">
                 <img
                   src="/images/aya.png"
                   style={{
