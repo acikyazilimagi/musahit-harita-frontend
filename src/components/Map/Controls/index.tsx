@@ -261,6 +261,7 @@ const styles: IStyles = {
     maxWidth: "420px",
     display: "flex",
     alignItems: "flex-start",
+    textAlign: "center",
   },
   infoSnackbarText: {
     fontSize: "14px",
