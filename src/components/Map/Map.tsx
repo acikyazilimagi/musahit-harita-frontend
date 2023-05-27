@@ -7,6 +7,7 @@ import { useAboutView } from "@/components/AboutUs/AboutUsOverlay";
 import { useHelpView } from "@/components/UserGuide/UserGuide";
 import { IconButton, Theme, SxProps } from "@mui/material";
 import Image from "next/image";
+import { useTranslation } from "next-i18next";
 
 const DynamicMap = dynamic(() => import("./Dynamic"), {
   ssr: false,
@@ -52,6 +53,9 @@ const styles: IStyles = {
 
 export const Map = (props: MapProps) => {
   const helpView = useHelpView();
+
+  const { t } = useTranslation("home");
+
   const aboutView = useAboutView();
   return (
     <>
@@ -103,7 +107,7 @@ export const Map = (props: MapProps) => {
                 aboutView.toggle(false);
               }}
             >
-              User Guide
+              {t("header.userGuide")}
               <HelpOutline />
             </IconButton>
           </li>
@@ -122,7 +126,7 @@ export const Map = (props: MapProps) => {
                 helpView.toggle(false);
               }}
             >
-              About Us
+              {t("header.aboutUs")}
               <InfoOutlinedIcon />
             </IconButton>
           </li>
