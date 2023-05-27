@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { HelpOutline } from "@mui/icons-material";
 import {
   MapTypeMapLayerViewComponent,
   useMTMLView,
@@ -21,19 +20,16 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import LayersIcon from "@mui/icons-material/Layers";
 import SearchIcon from "@mui/icons-material/Search";
-import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import CloseIcon from "@mui/icons-material/Close";
 import { useMap } from "react-leaflet";
 import { Control } from "./Control";
 import { LayerButton } from "./LayerButton";
-import { useHelpView } from "../../UserGuide/UserGuide";
 import { useTranslation } from "next-i18next";
 import { DoubleClickStopPropagation } from "@/components/DoubleClickStopPropagation";
 import {
   FilterVotingLocations,
   useVotingLocations,
 } from "@/features/location-categories";
-import { useAboutView } from "@/components/AboutUs/AboutUsOverlay";
 import { CooldownButtonComponent } from "@/components/Button/Cooldown";
 
 interface IStyles {
@@ -101,35 +97,6 @@ const MapLayerControl = (props: IMapLayerControlProps) => {
   ) : null;
 };
 
-const HelpViewControl = () => {
-  const helpView = useHelpView();
-  const aboutView = useAboutView();
-  return (
-    <Box sx={styles.buttonBox}>
-      <IconButton
-        sx={styles.button}
-        color="inherit"
-        onClick={() => {
-          helpView.toggle(!helpView.isOpen);
-          aboutView.toggle(false);
-        }}
-      >
-        <HelpOutline />
-      </IconButton>
-      <IconButton
-        sx={styles.button}
-        color="inherit"
-        onClick={() => {
-          aboutView.toggle(!aboutView.isOpen);
-          helpView.toggle(false);
-        }}
-      >
-        <InfoOutlinedIcon />
-      </IconButton>
-    </Box>
-  );
-};
-
 export const MapControls = () => {
   const { t } = useTranslation("home");
 
@@ -144,7 +111,6 @@ export const MapControls = () => {
             <Stack display={"flex"} direction={"column"} rowGap={1}>
               <MapZoomControl />
               <MapLayerControl showOnly={"mobile"} />
-              <HelpViewControl />
             </Stack>
           </DoubleClickStopPropagation>
         </Control>

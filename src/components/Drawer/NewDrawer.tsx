@@ -280,6 +280,11 @@ export const Drawer = ({ data, onCopyBillboard }: DrawerProps) => {
   return (
     <MuiDrawer
       className={moduleStyles.drawer}
+      sx={{
+        "& .MuiDrawer-paper": {
+          top: "60px !important",
+        },
+      }}
       open={!!data && !!detail}
       anchor={anchor}
       hideBackdrop
@@ -288,7 +293,7 @@ export const Drawer = ({ data, onCopyBillboard }: DrawerProps) => {
         sx={{
           width: size.width > 768 ? 400 : "full",
           display: "flex",
-          height: "100vh",
+          height: "100vh - 60px",
           padding: "12px 24px 24px 24px",
           flexDirection: "column",
           overflow: "auto",

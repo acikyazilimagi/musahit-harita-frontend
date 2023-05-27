@@ -34,6 +34,7 @@ const NHome = () => {
       <HeadWithMeta />
       <main id="new-layout">
         <UIElementsOverlay />
+
         <MapContent />
         <Drawer
           data={useDrawerData()}
@@ -87,8 +88,8 @@ const styles: IStyles = {
     display: "flex",
     position: "fixed",
     flexDirection: "column",
-    top: "10px",
-    left: "60px",
+    top: "60px",
+    right: "0",
     zIndex: 1100,
     pointerEvents: "none",
     [theme.breakpoints.down("sm")]: {
