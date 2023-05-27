@@ -37,7 +37,8 @@
   },
   "cluster": {
     "actions": {
-      "copied": "Koordinat bilgisi kopyalandı."
+      "copied": "Koordinat bilgisi kopyalandı.",
+      "goToPin": "Pine git"
     },
     "beVolunteer": {
       "title": "Bilgilendirme",
