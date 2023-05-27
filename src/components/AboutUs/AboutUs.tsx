@@ -119,7 +119,6 @@ const styles: IStyles = {
     [theme.breakpoints.up("xs")]: {
       height: "100%",
     },
-    maxHeight: "70vh",
     overflowY: "auto",
   }),
   accordion: () => ({

@@ -2,20 +2,14 @@ import dynamic from "next/dynamic";
 import { Box, SxProps, Theme } from "@mui/material";
 import { HelpViewComponent } from "@/components/UserGuide/UserGuide";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useCopyToClipboard } from "@/hooks/useCopyToClipboard";
 import { HeadWithMeta } from "@/components/HeadWithMeta/HeadWithMeta";
 import AboutUsOverlay from "@/components/AboutUs/AboutUsOverlay";
-import { useDrawerData } from "@/stores/mapStore";
 
 const MapContent = dynamic(
   () => import("@/components/Map/Content").then((mod) => mod.MapContent),
   { ssr: false }
 );
 
-const Drawer = dynamic(
-  () => import("@/components/Drawer/NewDrawer").then((mod) => mod.Drawer),
-  { ssr: false }
-);
 // Development overlay container
 const UIElementsOverlay = () => {
   return (
@@ -27,18 +21,12 @@ const UIElementsOverlay = () => {
 };
 
 const NHome = () => {
-  const { copyToClipBoard } = useCopyToClipboard();
-
   return (
     <>
       <HeadWithMeta />
       <main id="new-layout">
         <UIElementsOverlay />
         <MapContent />
-        <Drawer
-          data={useDrawerData()}
-          onCopyBillboard={(_clipped) => copyToClipBoard(_clipped as string)}
-        />
       </main>
     </>
   );
@@ -87,8 +75,8 @@ const styles: IStyles = {
     display: "flex",
     position: "fixed",
     flexDirection: "column",
-    top: "10px",
-    left: "60px",
+    top: "60px",
+    right: "0",
     zIndex: 1100,
     pointerEvents: "none",
     [theme.breakpoints.down("sm")]: {
