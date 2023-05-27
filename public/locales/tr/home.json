@@ -27,6 +27,10 @@
     },
     "clear": "Temizle"
   },
+  "links": {
+    "sendDocumentTitle": "Web Sitesi Üzerinden Tutanak Gönder",
+    "sendDocumentMobileTitle": "Mobil Uygulama Üzerinden Tutanak Gönder"
+  },
   "tags": {
     "safe": "Az Yoğun",
     "low": "Az - Orta Yoğun",

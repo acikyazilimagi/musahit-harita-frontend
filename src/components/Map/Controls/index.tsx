@@ -22,6 +22,8 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import LayersIcon from "@mui/icons-material/Layers";
 import SearchIcon from "@mui/icons-material/Search";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import SummarizeIcon from "@mui/icons-material/Summarize";
+import TelegramIcon from "@mui/icons-material/Telegram";
 import CloseIcon from "@mui/icons-material/Close";
 import { useMap } from "react-leaflet";
 import { Control } from "./Control";
@@ -35,6 +37,7 @@ import {
 } from "@/features/location-categories";
 import { useAboutView } from "@/components/AboutUs/AboutUsOverlay";
 import { CooldownButtonComponent } from "@/components/Button/Cooldown";
+import { DisposableLinkButtonComponent } from "@/components/Button/Disposable";
 
 interface IStyles {
   [key: string]: SxProps<Theme>;
@@ -176,7 +179,12 @@ export const MapControls = () => {
             rowGap={2}
             alignItems={"flex-end"}
           >
-            <Stack display={"flex"} direction={"row"} columnGap={2}>
+            <Stack
+              display={"flex"}
+              direction={"column"}
+              columnGap={2}
+              rowGap={1}
+            >
               <FilterButtonComponent
                 buttonLabel={t("filter.findVotingLocationsTitle")}
                 icon={<SearchIcon />}
@@ -186,9 +194,19 @@ export const MapControls = () => {
                   );
                 }}
               />
-            </Stack>
-            <Stack display={"flex"} direction={"row"} columnGap={2}>
               <FilterVotingLocations />
+              <DisposableLinkButtonComponent
+                href="https://oytutanak.com"
+                dispose={votingLocationsFilter.isOpen}
+                buttonLabel={t("links.sendDocumentTitle")}
+                icon={<SummarizeIcon />}
+              />
+              <DisposableLinkButtonComponent
+                href="https://t.me/oytutanakbot"
+                dispose={votingLocationsFilter.isOpen}
+                buttonLabel={t("links.sendDocumentMobileTitle")}
+                icon={<TelegramIcon />}
+              />
             </Stack>
           </Stack>
         </Control>

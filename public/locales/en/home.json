@@ -27,6 +27,10 @@
     },
     "clear": "Clear"
   },
+  "links": {
+    "sendDocumentTitle": "Send Report Document with Web",
+    "sendDocumentMobileTitle": "Send Report Document with Mobile"
+  },
   "tags": {
     "safe": "Low Dense",
     "low": "Low - Medium Intense",

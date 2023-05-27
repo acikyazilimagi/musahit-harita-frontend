@@ -10,27 +10,31 @@ import {
 interface IStyles {
   [key: string]: SxProps<Theme>;
 }
-interface IFilterButtonProps {
-  onClick: () => void;
+interface IDisposableLinkButtonProps {
+  dispose: boolean;
   icon: React.ReactNode;
   buttonLabel: string;
+  href: string;
 }
 
-export const FilterButtonComponent = (props: IFilterButtonProps) => {
+export const DisposableLinkButtonComponent = (
+  props: IDisposableLinkButtonProps
+) => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
   return matches ? (
     <Button
       sx={styles.button}
+      style={{ opacity: props.dispose ? 0 : 1 }}
       color="inherit"
       variant="contained"
       startIcon={props.icon}
-      onClick={props.onClick}
+      href={props.href}
     >
       {props.buttonLabel}
     </Button>
   ) : (
-    <IconButton sx={styles.button} color="inherit" onClick={props.onClick}>
+    <IconButton sx={styles.button} color="inherit" href={props.href}>
       {props.icon}
     </IconButton>
   );
