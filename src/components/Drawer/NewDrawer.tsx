@@ -171,6 +171,7 @@ const ButtonGroup = ({
     useState<boolean>(false);
   const { t } = useTranslation("home");
   const map = useMap();
+  const size = useWindowSize();
   const drawerData = useDrawerData();
   useEffect(() => {
     setIsShared(false);
@@ -207,30 +208,6 @@ const ButtonGroup = ({
         open={isVolunteerInfoOpen}
         onClose={checkConfirmRedirect}
       />
-      <div className={moduleStyles.buttonGroup}>
-        <Button onClick={copy} variant="contained" color="inherit">
-          <ShareIcon className={moduleStyles.buttonDarkIcon}></ShareIcon>
-          <Typography
-            sx={{
-              marginLeft: "0.5rem",
-              fontWeight: "400",
-            }}
-            color="black"
-          >
-            {t("cluster.shareLink")}
-          </Typography>
-        </Button>
-        <Button onClick={goToPin} variant="contained" color="info">
-          <Typography
-            sx={{
-              marginLeft: "0.5rem",
-            }}
-            color="white"
-          >
-            {t("cluster.actions.goToPin")}
-          </Typography>
-        </Button>
-      </div>
       <Box
         sx={{
           display: "flex",
@@ -241,6 +218,7 @@ const ButtonGroup = ({
         <Button
           sx={{
             width: "100%",
+            height: "3rem",
           }}
           onClick={doVolunteer}
           variant="contained"
@@ -259,6 +237,38 @@ const ButtonGroup = ({
           </Typography>
         </Button>
       </Box>
+      <div className={moduleStyles.buttonGroup}>
+        <Button onClick={copy} variant="contained" color="inherit">
+          <ShareIcon className={moduleStyles.buttonDarkIcon}></ShareIcon>
+          <Typography
+            sx={{
+              marginLeft: "0.5rem",
+              fontWeight: "400",
+            }}
+            color="black"
+          >
+            {t("cluster.shareLink")}
+          </Typography>
+        </Button>
+        <Button
+          sx={{
+            display: size?.width > 768 ? "block" : "none",
+          }}
+          onClick={goToPin}
+          variant="contained"
+          color="info"
+        >
+          <Typography
+            sx={{
+              marginLeft: "0.5rem",
+            }}
+            color="white"
+          >
+            {t("cluster.actions.goToPin")}
+          </Typography>
+        </Button>
+      </div>
+
       {isShared && (
         <Alert
           severity="success"
