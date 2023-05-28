@@ -124,32 +124,8 @@ export const MapControls = () => {
           <Stack display={"flex"} direction={"column"} rowGap={1}>
             <Box
               sx={{
-                margin: {
-                  xs: "0px 0px 0px 8px",
-                  sm: "0",
-                  md: "0",
-                },
-              }}
-            >
-              <Link target="_blank" href="https://t.me/oytutanakbot">
-                <img
-                  src="/oytutanakbot.jpg"
-                  style={{
-                    borderRadius: "10px",
-                    boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.1)",
-                  }}
-                  alt="logo"
-                  loading="eager"
-                  width={140}
-                  height={48}
-                />
-              </Link>
-            </Box>
-
-            <Box
-              sx={{
-                margin: {
-                  xs: "0px 0px 24px 8px",
+                padding: {
+                  xs: "0px 0px 28px 8px",
                   sm: "0",
                   md: "0",
                 },
@@ -169,7 +145,6 @@ export const MapControls = () => {
                 />
               </Link>
             </Box>
-
             <MapTypeMapLayerViewComponent />
             <MapLayerControl showOnly={"desktop"} />
           </Stack>
@@ -297,7 +272,7 @@ const styles: IStyles = {
     bottom: "32px",
     left: "0px",
     width: "100%",
-    zIndex: 10500,
+    zIndex: 1030,
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
