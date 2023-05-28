@@ -88,6 +88,10 @@ const NeighbourhoodDetails = ({
                 sx={{
                   display: "flex",
                   marginBottom: "0.5rem",
+                  flexDirection: "row",
+                  flexWrap: "wrap",
+                  justifyContent: "flex-start",
+                  marginRight: "0.3rem",
                 }}
               >
                 {Object.entries(detail?.ballotBoxNos).map(([key, value]) => (
@@ -108,6 +112,7 @@ const NeighbourhoodDetails = ({
                         background: value ? "#45B97F" : "#DD8B8B",
                         padding: "0.2rem 0.5rem",
                         borderRadius: "5px",
+                        marginBottom: "0.1rem",
                       }}
                     >
                       {key}
