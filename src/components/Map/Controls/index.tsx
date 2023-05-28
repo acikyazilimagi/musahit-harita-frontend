@@ -198,7 +198,9 @@ export const MapControls = () => {
               borderRadius={3}
               sx={{
                 "& a": {
-                  color: "white !important",
+                  color: {
+                    sm: "white !important",
+                  },
                 },
               }}
             >
