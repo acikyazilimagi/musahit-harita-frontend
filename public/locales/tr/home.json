@@ -30,6 +30,7 @@
   "uploadBallotReport": {
     "chooseNewPhoto": "Yeni fotoğraf seç",
     "uploadLabel": "Yükle",
+    "uploadingLabel": "Yükleniyor...",
     "clickToChoosePhoto": "Fotoğraf seç"
   },
   "tags": {

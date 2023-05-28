@@ -30,6 +30,7 @@
   "uploadBallotReport": {
     "chooseNewPhoto": "Choose new photo",
     "uploadLabel": "Upload",
+    "uploadingLabel": "Uploading...",
     "clickToChoosePhoto": "Choose photo"
   },
   "tags": {
