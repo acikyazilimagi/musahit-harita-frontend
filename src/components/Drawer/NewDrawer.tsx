@@ -35,6 +35,7 @@ import { MapButtons } from "./components/MapButtons";
 import { getAllNeighborhoodsWithAllData } from "@/data/models";
 import { useMap } from "react-leaflet";
 import { ZOOM_LEVEL_NEIGHBORHOOD } from "@/features/map/constants";
+import Tooltip from "@mui/material/Tooltip";
 
 const DrawerIDLabel = ({ id }: { id: number }) => {
   return <span className={moduleStyles.contentIdSection}>ID: {id}</span>;
@@ -58,6 +59,8 @@ const NeighbourhoodDetails = ({
 }: {
   details: ChannelFeedDetails[];
 }) => {
+  const { t } = useTranslation("home");
+
   return (
     <div className={moduleStyles.neighbourhoodDetails}>
       <div className={moduleStyles.neighbourhoodWrapper}>
@@ -71,8 +74,48 @@ const NeighbourhoodDetails = ({
             }}
             key={index}
           >
-            {detail.buildingName.toLocaleLowerCase()} -{" "}
-            {detail.ballotBoxNos.join(" - ")}
+            <Typography
+              sx={{
+                fontWeight: "500",
+                fontSize: "16px",
+                color: "black",
+              }}
+            >
+              {detail.buildingName.toLocaleLowerCase()}{" "}
+            </Typography>
+            <Box
+              sx={{
+                display: "flex",
+                marginBottom: "0.5rem",
+              }}
+            >
+              {Object.entries(detail?.ballotBoxNos).map(([key, value]) => (
+                <Tooltip
+                  title={
+                    value
+                      ? t("cluster.ballotBoxTooltip.approved")
+                      : t("cluster.ballotBoxTooltip.notApproved")
+                  }
+                  key={key}
+                >
+                  <span
+                    style={{
+                      fontWeight: "medium",
+                      fontSize: "14px",
+                      color: "white",
+                      marginRight: "0.5rem",
+                      background: value ? "#45B97F" : "#DD8B8B",
+                      padding: "0.2rem 0.5rem",
+                      borderRadius: "5px",
+                    }}
+                  >
+                    {key}
+
+                    {value ? " ✓" : " ✗"}
+                  </span>
+                </Tooltip>
+              ))}
+            </Box>
           </Typography>
         ))}
       </div>
