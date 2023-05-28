@@ -1,19 +1,18 @@
 import {
   Button,
+  ButtonProps,
   IconButton,
-  SxProps,
-  Theme,
   useMediaQuery,
   useTheme,
 } from "@mui/material";
 
-interface IStyles {
-  [key: string]: SxProps<Theme>;
-}
 interface IFilterButtonProps {
-  onClick: () => void;
+  onClick?: () => void;
   icon: React.ReactNode;
   buttonLabel: string;
+  color?: ButtonProps["color"];
+  variant?: ButtonProps["variant"];
+  href?: ButtonProps["href"];
 }
 
 export const FilterButtonComponent = (props: IFilterButtonProps) => {
@@ -21,28 +20,21 @@ export const FilterButtonComponent = (props: IFilterButtonProps) => {
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
   return matches ? (
     <Button
-      sx={styles.button}
-      color="inherit"
-      variant="contained"
+      color={props.color}
+      variant={props.variant ?? "outlined"}
       startIcon={props.icon}
       onClick={props.onClick}
+      href={props.href}
     >
       {props.buttonLabel}
     </Button>
   ) : (
-    <IconButton sx={styles.button} color="inherit" onClick={props.onClick}>
+    <IconButton
+      color="inherit"
+      onClick={props.onClick}
+      href={props.href as any}
+    >
       {props.icon}
     </IconButton>
   );
-};
-const styles: IStyles = {
-  button: (theme: Theme) => ({
-    backgroundColor: theme.palette.common.white,
-    border: `solid 1px ${theme.palette.grey[300]}`,
-    color: `${theme.palette.grey[700]} !important`,
-    borderRadius: "8px !important",
-    [theme.breakpoints.down("sm")]: {
-      boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.1)",
-    },
-  }),
 };

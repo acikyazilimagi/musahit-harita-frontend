@@ -6,7 +6,7 @@
   "filter": {
     "title": "Filter",
     "findVotingLocationsTitle": "Find voting locations",
-    "timestampTitle": "Timeframe",
+    "uploadBallotBoxReportTitle": "Upload ballot box report",
     "city": "City",
     "district": "District",
     "neighborhood": "Neighborhood",
@@ -26,6 +26,11 @@
       "all": "All time"
     },
     "clear": "Clear"
+  },
+  "uploadBallotReport": {
+    "chooseNewPhoto": "Choose new photo",
+    "uploadLabel": "Upload",
+    "clickToChoosePhoto": "Choose photo"
   },
   "tags": {
     "safe": "Low Dense",
@@ -90,7 +95,7 @@
     "channels": {}
   },
   "info": {
-    "infoSnackbarText": "Following the lifting of the election bans on May 28th, information about ballot records will be available on map."
+    "infoSnackbarText": "Oy ve ötesi tarafında eksik tutanak kayıtlarının verisi gösteriliyor. Lütfen size en yakın bölgelerde ki eksik oy tutanaklarını gönderin."
   },
   "header": {
     "aboutUs": "About Us",

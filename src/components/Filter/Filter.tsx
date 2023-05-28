@@ -30,7 +30,7 @@ const styles = {
     pointerEvents: "all",
   }),
   card: () => ({
-    width: 250,
+    minWidth: 250,
     height: "auto",
   }),
   header: () => ({ fontSize: 14 }),

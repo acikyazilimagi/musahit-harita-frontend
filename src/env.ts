@@ -6,3 +6,7 @@ invariant(
 );
 
 export const API_URL = process.env.NEXT_PUBLIC_BASE_URL;
+
+// Feature flag to control ballot box feature enrollment
+export const FEATURE_BALLOT_BOX_REPORT =
+  process.env.NEXT_PUBLIC_FEATURE_BALLOT_REPORT === "true";
