@@ -41,6 +41,10 @@
     "high": "Çok Yoğun"
   },
   "cluster": {
+    "ballotBoxTooltip": {
+      "approved": "Onaylandı",
+      "notApproved": "Onaylanmadı"
+    },
     "actions": {
       "copied": "Koordinat bilgisi kopyalandı.",
       "goToPin": "Pine git"

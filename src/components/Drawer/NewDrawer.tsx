@@ -59,6 +59,8 @@ const NeighbourhoodDetails = ({
 }: {
   details: ChannelFeedDetails[];
 }) => {
+  const { t } = useTranslation("home");
+
   return (
     <div className={moduleStyles.neighbourhoodDetails}>
       <div className={moduleStyles.neighbourhoodWrapper}>
@@ -88,7 +90,14 @@ const NeighbourhoodDetails = ({
               }}
             >
               {Object.entries(detail?.ballotBoxNos).map(([key, value]) => (
-                <Tooltip title="Hello" key={key}>
+                <Tooltip
+                  title={
+                    value
+                      ? t("cluster.ballotBoxTooltip.approved")
+                      : t("cluster.ballotBoxTooltip.notApproved")
+                  }
+                  key={key}
+                >
                   <span
                     style={{
                       fontWeight: "medium",

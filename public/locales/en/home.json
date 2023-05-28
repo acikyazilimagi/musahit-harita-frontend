@@ -41,6 +41,10 @@
     "high": "Very Intense"
   },
   "cluster": {
+    "ballotBoxTooltip": {
+      "approved": "Approved",
+      "notApproved": "Unapproved"
+    },
     "actions": {
       "copied": "Coordinate information was copied.",
       "goToPin": "Go to pin"
