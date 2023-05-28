@@ -75,16 +75,19 @@ export const UploadBallotBoxReport = () => {
                 pb: 1,
               }}
             >
-              <img
-                src={selectedFile as any}
-                alt="Ballot box report"
-                style={{
-                  width: "100%",
-                  height: "auto",
-                  maxHeight: "calc(100vh - 525px)",
-                  objectFit: "cover",
-                }}
-              />
+              <Box sx={{ backgroundColor: "#c9c9c9" }}>
+                <img
+                  src={selectedFile as any}
+                  alt="Ballot box report"
+                  style={{
+                    width: "100%",
+                    height: "auto",
+                    maxHeight: "calc(100vh - 525px)",
+                    objectFit: "contain",
+                  }}
+                />
+              </Box>
+
               <Button sx={{ pointerEvents: "none" }}>
                 {t("uploadBallotReport.chooseNewPhoto")}
               </Button>
