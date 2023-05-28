@@ -27,6 +27,11 @@
     },
     "clear": "Clear"
   },
+  "uploadBallotReport": {
+    "chooseNewPhoto": "Choose new photo",
+    "uploadLabel": "Upload",
+    "clickToChoosePhoto": "Choose photo"
+  },
   "tags": {
     "safe": "Low Dense",
     "low": "Low - Medium Intense",

@@ -35,6 +35,7 @@ import Link from "next/link";
 import { isBallotBoxReportFeatureEnabled } from "@/features/ballot-box-report/isBallotBoxReportFeatureEnabled";
 import { CloudUpload } from "@mui/icons-material";
 import { useBallotBoxReportState } from "@/features/ballot-box-report/useBallotBoxReportState";
+import { UploadBallotBoxReport } from "@/features/ballot-box-report/UploadBallotBoxReport";
 
 interface IStyles {
   [key: string]: SxProps<Theme>;
@@ -187,6 +188,7 @@ export const MapControls = () => {
               />
             </Stack>
             <Stack display={"flex"} direction={"row"} columnGap={2}>
+              <UploadBallotBoxReport />
               <FilterVotingLocations />
             </Stack>
           </Stack>
