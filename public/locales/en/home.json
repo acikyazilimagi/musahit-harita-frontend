@@ -6,7 +6,7 @@
   "filter": {
     "title": "Filter",
     "findVotingLocationsTitle": "Find voting locations",
-    "timestampTitle": "Timeframe",
+    "uploadBallotBoxReportTitle": "Upload ballot box report",
     "city": "City",
     "district": "District",
     "neighborhood": "Neighborhood",

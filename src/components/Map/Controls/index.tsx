@@ -32,6 +32,9 @@ import {
 } from "@/features/location-categories";
 import { CooldownButtonComponent } from "@/components/Button/Cooldown";
 import Link from "next/link";
+import { isBallotBoxReportFeatureEnabled } from "@/features/ballot-box-report/isBallotBoxReportFeatureEnabled";
+import { CloudUpload } from "@mui/icons-material";
+import { useBallotBoxReportState } from "@/features/ballot-box-report/useBallotBoxReportState";
 
 interface IStyles {
   [key: string]: SxProps<Theme>;
@@ -102,6 +105,7 @@ export const MapControls = () => {
   const { t } = useTranslation("home");
 
   const votingLocationsFilter = useVotingLocations();
+  const ballotBoxReportState = useBallotBoxReportState();
   const [infoSnackbarOpen, setInfoSnackbarOpen] = useState(true);
 
   return (
@@ -153,6 +157,18 @@ export const MapControls = () => {
             alignItems={"flex-end"}
           >
             <Stack display={"flex"} direction={"row"} columnGap={2}>
+              {isBallotBoxReportFeatureEnabled() && (
+                <FilterButtonComponent
+                  variant="contained"
+                  buttonLabel={t("filter.uploadBallotBoxReportTitle")}
+                  icon={<CloudUpload />}
+                  onClick={() => {
+                    ballotBoxReportState.actions.setIsOpen(
+                      !ballotBoxReportState.isOpen
+                    );
+                  }}
+                />
+              )}
               <FilterButtonComponent
                 buttonLabel={t("filter.findVotingLocationsTitle")}
                 icon={<SearchIcon />}
