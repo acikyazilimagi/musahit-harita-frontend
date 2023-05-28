@@ -5,28 +5,72 @@ import { Box } from "@mui/system";
 import { useTranslation } from "next-i18next";
 import { ChangeEvent, useState } from "react";
 import { useBallotBoxReportState } from "./useBallotBoxReportState";
+import { compressImage } from "@/utils/compressImage";
+
+const FILE_SIZE_LIMIT_TO_COMPRESS = 400 * 1024;
+const COMPRESSED_IMAGE_DIMENSION = 1824;
 
 export const UploadBallotBoxReport = () => {
   const { t } = useTranslation("home");
   const { isOpen, actions } = useBallotBoxReportState();
-  const [selectedFile, setSelectedFile] = useState<File | null>();
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [uploading, setUploading] = useState(false);
 
-  const handleUploadClick = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleFileSelect = (event: ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files) return;
+    setSelectedFile(event.target.files[0]);
+  };
+
+  const handleUploadClick = async () => {
+    if (!selectedFile) return;
+
+    setUploading(true);
+
+    if (selectedFile.size > FILE_SIZE_LIMIT_TO_COMPRESS) {
+      try {
+        const base64 = await compressImage(
+          selectedFile,
+          COMPRESSED_IMAGE_DIMENSION
+        );
+
+        await fetch(`/api/upload-report`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ data: base64 }),
+        });
+        setSelectedFile(null);
+      } catch (err) {
+        console.log(`Could not upload image`, err);
+      }
+
+      setUploading(false);
+      return;
+    }
 
     const reader = new FileReader();
-    reader.onloadend = () => {
-      if (reader) {
-        setSelectedFile([reader.result] as any);
+
+    reader.onloadend = async () => {
+      const base64 = reader.result as string;
+
+      try {
+        await fetch(`/api/upload-report`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ data: base64 }),
+        });
+        setSelectedFile(null);
+      } catch (err) {
+        console.log(`Could not upload image`, err);
       }
+
+      setUploading(false);
     };
 
-    const file = event.target.files[0];
-    if (file) {
-      reader.readAsDataURL(file);
-    } else {
-      setSelectedFile(null);
-    }
+    reader.readAsDataURL(selectedFile);
   };
 
   if (!isOpen) {
@@ -49,10 +93,9 @@ export const UploadBallotBoxReport = () => {
         component="input"
         accept="image/*"
         id="upload-input"
-        multiple
         type="file"
         sx={{ display: "none" }}
-        onChange={handleUploadClick}
+        onChange={handleFileSelect}
       />
       <CardActionArea sx={{ maxWidth: 400 }}>
         <Box
@@ -76,7 +119,7 @@ export const UploadBallotBoxReport = () => {
               }}
             >
               <img
-                src={selectedFile as any}
+                src={URL.createObjectURL(selectedFile)}
                 alt="Ballot box report"
                 style={{
                   width: "100%",
@@ -104,8 +147,14 @@ export const UploadBallotBoxReport = () => {
           )}
         </Box>
       </CardActionArea>
-      <Button disabled={!selectedFile} variant="contained">
-        {t("uploadBallotReport.uploadLabel")}
+      <Button
+        disabled={!selectedFile || uploading}
+        variant="contained"
+        onClick={handleUploadClick}
+      >
+        {uploading
+          ? t("uploadBallotReport.uploadingLabel")
+          : t("uploadBallotReport.uploadLabel")}
       </Button>
     </Filter>
   );

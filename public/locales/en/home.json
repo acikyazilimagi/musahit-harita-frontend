@@ -30,6 +30,7 @@
   "uploadBallotReport": {
     "chooseNewPhoto": "Choose new photo",
     "uploadLabel": "Upload",
+    "uploadingLabel": "Uploading...",
     "clickToChoosePhoto": "Choose photo"
   },
   "tags": {
@@ -41,6 +42,10 @@
     "high": "Very Intense"
   },
   "cluster": {
+    "ballotBoxTooltip": {
+      "approved": "Approved",
+      "notApproved": "Unapproved"
+    },
     "actions": {
       "copied": "Coordinate information was copied.",
       "goToPin": "Go to pin"

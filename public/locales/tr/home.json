@@ -30,6 +30,7 @@
   "uploadBallotReport": {
     "chooseNewPhoto": "Yeni fotoğraf seç",
     "uploadLabel": "Yükle",
+    "uploadingLabel": "Yükleniyor...",
     "clickToChoosePhoto": "Fotoğraf seç"
   },
   "tags": {
@@ -41,6 +42,10 @@
     "high": "Çok Yoğun"
   },
   "cluster": {
+    "ballotBoxTooltip": {
+      "approved": "Onaylandı",
+      "notApproved": "Onaylanmadı"
+    },
     "actions": {
       "copied": "Koordinat bilgisi kopyalandı.",
       "goToPin": "Pine git"
