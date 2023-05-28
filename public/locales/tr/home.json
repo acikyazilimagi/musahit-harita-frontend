@@ -86,7 +86,8 @@
     "layer": {
       "heatmap": "Isı Haritası",
       "markers": "Konumlar"
-    }
+    },
+    "noData": "Henüz veri girişi yapılmamış. Elinizde tutanak mevcut ise gönderebilirsiniz."
   },
   "content": {
     "notifyTime": "Bildirim Zamanı",
