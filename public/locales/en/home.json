@@ -31,7 +31,9 @@
     "chooseNewPhoto": "Choose new photo",
     "uploadLabel": "Upload",
     "uploadingLabel": "Uploading...",
-    "clickToChoosePhoto": "Choose photo"
+    "clickToChoosePhoto": "Choose photo",
+    "sendWeb": "Send ballot report from web",
+    "sendTelegram": "Send ballot report from Telegram"
   },
   "tags": {
     "safe": "Low Dense",
