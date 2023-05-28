@@ -33,7 +33,7 @@ import {
 import { CooldownButtonComponent } from "@/components/Button/Cooldown";
 import Link from "next/link";
 import { isBallotBoxReportFeatureEnabled } from "@/features/ballot-box-report/isBallotBoxReportFeatureEnabled";
-import { CloudUpload } from "@mui/icons-material";
+import { AddAPhoto, CloudUpload, Telegram } from "@mui/icons-material";
 import { useBallotBoxReportState } from "@/features/ballot-box-report/useBallotBoxReportState";
 import { UploadBallotBoxReport } from "@/features/ballot-box-report/UploadBallotBoxReport";
 
@@ -187,6 +187,34 @@ export const MapControls = () => {
                   );
                   ballotBoxReportState.actions.setIsOpen(false);
                 }}
+              />
+            </Stack>
+            <Stack
+              display={"flex"}
+              direction={"row"}
+              columnGap={2}
+              bgcolor="white"
+              padding={1}
+              borderRadius={3}
+              sx={{
+                "& a": {
+                  color: "white !important",
+                },
+              }}
+            >
+              <FilterButtonComponent
+                color="primary"
+                variant="contained"
+                buttonLabel={"Web'den tutanak gönder"}
+                icon={<AddAPhoto />}
+                href="https://oytutanak.com"
+              />
+              <FilterButtonComponent
+                color="primary"
+                variant="contained"
+                buttonLabel={"Telegramdan tutanak gönder"}
+                icon={<Telegram />}
+                href="https://t.me/oytutanakbot"
               />
             </Stack>
             <Stack display={"flex"} direction={"row"} columnGap={2}>

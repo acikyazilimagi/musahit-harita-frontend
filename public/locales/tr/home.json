@@ -95,7 +95,7 @@
     "channels": {}
   },
   "info": {
-    "infoSnackbarText": "28 Mayıs günü seçim yasaklarının kaldırılmasını takiben tutanak kayıtlarının verisi haritada gösterilecektir."
+    "infoSnackbarText": "Oy ve ötesi tarafında eksik tutanak kayıtlarının verisi gösteriliyor. Lütfen size en yakın bölgelerde ki eksik oy tutanaklarını gönderin."
   },
   "header": {
     "aboutUs": "Hakkımızda",
