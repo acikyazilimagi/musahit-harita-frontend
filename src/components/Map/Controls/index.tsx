@@ -156,7 +156,14 @@ export const MapControls = () => {
             rowGap={2}
             alignItems={"flex-end"}
           >
-            <Stack display={"flex"} direction={"row"} columnGap={2}>
+            <Stack
+              display={"flex"}
+              direction={"row"}
+              columnGap={2}
+              bgcolor="white"
+              padding={1}
+              borderRadius={3}
+            >
               {isBallotBoxReportFeatureEnabled() && (
                 <FilterButtonComponent
                   variant="contained"
