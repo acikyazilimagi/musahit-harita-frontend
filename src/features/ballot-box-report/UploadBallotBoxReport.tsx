@@ -5,6 +5,7 @@ import { Box } from "@mui/system";
 import { useTranslation } from "next-i18next";
 import { ChangeEvent, useState } from "react";
 import { useBallotBoxReportState } from "./useBallotBoxReportState";
+import styles from "./UploadBallotBoxReport.module.css";
 
 export const UploadBallotBoxReport = () => {
   const { t } = useTranslation("home");
@@ -75,11 +76,23 @@ export const UploadBallotBoxReport = () => {
                 pb: 1,
               }}
             >
-              <img
-                src={selectedFile as any}
-                alt="Ballot box report"
-                style={{ width: "100%", height: "auto" }}
-              />
+              <Box
+                sx={{
+                  objectFit: "scale-down",
+                  height: "auto",
+                  width: "auto",
+                  display: "flex",
+                  justifyContent: "center",
+                  backgroundColor: "#cdcdcd",
+                }}
+              >
+                <img
+                  src={selectedFile as any}
+                  alt="Ballot box report"
+                  className={styles.reportImg}
+                />
+              </Box>
+
               <Button sx={{ pointerEvents: "none" }}>
                 {t("uploadBallotReport.chooseNewPhoto")}
               </Button>

@@ -1,0 +1,24 @@
+.reportImg {
+  max-width: 400px;
+  max-height: 300px;
+
+  @media (min-width: 500px) {
+    max-width: 400px;
+    max-height: 400px;
+  }
+
+  @media (min-width: 900px) {
+    max-width: 400px;
+    max-height: 200px;
+  }
+
+  @media (min-width: 1200px) {
+    max-width: 400px;
+    max-height: 400px;
+  }
+
+  @media (min-width: 1500px) {
+    max-width: 400px;
+    max-height: 700px;
+  }
+}
