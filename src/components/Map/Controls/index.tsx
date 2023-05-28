@@ -207,14 +207,14 @@ export const MapControls = () => {
               <FilterButtonComponent
                 color="primary"
                 variant="contained"
-                buttonLabel={"Web'den tutanak gönder"}
+                buttonLabel={t("uploadBallotReport.sendWeb")}
                 icon={<AddAPhoto />}
                 href="https://oytutanak.com"
               />
               <FilterButtonComponent
                 color="primary"
                 variant="contained"
-                buttonLabel={"Telegramdan tutanak gönder"}
+                buttonLabel={t("uploadBallotReport.sendTelegram")}
                 icon={<Telegram />}
                 href="https://t.me/oytutanakbot"
               />

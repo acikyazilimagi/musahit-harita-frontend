@@ -31,7 +31,9 @@
     "chooseNewPhoto": "Yeni fotoğraf seç",
     "uploadLabel": "Yükle",
     "uploadingLabel": "Yükleniyor...",
-    "clickToChoosePhoto": "Fotoğraf seç"
+    "clickToChoosePhoto": "Fotoğraf seç",
+    "sendWeb": "Web'den tutanak gönder",
+    "sendTelegram": "Telegram'dan tutanak gönder"
   },
   "tags": {
     "safe": "Az Yoğun",

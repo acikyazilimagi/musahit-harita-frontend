@@ -31,7 +31,9 @@
     "chooseNewPhoto": "Choose new photo",
     "uploadLabel": "Upload",
     "uploadingLabel": "Uploading...",
-    "clickToChoosePhoto": "Choose photo"
+    "clickToChoosePhoto": "Choose photo",
+    "sendWeb": "Send ballot report from web",
+    "sendTelegram": "Send ballot report from Telegram"
   },
   "tags": {
     "safe": "Low Dense",
@@ -87,7 +89,7 @@
       "heatmap": "Heatmap",
       "markers": "Markers"
     },
-    "noData": "No data has been entered yet. If you have a report, you can send it."
+    "noData": "No data has been entered yet. If you have a ballot report, you can send it."
   },
   "content": {
     "notifyTime": "Notify Time",
