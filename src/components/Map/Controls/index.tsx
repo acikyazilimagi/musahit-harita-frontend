@@ -174,6 +174,7 @@ export const MapControls = () => {
                     ballotBoxReportState.actions.setIsOpen(
                       !ballotBoxReportState.isOpen
                     );
+                    votingLocationsFilter.actions.setIsOpen(false);
                   }}
                 />
               )}
@@ -184,6 +185,7 @@ export const MapControls = () => {
                   votingLocationsFilter.actions.setIsOpen(
                     !votingLocationsFilter.isOpen
                   );
+                  ballotBoxReportState.actions.setIsOpen(false);
                 }}
               />
             </Stack>
