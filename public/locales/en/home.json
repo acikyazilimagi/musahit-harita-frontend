@@ -6,7 +6,7 @@
   "filter": {
     "title": "Filter",
     "findVotingLocationsTitle": "Find voting locations",
-    "timestampTitle": "Timeframe",
+    "uploadBallotBoxReportTitle": "Upload ballot box report",
     "city": "City",
     "district": "District",
     "neighborhood": "Neighborhood",
@@ -26,6 +26,11 @@
       "all": "All time"
     },
     "clear": "Clear"
+  },
+  "uploadBallotReport": {
+    "chooseNewPhoto": "Choose new photo",
+    "uploadLabel": "Upload",
+    "clickToChoosePhoto": "Choose photo"
   },
   "tags": {
     "safe": "Low Dense",

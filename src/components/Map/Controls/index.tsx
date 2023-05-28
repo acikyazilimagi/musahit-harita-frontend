@@ -32,6 +32,10 @@ import {
 } from "@/features/location-categories";
 import { CooldownButtonComponent } from "@/components/Button/Cooldown";
 import Link from "next/link";
+import { isBallotBoxReportFeatureEnabled } from "@/features/ballot-box-report/isBallotBoxReportFeatureEnabled";
+import { CloudUpload } from "@mui/icons-material";
+import { useBallotBoxReportState } from "@/features/ballot-box-report/useBallotBoxReportState";
+import { UploadBallotBoxReport } from "@/features/ballot-box-report/UploadBallotBoxReport";
 
 interface IStyles {
   [key: string]: SxProps<Theme>;
@@ -102,6 +106,7 @@ export const MapControls = () => {
   const { t } = useTranslation("home");
 
   const votingLocationsFilter = useVotingLocations();
+  const ballotBoxReportState = useBallotBoxReportState();
   const [infoSnackbarOpen, setInfoSnackbarOpen] = useState(true);
 
   return (
@@ -152,7 +157,26 @@ export const MapControls = () => {
             rowGap={2}
             alignItems={"flex-end"}
           >
-            <Stack display={"flex"} direction={"row"} columnGap={2}>
+            <Stack
+              display={"flex"}
+              direction={"row"}
+              columnGap={2}
+              bgcolor="white"
+              padding={1}
+              borderRadius={3}
+            >
+              {isBallotBoxReportFeatureEnabled() && (
+                <FilterButtonComponent
+                  variant="contained"
+                  buttonLabel={t("filter.uploadBallotBoxReportTitle")}
+                  icon={<CloudUpload />}
+                  onClick={() => {
+                    ballotBoxReportState.actions.setIsOpen(
+                      !ballotBoxReportState.isOpen
+                    );
+                  }}
+                />
+              )}
               <FilterButtonComponent
                 buttonLabel={t("filter.findVotingLocationsTitle")}
                 icon={<SearchIcon />}
@@ -164,6 +188,7 @@ export const MapControls = () => {
               />
             </Stack>
             <Stack display={"flex"} direction={"row"} columnGap={2}>
+              <UploadBallotBoxReport />
               <FilterVotingLocations />
             </Stack>
           </Stack>

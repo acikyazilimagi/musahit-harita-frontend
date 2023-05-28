@@ -6,7 +6,7 @@
   "filter": {
     "title": "Filtre",
     "findVotingLocationsTitle": "Sandık Konumu Bul",
-    "timestampTitle": "Zaman aralığı",
+    "uploadBallotBoxReportTitle": "Tutanak yükle",
     "city": "Şehir",
     "district": "İlçe",
     "neighborhood": "Mahalle",
@@ -26,6 +26,11 @@
       "all": "Tüm zamanlar"
     },
     "clear": "Temizle"
+  },
+  "uploadBallotReport": {
+    "chooseNewPhoto": "Yeni fotoğraf seç",
+    "uploadLabel": "Yükle",
+    "clickToChoosePhoto": "Fotoğraf seç"
   },
   "tags": {
     "safe": "Az Yoğun",
