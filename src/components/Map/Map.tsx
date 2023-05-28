@@ -100,7 +100,7 @@ export const Map = (props: MapProps) => {
             }}
           >
             <IconButton
-              sx={styles.headerbutton}
+              sx={styles.button}
               color="inherit"
               onClick={() => {
                 helpView.toggle(!helpView.isOpen);
@@ -119,7 +119,7 @@ export const Map = (props: MapProps) => {
             }}
           >
             <IconButton
-              sx={styles.headerButton}
+              sx={styles.button}
               color="inherit"
               onClick={() => {
                 aboutView.toggle(!aboutView.isOpen);
