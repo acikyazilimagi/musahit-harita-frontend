@@ -64,60 +64,64 @@ const NeighbourhoodDetails = ({
   return (
     <div className={moduleStyles.neighbourhoodDetails}>
       <div className={moduleStyles.neighbourhoodWrapper}>
-        {details.map((detail, index) => (
-          <Typography
-            sx={{
-              marginBottom: "0.5rem",
-              fontSize: "16px",
-              color: "#6C6C6C",
-              textTransform: "capitalize",
-            }}
-            key={index}
-          >
+        {details.length > 0 ? (
+          details.map((detail, index) => (
             <Typography
               sx={{
-                fontWeight: "500",
-                fontSize: "16px",
-                color: "black",
-              }}
-            >
-              {detail.buildingName.toLocaleLowerCase()}{" "}
-            </Typography>
-            <Box
-              sx={{
-                display: "flex",
                 marginBottom: "0.5rem",
+                fontSize: "16px",
+                color: "#6C6C6C",
+                textTransform: "capitalize",
               }}
+              key={index}
             >
-              {Object.entries(detail?.ballotBoxNos).map(([key, value]) => (
-                <Tooltip
-                  title={
-                    value
-                      ? t("cluster.ballotBoxTooltip.approved")
-                      : t("cluster.ballotBoxTooltip.notApproved")
-                  }
-                  key={key}
-                >
-                  <span
-                    style={{
-                      fontWeight: "medium",
-                      fontSize: "14px",
-                      color: "white",
-                      marginRight: "0.5rem",
-                      background: value ? "#45B97F" : "#DD8B8B",
-                      padding: "0.2rem 0.5rem",
-                      borderRadius: "5px",
-                    }}
+              <Typography
+                sx={{
+                  fontWeight: "500",
+                  fontSize: "16px",
+                  color: "black",
+                }}
+              >
+                {detail.buildingName.toLocaleLowerCase()}{" "}
+              </Typography>
+              <Box
+                sx={{
+                  display: "flex",
+                  marginBottom: "0.5rem",
+                }}
+              >
+                {Object.entries(detail?.ballotBoxNos).map(([key, value]) => (
+                  <Tooltip
+                    title={
+                      value
+                        ? t("cluster.ballotBoxTooltip.approved")
+                        : t("cluster.ballotBoxTooltip.notApproved")
+                    }
+                    key={key}
                   >
-                    {key}
+                    <span
+                      style={{
+                        fontWeight: "medium",
+                        fontSize: "14px",
+                        color: "white",
+                        marginRight: "0.5rem",
+                        background: value ? "#45B97F" : "#DD8B8B",
+                        padding: "0.2rem 0.5rem",
+                        borderRadius: "5px",
+                      }}
+                    >
+                      {key}
 
-                    {value ? " ✓" : " ✗"}
-                  </span>
-                </Tooltip>
-              ))}
-            </Box>
-          </Typography>
-        ))}
+                      {value ? " ✓" : " ✗"}
+                    </span>
+                  </Tooltip>
+                ))}
+              </Box>
+            </Typography>
+          ))
+        ) : (
+          <Alert severity="info">{t("map.noData")}</Alert>
+        )}
       </div>
     </div>
   );
