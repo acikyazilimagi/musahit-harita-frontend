@@ -1,5 +1,6 @@
 import { ChannelData, DeviceType, EVENT_TYPES } from "@/types";
 import { create } from "zustand";
+import isMobile from "is-mobile";
 
 /* eslint-disable no-unused-vars */
 export enum MapType {
@@ -38,7 +39,7 @@ interface MapState {
 export const useMapStore = create<MapState>()((set) => ({
   drawerData: null,
   isDrawerOpen: false,
-  device: "desktop",
+  device: isMobile() ? "mobile" : "desktop",
   markerData: [],
   mapType: MapType.Default,
   mapLayers: [],
