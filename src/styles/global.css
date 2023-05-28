@@ -8,6 +8,7 @@
 
 #new-layout .leaflet-right > .leaflet-control {
   margin-bottom: 6px !important;
+  margin-left: 10px;
 }
 #new-layout .leaflet-bottom.leaflet-left {
   z-index: 1070 !important;
